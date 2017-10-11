@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Dell TB15 拓展坞 Diy 风扇散热(多图) - 夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Dell TB15 拓展坞用了一周多, 先简单说下自己发现的优缺点: 缺点:  必须破解才能使用 散热有问题, 似乎是官方召回的产品, 持续使用时外壳40℃+ 稳定性不明 有时 USB、Lan口 会没反应, 需要重启Dock  优点:  可以给 15’ mbp 充电, 58W. 之前用绿*的 HUB 和官方充电器只能到 52W, 时不时会提示不在充电. DP/mini-DP 支持 4K 60Hz">
+<meta name="keywords" content="Thunderbolt3,Dock">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dell TB15 拓展坞 Diy 风扇散热(多图)">
+<meta property="og:url" content="http://blog.xiazhiri.com/dell-tb15-diy-cooler">
+<meta property="og:site_name" content="夏之日">
+<meta property="og:description" content="Dell TB15 拓展坞用了一周多, 先简单说下自己发现的优缺点: 缺点:  必须破解才能使用 散热有问题, 似乎是官方召回的产品, 持续使用时外壳40℃+ 稳定性不明 有时 USB、Lan口 会没反应, 需要重启Dock  优点:  可以给 15’ mbp 充电, 58W. 之前用绿*的 HUB 和官方充电器只能到 52W, 时不时会提示不在充电. DP/mini-DP 支持 4K 60Hz">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNbRwly1fbslnrmgr7j31kw16ohdt.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNbRwly1fbsm35wonnj31kw23vu0x.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tNbRwly1fbsmynbgogj30dw0690ut.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNbRwly1fbslwhah2aj31kw23vhdt.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNbRwly1fbsn5dl9z8j31kw16o4qp.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNbRwly1fbsmczid9lj31kw16ou0x.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNbRwly1fbsmi11ti0j31kw1nyb29.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNbRwly1fbsmkna93kj31kw16oe81.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNbRwly1fbsmqb799hj31kw16ohdt.jpg">
+<meta property="og:updated_time" content="2017-05-13T04:33:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dell TB15 拓展坞 Diy 风扇散热(多图)">
+<meta name="twitter:description" content="Dell TB15 拓展坞用了一周多, 先简单说下自己发现的优缺点: 缺点:  必须破解才能使用 散热有问题, 似乎是官方召回的产品, 持续使用时外壳40℃+ 稳定性不明 有时 USB、Lan口 会没反应, 需要重启Dock  优点:  可以给 15’ mbp 充电, 58W. 之前用绿*的 HUB 和官方充电器只能到 52W, 时不时会提示不在充电. DP/mini-DP 支持 4K 60Hz">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006tNbRwly1fbslnrmgr7j31kw16ohdt.jpg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-dell-tb15-diy-cooler" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Dell TB15 拓展坞 Diy 风扇散热(多图)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/dell-tb15-diy-cooler" class="article-date">
+  <time datetime="2017-01-16T09:04:25.000Z" itemprop="datePublished">2017-01-16</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Dell TB15 拓展坞用了一周多, 先简单说下自己发现的优缺点:</p>
+<p>缺点:</p>
+<ol>
+<li><a href="https://github.com/KhaosT/tb3-enabler" target="_blank" rel="external">必须破解才能使用</a></li>
+<li>散热有问题, 似乎是官方召回的产品, 持续使用时外壳40℃+ 稳定性不明</li>
+<li>有时 USB、Lan口 会没反应, 需要重启Dock</li>
+</ol>
+<p>优点:</p>
+<ol>
+<li>可以给 15’ mbp 充电, 58W. 之前用绿*的 HUB 和官方充电器只能到 52W, 时不时会提示不在充电.</li>
+<li>DP/mini-DP 支持 4K 60Hz</li>
+<li>千兆 Lan</li>
+<li>便宜. *宝上洋垃圾 + 180w 电源适配器 500+大洋</li>
+</ol>
+<p>下面开始 DIY<br><img src="http://ww1.sinaimg.cn/large/006tNbRwly1fbslnrmgr7j31kw16ohdt.jpg" alt=""><br>▲带电测试几分钟, 红框内的芯片触摸温度50℃+</p>
+<a id="more"></a>
+<p><img src="http://ww2.sinaimg.cn/large/006tNbRwly1fbsm35wonnj31kw23vu0x.jpg" alt=""><br><img src="https://ww4.sinaimg.cn/large/006tNbRwly1fbsmynbgogj30dw0690ut.jpg" alt=""><br>▲温度开关(40℃常开) + 5v笔记本风扇 + DC降压模块 + 散热片</p>
+<p><img src="http://ww2.sinaimg.cn/large/006tNbRwly1fbslwhah2aj31kw23vhdt.jpg" alt=""><br>▲背部USB2.0端口取电, 记得热熔胶固定</p>
+<p>外壳两侧开进风出风口, 开始尝试用手拧钻孔, 但钻了两个之后直接放弃了——手酸.<br>最后直接拿电烙铁开口, 锉刀磨平. 过程中没有拍照.</p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNbRwly1fbsn5dl9z8j31kw16o4qp.jpg" alt=""><br>▲风扇和降压模块用热熔胶固定</p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNbRwly1fbsmczid9lj31kw16ou0x.jpg" alt=""><br>▲连接起来</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tNbRwly1fbsmi11ti0j31kw1nyb29.jpg" alt=""><br>▲内部空间很富余</p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNbRwly1fbsmkna93kj31kw16oe81.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/006tNbRwly1fbsmqb799hj31kw16ohdt.jpg" alt=""><br>▲开口</p>
+<p>结论/心得/成果:</p>
+<ol>
+<li>难度不大, 内部空间很富余</li>
+<li>风扇有噪音, 不过办公室内可以忽略</li>
+<li>外壳不热了, 对稳定性影响未知</li>
+<li>风扇有最低启动电压，不能无极调速</li>
+<li>热熔胶要慎用</li>
+<li>开心就好</li>
+</ol>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dock/">Dock</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Thunderbolt3/">Thunderbolt3</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Android-Lint-Aosp-with-SonarQube" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          Android Lint Aosp App With SonarQube
+        
+      </div>
+    </a>
+  
+  
+    <a href="/crosswalk-chromium-mod-jar" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CrossWalk Chromium Jar 修改指南&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  var disqus_url = 'http://blog.xiazhiri.com/dell-tb15-diy-cooler';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

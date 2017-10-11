@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>cTotalCMD  Total Commander启动器 - 夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="特性1.设置Total Commander(简称TC)为默认文件管理器。2.回收站、控制面板使用系统默认文件管理器打开。3.从外部打开时，防止TC重复打开标签。感谢@sunwind兄提供思路4.从外部打开时，按住shift在右侧激活，否则左侧。    注意本工具仅支持win7,XP请参见@sunwind的日志 用法将 cTotalCMD.exe cTotalCMD.install.exe放在TC目">
+<meta name="keywords" content="ahk,totalcmd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cTotalCMD  Total Commander启动器">
+<meta property="og:url" content="http://blog.xiazhiri.com/tc-as-default-2.html">
+<meta property="og:site_name" content="夏之日">
+<meta property="og:description" content="特性1.设置Total Commander(简称TC)为默认文件管理器。2.回收站、控制面板使用系统默认文件管理器打开。3.从外部打开时，防止TC重复打开标签。感谢@sunwind兄提供思路4.从外部打开时，按住shift在右侧激活，否则左侧。    注意本工具仅支持win7,XP请参见@sunwind的日志 用法将 cTotalCMD.exe cTotalCMD.install.exe放在TC目">
+<meta property="og:updated_time" content="2017-05-14T12:34:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cTotalCMD  Total Commander启动器">
+<meta name="twitter:description" content="特性1.设置Total Commander(简称TC)为默认文件管理器。2.回收站、控制面板使用系统默认文件管理器打开。3.从外部打开时，防止TC重复打开标签。感谢@sunwind兄提供思路4.从外部打开时，按住shift在右侧激活，否则左侧。    注意本工具仅支持win7,XP请参见@sunwind的日志 用法将 cTotalCMD.exe cTotalCMD.install.exe放在TC目">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-tc-as-default-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      cTotalCMD  Total Commander启动器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/tc-as-default-2.html" class="article-date">
+  <time datetime="2013-04-06T06:59:31.000Z" itemprop="datePublished">2013-04-06</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><p>1.设置Total Commander(简称TC)为默认文件管理器。<br>2.回收站、控制面板使用系统默认文件管理器打开。<br>3.从外部打开时，防止TC重复打开标签。感谢<a href="http://blog.csdn.net/liuyukuan/article/details/8493882" target="_blank" rel="external">@sunwind兄提供思路</a><br>4.从外部打开时，按住shift在右侧激活，否则左侧。   </p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>本工具仅支持win7,XP请参见<a href="http://blog.csdn.net/liuyukuan/article/details/8493882" target="_blank" rel="external">@sunwind的日志</a></p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>将 <code>cTotalCMD.exe</code> <code>cTotalCMD.install.exe</code>放在TC目录中<br>运行cTotalCMD.install.exe</p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><a href="https://github.com/likaci/cToalCMD" target="_blank" rel="external">https://github.com/likaci/cToalCMD</a></p>
+
+      
+    </div>
+    
+      <div class="article-toc">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#特性"><span class="toc-number">1.</span> <span class="toc-text">特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意"><span class="toc-number">2.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用法"><span class="toc-number">3.</span> <span class="toc-text">用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载"><span class="toc-number">4.</span> <span class="toc-text">下载</span></a></li></ol>
+      </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ahk/">ahk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/totalcmd/">totalcmd</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Regex.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          最近用到的几个正则
+        
+      </div>
+    </a>
+  
+  
+    <a href="/vim2ahk.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Vim2Ahk Vim下的AutoHotKey IDE环境&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  var disqus_url = 'http://blog.xiazhiri.com/tc-as-default-2.html';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

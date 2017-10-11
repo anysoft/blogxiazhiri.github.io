@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ArcMap触摸屏绘图辅助程序 - 夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这个脚本应该是写过最长的脚本了(囧，具体有多长有兴趣的可以去看下……    脚本的功能就是作为一个外挂程序，辅助ArcMap使用触摸屏进行绘图，程序的界面提供了最常用的绘图功能。不知道最新版的ArcMap有没有集成类似的功能。具体的功能可以参照视频。">
+<meta name="keywords" content="ahk,gis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArcMap触摸屏绘图辅助程序">
+<meta property="og:url" content="http://blog.xiazhiri.com/arcmap-touchscreen-plugin">
+<meta property="og:site_name" content="夏之日">
+<meta property="og:description" content="这个脚本应该是写过最长的脚本了(囧，具体有多长有兴趣的可以去看下……    脚本的功能就是作为一个外挂程序，辅助ArcMap使用触摸屏进行绘图，程序的界面提供了最常用的绘图功能。不知道最新版的ArcMap有没有集成类似的功能。具体的功能可以参照视频。">
+<meta property="og:updated_time" content="2013-02-24T13:09:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ArcMap触摸屏绘图辅助程序">
+<meta name="twitter:description" content="这个脚本应该是写过最长的脚本了(囧，具体有多长有兴趣的可以去看下……    脚本的功能就是作为一个外挂程序，辅助ArcMap使用触摸屏进行绘图，程序的界面提供了最常用的绘图功能。不知道最新版的ArcMap有没有集成类似的功能。具体的功能可以参照视频。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-arcmap-touchscreen-plugin" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ArcMap触摸屏绘图辅助程序
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/arcmap-touchscreen-plugin" class="article-date">
+  <time datetime="2013-02-19T13:23:57.000Z" itemprop="datePublished">2013-02-19</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这个脚本应该是写过最长的脚本了(囧，具体有多长有兴趣的可以去看下……   </p>
+<p>脚本的功能就是作为一个外挂程序，辅助ArcMap使用触摸屏进行绘图，程序的界面提供了最常用的绘图功能。不知道最新版的ArcMap有没有集成类似的功能。<br>具体的功能可以参照视频。<br><a id="more"></a></p>
+<embed src="http://www.tudou.com/v/5k-DTXG_eww/&resourceId=0_05_05_99&bid=05/v.swf" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="opaque" width="480" height="400">
+
+<p>脚本托管于github，<a href="https://github.com/likaci/ArcMapTouchScreenPlugin" target="_blank" rel="external">ArcMap TouchScreen Plugin</a> </p>
+<hr>
+<p>##ArcMap TouchScreen Draw Map Helper<br>An autohotkey script. This script compatible with ArcMap to give users a easy way to draw maps.<br>The GUI provide some buttons for shotcut operation.<br>Found script at github <a href="https://github.com/likaci/ArcMapTouchScreenPlugin" target="_blank" rel="external">ArcMap TouchScreen Plugin</a>.<br>Demo operation is the video above.   </p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ahk/">ahk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gis/">gis</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/hexo-add-duoshuo" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          为hexo添加多说评论
+        
+      </div>
+    </a>
+  
+  
+    <a href="/folder-icon" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">批量修改文件夹图标&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  var disqus_url = 'http://blog.xiazhiri.com/arcmap-touchscreen-plugin';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

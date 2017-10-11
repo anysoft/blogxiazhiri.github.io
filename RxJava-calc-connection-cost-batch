@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RxJava 批量计算网络连接速度 - 夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.计算连接耗时123456789101112131415161718private static long calcConnCost(String url) &amp;#123;    long start = new Date().getTime();    long end = start;    try &amp;#123;        HttpURLConnection conn = (HttpURL">
+<meta name="keywords" content="Android,RxJava">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJava 批量计算网络连接速度">
+<meta property="og:url" content="http://blog.xiazhiri.com/RxJava-calc-connection-cost-batch">
+<meta property="og:site_name" content="夏之日">
+<meta property="og:description" content="1.计算连接耗时123456789101112131415161718private static long calcConnCost(String url) &amp;#123;    long start = new Date().getTime();    long end = start;    try &amp;#123;        HttpURLConnection conn = (HttpURL">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/c0f281e2jw1exnlcvg7l3j21f60xitfz.jpg">
+<meta property="og:updated_time" content="2017-05-13T04:34:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJava 批量计算网络连接速度">
+<meta name="twitter:description" content="1.计算连接耗时123456789101112131415161718private static long calcConnCost(String url) &amp;#123;    long start = new Date().getTime();    long end = start;    try &amp;#123;        HttpURLConnection conn = (HttpURL">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/c0f281e2jw1exnlcvg7l3j21f60xitfz.jpg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-RxJava-calc-connection-cost-batch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RxJava 批量计算网络连接速度
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/RxJava-calc-connection-cost-batch" class="article-date">
+  <time datetime="2015-11-03T02:51:21.000Z" itemprop="datePublished">2015-11-03</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.计算连接耗时<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">calcConnCost</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">    <span class="keyword">long</span> start = <span class="keyword">new</span> Date().getTime();</div><div class="line">    <span class="keyword">long</span> end = start;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        HttpURLConnection conn = (HttpURLConnection) <span class="keyword">new</span> URL(url).openConnection();</div><div class="line">        conn.setRequestProperty(<span class="string">"Range"</span>, <span class="string">"bytes=0-0"</span>);</div><div class="line">        conn.setIfModifiedSince(<span class="number">1</span>);</div><div class="line">        start = <span class="keyword">new</span> Date().getTime();</div><div class="line">        <span class="keyword">if</span> (conn.getResponseCode() == <span class="number">206</span> || conn.getResponseCode() == <span class="number">200</span>) &#123;</div><div class="line">            end = <span class="keyword">new</span> Date().getTime();</div><div class="line">        &#125;</div><div class="line">        conn.disconnect();</div><div class="line">        conn = <span class="keyword">null</span>;</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> end - start;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>2.异步计算<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">        Observable.just(<span class="string">"http://baidu.com"</span>)</div><div class="line">                .map(<span class="keyword">new</span> Func1&lt;String, Long&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> Long <span class="title">call</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">                        <span class="keyword">return</span> calcConnCost(url);</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">                .subscribeOn(Schedulers.io())</div><div class="line">                .observeOn(AndroidSchedulers.mainThread())</div><div class="line">                .subscribe(<span class="keyword">new</span> Action1&lt;Long&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Long cost)</span> </span>&#123;</div><div class="line">                        Log.d(<span class="string">"time"</span>, cost + <span class="string">""</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line"><span class="comment">//输出 time:90</span></div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>3.请求十次，求平均值<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">        MathObservable.averageLong(</div><div class="line">                Observable.just(<span class="string">"baidu.com"</span>)</div><div class="line">                        .repeat(<span class="number">10</span>)</div><div class="line">                        .map(<span class="keyword">new</span> Func1&lt;String, Long&gt;() &#123;</div><div class="line">                            <span class="meta">@Override</span></div><div class="line">                            <span class="function"><span class="keyword">public</span> Long <span class="title">call</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">                                <span class="keyword">return</span> calcConnCost(url);</div><div class="line">                            &#125;</div><div class="line">                        &#125;)</div><div class="line">        )</div><div class="line">                .subscribeOn(Schedulers.io())</div><div class="line">                .observeOn(AndroidSchedulers.mainThread())</div><div class="line">                .subscribe(<span class="keyword">new</span> Action1&lt;Long&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Long averageCost)</span> </span>&#123;</div><div class="line">                        Log.e(<span class="string">"Average"</span>, averageCost + <span class="string">""</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line"><span class="comment">//输出Average:90</span></div></pre></td></tr></table></figure></p>
+<p>4.一组Url求平均值<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">        List&lt;String&gt; urls = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        MathObservable.averageLong(</div><div class="line">                Observable.from(urls)</div><div class="line">                        .map(<span class="keyword">new</span> Func1&lt;String, Long&gt;() &#123;</div><div class="line">                            <span class="meta">@Override</span></div><div class="line">                            <span class="function"><span class="keyword">public</span> Long <span class="title">call</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">                                <span class="keyword">return</span> calcConnCost(url);</div><div class="line">                            &#125;</div><div class="line">                        &#125;)</div><div class="line">        )</div><div class="line">                .subscribeOn(Schedulers.io())</div><div class="line">                .observeOn(AndroidSchedulers.mainThread())</div><div class="line">                .subscribe(<span class="keyword">new</span> Action1&lt;Long&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Long averageCost)</span> </span>&#123;</div><div class="line">                        Log.e(<span class="string">"Average"</span>, averageCost + <span class="string">""</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line"><span class="comment">//输出 Average:90</span></div></pre></td></tr></table></figure></p>
+<p>5.多组Url分别求平均值<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">        Map&lt;String, Set&lt;String&gt;&gt; hostUrl = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">        Observable.from(hostUrl.entrySet())</div><div class="line">                .flatMap(<span class="keyword">new</span> Func1&lt;Map.Entry&lt;String, Set&lt;String&gt;&gt;, Observable&lt;Long&gt;&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> Observable&lt;Long&gt; <span class="title">call</span><span class="params">(Map.Entry&lt;String, Set&lt;String&gt;&gt; stringSetEntry)</span> </span>&#123;</div><div class="line">                        <span class="keyword">return</span> MathObservable.averageLong(</div><div class="line">                                Observable.from(stringSetEntry.getValue())</div><div class="line">                                        .map(<span class="keyword">new</span> Func1&lt;String, Long&gt;() &#123;</div><div class="line">                                            <span class="meta">@Override</span></div><div class="line">                                            <span class="function"><span class="keyword">public</span> Long <span class="title">call</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">                                                <span class="keyword">return</span> calcConnCost(url);</div><div class="line">                                            &#125;</div><div class="line">                                        &#125;)</div><div class="line">                        );</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">                .subscribeOn(Schedulers.io())</div><div class="line">                .observeOn(AndroidSchedulers.mainThread())</div><div class="line">                .subscribe(<span class="keyword">new</span> Action1&lt;Long&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Long averageCost)</span> </span>&#123;</div><div class="line">                        Log.e(<span class="string">"Average"</span>, averageCost + <span class="string">""</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line"><span class="comment">//输出 Average:70</span></div><div class="line"><span class="comment">//输出 Average:60</span></div><div class="line"><span class="comment">//输出 Average:50</span></div><div class="line"><span class="comment">//...</span></div></pre></td></tr></table></figure></p>
+<p>6.多组Url分别求平均值并保留host</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">        Map&lt;String, Set&lt;String&gt;&gt; hostUrl = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">        Observable.from(hostUrl.entrySet())</div><div class="line">                .flatMap(<span class="keyword">new</span> Func1&lt;Map.Entry&lt;String, Set&lt;String&gt;&gt;, Observable&lt;Map.Entry&lt;String, Long&gt;&gt;&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="keyword">public</span> Observable&lt;Map.Entry&lt;String, Long&gt;&gt; call(Map.Entry&lt;String, Set&lt;String&gt;&gt; stringSetEntry) &#123;</div><div class="line">                        <span class="keyword">return</span> Observable.zip(</div><div class="line">                                Observable.just(stringSetEntry.getKey()),</div><div class="line">                                MathObservable.averageLong(</div><div class="line">                                        Observable.from(stringSetEntry.getValue()).map(<span class="keyword">new</span> Func1&lt;String, Long&gt;() &#123;</div><div class="line">                                            <span class="meta">@Override</span></div><div class="line">                                            <span class="function"><span class="keyword">public</span> Long <span class="title">call</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">                                                <span class="keyword">return</span> NetSpeedUtil.calcConnCost(url);</div><div class="line">                                            &#125;</div><div class="line">                                        &#125;)),</div><div class="line">                                <span class="keyword">new</span> Func2&lt;String, Long, Map.Entry&lt;String, Long&gt;&gt;() &#123;</div><div class="line">                                    <span class="meta">@Override</span></div><div class="line">                                    <span class="keyword">public</span> Map.<span class="function">Entry&lt;String, Long&gt; <span class="title">call</span><span class="params">(String host, Long cost)</span> </span>&#123;</div><div class="line">                                        <span class="keyword">return</span> <span class="keyword">new</span> AbstractMap.SimpleEntry&lt;&gt;(host, cost);</div><div class="line">                                    &#125;</div><div class="line">                                &#125;</div><div class="line">                        );</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">                .subscribeOn(Schedulers.io())</div><div class="line">                .observeOn(AndroidSchedulers.mainThread())</div><div class="line">                .subscribe(<span class="keyword">new</span> Action1&lt;Map.Entry&lt;String, Long&gt;&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Map.Entry&lt;String, Long&gt; hostCostEntry)</span> </span>&#123;</div><div class="line">                        Log.e(hostCostEntry.getKey(), hostCostEntry.getValue() + <span class="string">""</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line"><span class="comment">//输出 baidu.com:90</span></div><div class="line"><span class="comment">//输出 yahoo.com:110</span></div><div class="line"><span class="comment">//输出 google.cn:190</span></div><div class="line"><span class="comment">//...</span></div></pre></td></tr></table></figure>
+<p>7.拆分之后可读性更好一些…<br><img src="http://ww3.sinaimg.cn/large/c0f281e2jw1exnlcvg7l3j21f60xitfz.jpg" alt=""></p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Intellij-IDEA-15-right-menu-can-not-show-cause-Jitouch" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          Jitouch 和 Intellij IDEA 15 冲突导致 IDEA 右键菜单不能显示。
+        
+      </div>
+    </a>
+  
+  
+    <a href="/OSX10-11-EICapitan-IntellijIDEA-AndroidStudio-RightMouseMenuProblem" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">AndroidStudio Intellij IDEA 在 OSX 10.11 上右键失效&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  var disqus_url = 'http://blog.xiazhiri.com/RxJava-calc-connection-cost-batch';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

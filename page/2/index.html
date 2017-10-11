@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="夏之日">
+<meta property="og:url" content="http://blog.xiazhiri.com/page/2/index.html">
+<meta property="og:site_name" content="夏之日">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="夏之日">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer">
+      <article id="post-Android-Play-Encrypted-Video" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Android-Play-Encrypted-Video.html">Android 播放加密视频的一个思路</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/Android-Play-Encrypted-Video.html" class="article-date">
+  <time datetime="2016-03-20T09:32:57.000Z" itemprop="datePublished">2016-03-20</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>Android 播放加密视频的基本思路就是：<strong>本地启动一个HTTP服务作为代理，解密之后给播放器播放</strong>。<br>这样的好处就是可以<strong>自定义加密方案</strong>，更重要的是 加密/解密模块 可以和视频播放模块<strong>解耦</strong>。   </p>
+<h3 id="处理HTTP头"><a href="#处理HTTP头" class="headerlink" title="处理HTTP头"></a>处理HTTP头</h3><p>这里使用的 <a href="http://nanohttpd.org/" target="_blank" rel="external">NanoHTTPD</a> , 一个纯Java实现的微型WEB服务器，代码开源。<br>代码实现起来很简单，只要继承然后重写两个方法就可以。<br>稍微复杂的是怎样处理从视频播放器过来的请求。   </p>
+<p>通过 <a href="https://www.charlesproxy.com/" target="_blank" rel="external">Charles</a> 代理就能发现简单的规律。<br>VideoView播放在线视频的时候，发出的GET请求。第一次是一个普通的请求，务器返回200；之后的则全是分段请求，服务器返回206。   </p>
+<p>第一次请求 和 结果<br><img src="http://ww1.sinaimg.cn/large/c0f281e2jw1f25u97tgzej215m04idgr.jpg" alt="">   </p>
+<p><img src="http://ww2.sinaimg.cn/large/c0f281e2jw1f25ub757lbj211g09qq4v.jpg" alt=""></p>
+<hr>
+<p>第二次请求 和 结果<br><img src="http://ww4.sinaimg.cn/large/c0f281e2jw1f25uch2s9fj215c05at9x.jpg" alt="">   </p>
+<p><img src="http://ww3.sinaimg.cn/large/c0f281e2jw1f25udpfdj7j212409ytb1.jpg" alt="">   </p>
+<p>两次Request的区别是 后面的有Range字段<br>两次Response的区别是:   </p>
+<ol>
+<li>第一次 返回HTTP200 第二次 返回HTTP206</li>
+<li>第一次 Content-Length是文件的整体大小; 第二次Content-Lenght是剩余的大小</li>
+<li>第二次 返回Content-Range</li>
+</ol>
+<p>有了区别之后就简单了，剩下要做的就是: <strong>根据Req的不同，返回不同的 HTTP头 和数据</strong>。</p>
+        
+          <p class="article-more-link">
+            <a href="/Android-Play-Encrypted-Video.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
+      <article id="post-intellij-webstorm-create-non-web-node-project" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/intellij-webstorm-create-non-web-node-project.html">Intellij IDEA / WebStorm Create Non-Web Node Project</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/intellij-webstorm-create-non-web-node-project.html" class="article-date">
+  <time datetime="2016-01-28T02:06:30.000Z" itemprop="datePublished">2016-01-28</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>Create project</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ mkdir nodetest &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></div><div class="line">$ npm init</div></pre></td></tr></table></figure>
+</li>
+<li><p>Open project in intellij / WebStorm , Enable Code Assistance<br><img src="http://ww4.sinaimg.cn/large/c0f281e2jw1f0f0j3cmk2j217k0w0dmo.jpg" alt=""></p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Intellij/">Intellij</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
+      <article id="post-elasticsearch-delete-by-query-error" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/elasticsearch-delete-by-query-error.html">Elasticsearch Delete By Query plugin error</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/elasticsearch-delete-by-query-error.html" class="article-date">
+  <time datetime="2016-01-18T01:53:52.000Z" itemprop="datePublished">2016-01-18</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">DELETE _all/_query</div><div class="line">&#123;</div><div class="line">  &quot;query&quot;: &#123;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>No handler found for uri [/logstash-2016.01.13/logs] and method [DELETE]</strong></p>
+<p>Solution: restart elasticsearch after install the delete-by-query plugin…</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elk/">elk</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
+      <article id="post-Intellij-IDEA-15-right-menu-can-not-show-cause-Jitouch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Intellij-IDEA-15-right-menu-can-not-show-cause-Jitouch.html">Jitouch 和 Intellij IDEA 15 冲突导致 IDEA 右键菜单不能显示。</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/Intellij-IDEA-15-right-menu-can-not-show-cause-Jitouch.html" class="article-date">
+  <time datetime="2015-11-04T09:00:00.000Z" itemprop="datePublished">2015-11-04</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Jitouch 和 Intellij IDEA 15 冲突导致 IDEA 右键菜单不能显示。<br>目前只能禁用掉 Jitouch<br>或者 <a href="http://blog.jetbrains.com/idea/2015/05/intellij-idea-14-1-4-eap-141-1192-is-available/" target="_blank" rel="external">切换 IDE JDK 版本</a> 或者 Ctrl+左键</p>
+<hr>
+<p>IntelliJ IDEA 15 context menu can’t show cause conflicts with Jitouch.<br>You can disable Jitouch<br>or <a href="http://blog.jetbrains.com/idea/2015/05/intellij-idea-14-1-4-eap-141-1192-is-available/" target="_blank" rel="external">Switch JDK version of IDE</a> or just ctrl + click…</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Intellij-IDEA/">Intellij IDEA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS-X/">OS X</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
+      <article id="post-RxJava-calc-connection-cost-batch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/RxJava-calc-connection-cost-batch.html">RxJava 批量计算网络连接速度</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/RxJava-calc-connection-cost-batch.html" class="article-date">
+  <time datetime="2015-11-03T02:51:21.000Z" itemprop="datePublished">2015-11-03</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.计算连接耗时<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">calcConnCost</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">    <span class="keyword">long</span> start = <span class="keyword">new</span> Date().getTime();</div><div class="line">    <span class="keyword">long</span> end = start;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        HttpURLConnection conn = (HttpURLConnection) <span class="keyword">new</span> URL(url).openConnection();</div><div class="line">        conn.setRequestProperty(<span class="string">"Range"</span>, <span class="string">"bytes=0-0"</span>);</div><div class="line">        conn.setIfModifiedSince(<span class="number">1</span>);</div><div class="line">        start = <span class="keyword">new</span> Date().getTime();</div><div class="line">        <span class="keyword">if</span> (conn.getResponseCode() == <span class="number">206</span> || conn.getResponseCode() == <span class="number">200</span>) &#123;</div><div class="line">            end = <span class="keyword">new</span> Date().getTime();</div><div class="line">        &#125;</div><div class="line">        conn.disconnect();</div><div class="line">        conn = <span class="keyword">null</span>;</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> end - start;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>2.异步计算<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">        Observable.just(<span class="string">"http://baidu.com"</span>)</div><div class="line">                .map(<span class="keyword">new</span> Func1&lt;String, Long&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> Long <span class="title">call</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">                        <span class="keyword">return</span> calcConnCost(url);</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">                .subscribeOn(Schedulers.io())</div><div class="line">                .observeOn(AndroidSchedulers.mainThread())</div><div class="line">                .subscribe(<span class="keyword">new</span> Action1&lt;Long&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Long cost)</span> </span>&#123;</div><div class="line">                        Log.d(<span class="string">"time"</span>, cost + <span class="string">""</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line"><span class="comment">//输出 time:90</span></div></pre></td></tr></table></figure></p>
+        
+          <p class="article-more-link">
+            <a href="/RxJava-calc-connection-cost-batch.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
+      <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
+      </nav>
+    </section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

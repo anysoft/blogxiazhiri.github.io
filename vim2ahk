@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vim2Ahk Vim下的AutoHotKey IDE环境 - 夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="特性F5 运行 F6 停止 F7 编译 F8 打开taglist 等 错误信息输出在vim窗口 代码补全 代码提示 *编辑模式下 F1 Alt-F1 查询光标处help.chm ahk Snippet补全 ahk taglist To do&amp;lt;del&amp;gt;当脚本运行时信息窗口提示Running&amp;lt;/del&amp;gt; 解决中文和特殊字符脚本无法运行 同时编辑多个脚本时F5 F6混乱 替换文件">
+<meta name="keywords" content="ahk,vim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim2Ahk Vim下的AutoHotKey IDE环境">
+<meta property="og:url" content="http://blog.xiazhiri.com/vim2ahk">
+<meta property="og:site_name" content="夏之日">
+<meta property="og:description" content="特性F5 运行 F6 停止 F7 编译 F8 打开taglist 等 错误信息输出在vim窗口 代码补全 代码提示 *编辑模式下 F1 Alt-F1 查询光标处help.chm ahk Snippet补全 ahk taglist To do&amp;lt;del&amp;gt;当脚本运行时信息窗口提示Running&amp;lt;/del&amp;gt; 解决中文和特殊字符脚本无法运行 同时编辑多个脚本时F5 F6混乱 替换文件">
+<meta property="og:image" content="http://blog.xiazhiri.com/pic/vim2ahk.jpg">
+<meta property="og:updated_time" content="2017-05-14T12:34:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vim2Ahk Vim下的AutoHotKey IDE环境">
+<meta name="twitter:description" content="特性F5 运行 F6 停止 F7 编译 F8 打开taglist 等 错误信息输出在vim窗口 代码补全 代码提示 *编辑模式下 F1 Alt-F1 查询光标处help.chm ahk Snippet补全 ahk taglist To do&amp;lt;del&amp;gt;当脚本运行时信息窗口提示Running&amp;lt;/del&amp;gt; 解决中文和特殊字符脚本无法运行 同时编辑多个脚本时F5 F6混乱 替换文件">
+<meta name="twitter:image" content="http://blog.xiazhiri.com/pic/vim2ahk.jpg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-vim2ahk" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vim2Ahk Vim下的AutoHotKey IDE环境
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/vim2ahk" class="article-date">
+  <time datetime="2013-03-18T09:28:22.000Z" itemprop="datePublished">2013-03-18</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><pre><code>F5 运行
+F6 停止
+F7 编译
+F8 打开taglist 等
+错误信息输出在vim窗口
+代码补全
+代码提示 *编辑模式下 F1
+Alt-F1 查询光标处help.chm
+ahk Snippet补全
+ahk taglist
+</code></pre><h2 id="To-do"><a href="#To-do" class="headerlink" title="To do"></a>To do</h2><pre><code>&lt;del&gt;当脚本运行时信息窗口提示Running&lt;/del&gt;
+解决中文和特殊字符脚本无法运行
+同时编辑多个脚本时F5 F6混乱
+替换文件管理器为NERDTree
+运行和停止统一为F5
+代码提示做成弹出菜单的形式
+增加Debug功能
+</code></pre><hr>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="1-建议路径是-d-Vim"><a href="#1-建议路径是-d-Vim" class="headerlink" title="1.建议路径是 d:\Vim\"></a>1.建议路径是 d:\Vim\</h3><pre><code>即 d:\
+    |-vim\
+    |    |-vim73\
+    |    |-vimfile\
+    |    |-BackupDir\
+    |    |-Dict\
+</code></pre><h3 id="2-配置ctags"><a href="#2-配置ctags" class="headerlink" title="2.配置ctags"></a>2.配置ctags</h3><p>如果<strong>不</strong>使用taglist可以省略以下<br>    ctags.cnf 放到$HOME中,win7默认为 c:\Users\用户名\ ,可以在vim中 :ec $HOME  获取路径<br>    ctags.exe 放到环境变量的path中 比如c:\windows   </p>
+<h3 id="3编辑vimrc"><a href="#3编辑vimrc" class="headerlink" title="3编辑vimrc"></a>3编辑vimrc</h3><pre><code>编辑vimrc,根据实际情况配置，路径中尽量不要使用空格和中文
+62行
+    let g:AhkSIDE_AhkChm = &apos;d:\AutoHotKeyL\AutoHotkey.chm&apos;
+63行
+    let g:AhkSIDE_AhkExe = &apos;d:\AutoHotKeyL\AutoHotkeyA32.exe&apos;
+316行
+    let Tlist_Ctags_Cmd = &apos;D:\Vim\vim73\ctags.exe&apos;
+</code></pre><p>  完成后即可</p>
+<h3 id="预设快捷键"><a href="#预设快捷键" class="headerlink" title="预设快捷键"></a>预设快捷键</h3><pre><code>F1 编辑状态下  代码提示
+    alt-F1 查询帮助chm
+F2 隐藏显示菜单栏
+F4 跳转到错误
+F5 运行
+F6 结束运行
+F7 编译
+F8 打开taglis等
+F9 生成tags
+</code></pre><h3 id="其他快捷键"><a href="#其他快捷键" class="headerlink" title="其他快捷键"></a>其他快捷键</h3><pre><code>leader设置为&quot;,&quot;
+,c 关闭当前窗口
+,o 关闭其他窗口
+,b 新建窗口
+,n 下个窗口
+
+gc 关闭当前tab
+go 关闭其他tab
+gb 新建tab
+gn 下个tab
+
+,e 编辑vimrc
+,s 重载vimrc
+,ww 保存文件
+,wf 强制保存
+,qq 退出/关闭窗口
+,qa 退出所有
+</code></pre><h3 id="再其他的快捷键见vimrc"><a href="#再其他的快捷键见vimrc" class="headerlink" title="再其他的快捷键见vimrc"></a>再其他的快捷键见vimrc</h3><hr>
+<h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><p>感谢<a href="http://blog.csdn.net/liuyukuan" target="_blank" rel="external">Sunwind</a> 和 <a href="https://github.com/linxinhong" target="_blank" rel="external">Array</a> 的指点<br>还有AhkSIDE作者<a href="http://ahk.5d6d.net/viewthread.php?tid=5462&amp;pid=33912&amp;page=1&amp;extra=#pid33912" target="_blank" rel="external">Loaxs</a><br>有幸如果作者能看见一定要联系我likaci(a)qq.com<br>最主要的功能全部有AhkSIDE实现,我只是稍作修改后各个插件的堆砌，修改后的ahkside在bundle\AhkSIDE\ 中<br>还有vim作者,各位插件作者  </p>
+<h2 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h2><p><img src="http://blog.xiazhiri.com/pic/vim2ahk.jpg" alt="">   </p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p><a href="https://github.com/likaci/vim2ahk" target="_blank" rel="external">vim2ahk</a></p>
+
+      
+    </div>
+    
+      <div class="article-toc">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#特性"><span class="toc-number">1.</span> <span class="toc-text">特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#To-do"><span class="toc-number">2.</span> <span class="toc-text">To do</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-建议路径是-d-Vim"><span class="toc-number">3.1.</span> <span class="toc-text">1.建议路径是 d:\Vim\</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-配置ctags"><span class="toc-number">3.2.</span> <span class="toc-text">2.配置ctags</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3编辑vimrc"><span class="toc-number">3.3.</span> <span class="toc-text">3编辑vimrc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#预设快捷键"><span class="toc-number">3.4.</span> <span class="toc-text">预设快捷键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他快捷键"><span class="toc-number">3.5.</span> <span class="toc-text">其他快捷键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#再其他的快捷键见vimrc"><span class="toc-number">3.6.</span> <span class="toc-text">再其他的快捷键见vimrc</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#感谢"><span class="toc-number">4.</span> <span class="toc-text">感谢</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预览"><span class="toc-number">5.</span> <span class="toc-text">预览</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载"><span class="toc-number">5.1.</span> <span class="toc-text">下载</span></a></li></ol></li></ol>
+      </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ahk/">ahk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/tc-as-default-2" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          cTotalCMD  Total Commander启动器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/hexo-duoshuo-jQuery" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hexo多说评论jQuery版本&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  var disqus_url = 'http://blog.xiazhiri.com/vim2ahk';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

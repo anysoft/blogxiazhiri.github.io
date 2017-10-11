@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>提高效率的几个软件(2) - 夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="个人观点，看看就好。 1.goagent免费翻墙利器不会翻墙的程序员不是好程序员，有了它就可以访问不存在的网站。相比StackOverflow 百度知道就是个x，还有维基百科和百度百科、谷歌和百度……介绍地址">
+<meta name="keywords" content="SoftWare">
+<meta property="og:type" content="article">
+<meta property="og:title" content="提高效率的几个软件(2)">
+<meta property="og:url" content="http://blog.xiazhiri.com/efficient-software-2">
+<meta property="og:site_name" content="夏之日">
+<meta property="og:description" content="个人观点，看看就好。 1.goagent免费翻墙利器不会翻墙的程序员不是好程序员，有了它就可以访问不存在的网站。相比StackOverflow 百度知道就是个x，还有维基百科和百度百科、谷歌和百度……介绍地址">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/c0f281e2tw1eiuz78ygarj20qd0cvgo2.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/c0f281e2tw1eiuzafksfxj20as08odh0.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/c0f281e2tw1eiuzjsxxnoj20gq0ggn0b.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/c0f281e2tw1eiv2y2vetwj20lf086wgz.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/c0f281e2tw1eiv1mkoxusj20lp0awjsr.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/c0f281e2tw1eiv14ba3utj209s0e53z8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/c0f281e2tw1eiv1bxjp62g20bf03d75x.gif">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/c0f281e2tw1eiv1ix27bnj20br04paai.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/c0f281e2tw1eiv1pps5jyj20b907k75e.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/c0f281e2tw1eiv1t3fenfg20e50cm12u.gif">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/c0f281e2tw1eiv285wsfkj20hg06yaba.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/c0f281e2tw1eiv28irva2j20d806xaaj.jpg">
+<meta property="og:updated_time" content="2017-05-14T12:33:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="提高效率的几个软件(2)">
+<meta name="twitter:description" content="个人观点，看看就好。 1.goagent免费翻墙利器不会翻墙的程序员不是好程序员，有了它就可以访问不存在的网站。相比StackOverflow 百度知道就是个x，还有维基百科和百度百科、谷歌和百度……介绍地址">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/c0f281e2tw1eiuz78ygarj20qd0cvgo2.jpg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-efficient-software-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      提高效率的几个软件(2)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/efficient-software-2" class="article-date">
+  <time datetime="2014-07-30T11:58:33.000Z" itemprop="datePublished">2014-07-30</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="个人观点，看看就好。"><a href="#个人观点，看看就好。" class="headerlink" title="个人观点，看看就好。"></a>个人观点，看看就好。</h3><hr>
+<h2 id="1-goagent免费翻墙利器"><a href="#1-goagent免费翻墙利器" class="headerlink" title="1.goagent免费翻墙利器"></a>1.goagent免费翻墙利器</h2><p>不会翻墙的程序员不是好程序员，有了它就可以访问<strong>不存在的</strong>网站。<br>相比StackOverflow 百度知道就是个x，还有维基百科和百度百科、谷歌和百度……<br><a href="http://wildcat.name/goagent.html" target="_blank" rel="external">介绍地址</a></p>
+<blockquote>
+<p><img src="http://ww4.sinaimg.cn/large/c0f281e2tw1eiuz78ygarj20qd0cvgo2.jpg" alt=""></p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="2-ditto-剪贴板增强工具"><a href="#2-ditto-剪贴板增强工具" class="headerlink" title="2.ditto 剪贴板增强工具"></a>2.ditto 剪贴板增强工具</h2><p>可以记录下剪贴板的历史记录，更神奇的是它还可以使用<strong>Listary</strong>过滤。<br>复制粘贴多处内容时，不用多个窗口来回切换了。<br><a href="http://xbeta.info/ditto.htm" target="_blank" rel="external">介绍地址</a></p>
+<blockquote>
+<p><img src="http://ww2.sinaimg.cn/large/c0f281e2tw1eiuzafksfxj20as08odh0.jpg" alt=""></p>
+</blockquote>
+<hr>
+<h2 id="3-ProcessLasso-进程级系统优化工具"><a href="#3-ProcessLasso-进程级系统优化工具" class="headerlink" title="3.ProcessLasso 进程级系统优化工具"></a>3.ProcessLasso 进程级系统优化工具</h2><p>可以调整进程的优先级，即使CPU占用90+%，也能做到前台程序不卡。<br><a href="http://www.portablesoft.org/process-lasso/" target="_blank" rel="external">介绍地址</a></p>
+<blockquote>
+<p><img src="http://ww2.sinaimg.cn/large/c0f281e2tw1eiuzjsxxnoj20gq0ggn0b.jpg" alt=""></p>
+</blockquote>
+<hr>
+<h2 id="4-StrokeIt-鼠标手势"><a href="#4-StrokeIt-鼠标手势" class="headerlink" title="4.StrokeIt 鼠标手势"></a>4.StrokeIt 鼠标手势</h2><p>鼠标手势增强工具，<a href="http://xbeta.info/strokeit.htm" target="_blank" rel="external">介绍地址</a>。</p>
+<hr>
+<h2 id="5-MacType-字体美化增强"><a href="#5-MacType-字体美化增强" class="headerlink" title="5.MacType 字体美化增强"></a>5.MacType 字体美化增强</h2><p><a href="http://www.iplaysoft.com/mactype.html" target="_blank" rel="external">介绍地址</a></p>
+<blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/c0f281e2tw1eiv2y2vetwj20lf086wgz.jpg" alt=""></p>
+</blockquote>
+<h2 id="6-Chrome"><a href="#6-Chrome" class="headerlink" title="6.Chrome"></a>6.Chrome</h2><p>和火狐一样，如果不加插件。甚至不如IE和xx急速、xx高速浏览器。<br>主要插件介绍 <strong>注意Chrome商店必须翻墙后才能访问。</strong></p>
+<hr>
+<p><a href="https://chrome.google.com/webstore/detail/dpplabbmogkhghncfbfdeeokoefdjegm" target="_blank" rel="external">Proxy SwitchySharp</a> : 配合goagent使用，自动切换代理。无痛翻墙。</p>
+<blockquote>
+<p><img src="http://ww4.sinaimg.cn/large/c0f281e2tw1eiv1mkoxusj20lp0awjsr.jpg" alt=""></p>
+</blockquote>
+<hr>
+<p><a href="https://chrome.google.com/webstore/detail/hdokiejnpimakedhajhdlcegeplioahd" target="_blank" rel="external">LastPass</a> : 跨平台的密码管理工具，自动填表，自动登陆，生成密码。手机上同样可以使用。</p>
+<blockquote>
+<p><img src="http://ww3.sinaimg.cn/large/c0f281e2tw1eiv14ba3utj209s0e53z8.jpg" alt=""></p>
+</blockquote>
+<hr>
+<p><a href="https://chrome.google.com/webstore/detail/ie-tab-multi-enhance/fnfnbeppfinmnjnjhedifcfllpcfgeea#" target="_blank" rel="external">IE Tab Multi</a> : Chrome中模拟IE，可以同步Cookies。</p>
+<hr>
+<p><a href="https://chrome.google.com/webstore/detail/lazarus-form-recovery/loljledaigphbcpfhfmgopdkppkifgno" target="_blank" rel="external">Lazarus</a> : 表单恢复工具，发帖或者注册账号时不小心关闭了网站，辛辛苦苦填的内容可以用它恢复回来。</p>
+<blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/c0f281e2tw1eiv1bxjp62g20bf03d75x.gif" alt=""></p>
+</blockquote>
+<hr>
+<p><a href="https://chrome.google.com/webstore/detail/njeebknkghnjbobnghdlfgfaigkjciih" target="_blank" rel="external">易词典</a> : 双击翻译，划词翻译。</p>
+<blockquote>
+<p><img src="http://ww4.sinaimg.cn/large/c0f281e2tw1eiv1ix27bnj20br04paai.jpg" alt=""></p>
+</blockquote>
+<hr>
+<p><a href="https://chrome.google.com/webstore/detail/fcihnniakiicgonogcieldhhjbgpnjpj" target="_blank" rel="external">有道智能翻译</a> : 类似阅读理解的那种效果，难词生词加括号注释。</p>
+<blockquote>
+<p><img src="http://ww3.sinaimg.cn/large/c0f281e2tw1eiv1pps5jyj20b907k75e.jpg" alt=""></p>
+</blockquote>
+<hr>
+<p><a href="https://chrome.google.com/webstore/detail/%E7%99%BE%E5%BA%A6%E8%B0%B7%E6%AD%8C%E4%B8%80%E9%94%AE%E5%88%87%E6%8D%A2/fknieppmhfgnjilnkdeoegocjkijpbfh" target="_blank" rel="external">百度谷歌一键切换</a> : 点击地址栏图标就可以在两个搜索结果中切换。</p>
+<blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/c0f281e2tw1eiv1t3fenfg20e50cm12u.gif" alt=""></p>
+</blockquote>
+<hr>
+<p><a href="https://chrome.google.com/webstore/detail/aognaapdfnnldnjglanfbbklaakbpejm" target="_blank" rel="external">眼不见心不烦</a> : 刷微博必备……</p>
+<hr>
+<p><a href="https://chrome.google.com/webstore/detail/kllbckciimnnjhkefeobpbmbmpjenoid" target="_blank" rel="external">聚搜索</a> : 划词搜索。</p>
+<blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/c0f281e2tw1eiv285wsfkj20hg06yaba.jpg" alt=""></p>
+</blockquote>
+<hr>
+<p><a href="https://chrome.google.com/webstore/detail/%E6%83%A0%E6%83%A0%E8%B4%AD%E7%89%A9%E5%8A%A9%E6%89%8B/ohjkicjidmohhfcjjlahfppkdblibkkb" target="_blank" rel="external">惠惠购物助手</a> : 网购必备……可以显示历史报价，其他商城的价格。</p>
+<blockquote>
+<p><img src="http://ww2.sinaimg.cn/large/c0f281e2tw1eiv28irva2j20d806xaaj.jpg" alt=""></p>
+</blockquote>
+
+      
+    </div>
+    
+      <div class="article-toc">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#个人观点，看看就好。"><span class="toc-number">1.</span> <span class="toc-text">个人观点，看看就好。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-goagent免费翻墙利器"><span class="toc-number"></span> <span class="toc-text">1.goagent免费翻墙利器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-ditto-剪贴板增强工具"><span class="toc-number"></span> <span class="toc-text">2.ditto 剪贴板增强工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-ProcessLasso-进程级系统优化工具"><span class="toc-number"></span> <span class="toc-text">3.ProcessLasso 进程级系统优化工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-StrokeIt-鼠标手势"><span class="toc-number"></span> <span class="toc-text">4.StrokeIt 鼠标手势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-MacType-字体美化增强"><span class="toc-number"></span> <span class="toc-text">5.MacType 字体美化增强</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Chrome"><span class="toc-number"></span> <span class="toc-text">6.Chrome</span></a>
+      </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SoftWare/">SoftWare</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/arcgis-generate-tpk" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          ArcGIS 制作 tpk
+        
+      </div>
+    </a>
+  
+  
+    <a href="/efficient-software" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">提高效率的几个软件&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  var disqus_url = 'http://blog.xiazhiri.com/efficient-software-2';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

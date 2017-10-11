@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android Lint Aosp App With SonarQube - 夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="背景第三方 App 在 Android Studio 中可以直接使用 Lint 展示结果.源码编译时在 make 之后工程根目录执行 lint packages/apps/Calendar/ 也可以 Lint.但在实际使用中 lint vendor/letv/apps/Camera/ 时提示 No bytecode found: Has the project been built? (Camer">
+<meta name="keywords" content="Android,Lint,AOSP,SonarQube">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Lint Aosp App With SonarQube">
+<meta property="og:url" content="http://blog.xiazhiri.com/Android-Lint-Aosp-with-SonarQube">
+<meta property="og:site_name" content="夏之日">
+<meta property="og:description" content="背景第三方 App 在 Android Studio 中可以直接使用 Lint 展示结果.源码编译时在 make 之后工程根目录执行 lint packages/apps/Calendar/ 也可以 Lint.但在实际使用中 lint vendor/letv/apps/Camera/ 时提示 No bytecode found: Has the project been built? (Camer">
+<meta property="og:updated_time" content="2017-06-19T10:12:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Lint Aosp App With SonarQube">
+<meta name="twitter:description" content="背景第三方 App 在 Android Studio 中可以直接使用 Lint 展示结果.源码编译时在 make 之后工程根目录执行 lint packages/apps/Calendar/ 也可以 Lint.但在实际使用中 lint vendor/letv/apps/Camera/ 时提示 No bytecode found: Has the project been built? (Camer">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-Android-Lint-Aosp-with-SonarQube" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android Lint Aosp App With SonarQube
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/Android-Lint-Aosp-with-SonarQube" class="article-date">
+  <time datetime="2017-06-06T08:08:42.000Z" itemprop="datePublished">2017-06-06</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>第三方 App 在 Android Studio 中可以直接使用 Lint 展示结果.<br>源码编译时在 make 之后工程根目录执行 lint packages/apps/Calendar/ 也可以 Lint.<br>但在实际使用中 <code>lint vendor/letv/apps/Camera/</code> 时提示 <code>No bytecode found: Has the project been built? (Camera)</code>, 同时还有资源使用的误报。</p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>分析 lint 源码可知<br><a href="https://android.googlesource.com/platform/sdk/+/0bf1b2c/lint/libs/lint_api/src/com/android/tools/lint/detector/api/Project.java#654" target="_blank" rel="external">lint/detector/api/Project.java#654</a><br><a id="more"></a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> List&lt;File&gt; <span class="title">getAospJavaClassPath</span><span class="params">()</span> </span>&#123;</div><div class="line">    List&lt;File&gt; classDirs = <span class="keyword">new</span> ArrayList&lt;File&gt;(<span class="number">1</span>);</div><div class="line">    <span class="keyword">for</span> (File dir : getIntermediateDirs()) &#123;</div><div class="line">        File classes = <span class="keyword">new</span> File(dir, <span class="string">"classes"</span>); <span class="comment">//$NON-NLS-1$</span></div><div class="line">        <span class="keyword">if</span> (classes.exists()) &#123;</div><div class="line">            classDirs.add(classes);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            classes = <span class="keyword">new</span> File(dir, <span class="string">"classes.jar"</span>); <span class="comment">//$NON-NLS-1$</span></div><div class="line">            <span class="keyword">if</span> (classes.exists()) &#123;</div><div class="line">                classDirs.add(classes);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (classDirs.size() == <span class="number">0</span>) &#123;</div><div class="line">        mClient.log(<span class="keyword">null</span>,</div><div class="line">                <span class="string">"No bytecode found: Has the project been built? (%1$s)"</span>, getName());</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> classDirs;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/** Find the _intermediates directories for a given module name */</span></div><div class="line"><span class="function"><span class="keyword">private</span> List&lt;File&gt; <span class="title">getIntermediateDirs</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">// See build/core/definitions.mk and in particular the "intermediates-dir-for" definition</span></div><div class="line">    List&lt;File&gt; intermediates = <span class="keyword">new</span> ArrayList&lt;File&gt;();</div><div class="line">    <span class="comment">// <span class="doctag">TODO:</span> Look up the module name, e.g. LOCAL_MODULE. However,</span></div><div class="line">    <span class="comment">// some Android.mk files do some complicated things with it - and most</span></div><div class="line">    <span class="comment">// projects use the same module name as the directory name.</span></div><div class="line">    String moduleName = mDir.getName();</div><div class="line">    String top = getAospTop();</div><div class="line">    <span class="keyword">final</span> String[] outFolders = <span class="keyword">new</span> String[] &#123;</div><div class="line">        top + <span class="string">"/out/host/common/obj"</span>,             <span class="comment">//$NON-NLS-1$</span></div><div class="line">        top + <span class="string">"/out/target/common/obj"</span>,           <span class="comment">//$NON-NLS-1$</span></div><div class="line">        getAospHostOut() + <span class="string">"/obj"</span>,                <span class="comment">//$NON-NLS-1$</span></div><div class="line">        getAospProductOut() + <span class="string">"/obj"</span>              <span class="comment">//$NON-NLS-1$</span></div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">final</span> String[] moduleClasses = <span class="keyword">new</span> String[] &#123;</div><div class="line">            <span class="string">"APPS"</span>,                <span class="comment">//$NON-NLS-1$</span></div><div class="line">            <span class="string">"JAVA_LIBRARIES"</span>,      <span class="comment">//$NON-NLS-1$</span></div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">for</span> (String out : outFolders) &#123;</div><div class="line">        <span class="function"><span class="keyword">assert</span> new <span class="title">File</span><span class="params">(out.replace(<span class="string">'/'</span>, File.separatorChar)</span>).<span class="title">exists</span><span class="params">()</span> : out</span>;</div><div class="line">        <span class="keyword">for</span> (String moduleClass : moduleClasses) &#123;</div><div class="line">            String path = out + <span class="string">'/'</span> + moduleClass + <span class="string">'/'</span> + moduleName</div><div class="line">                    + <span class="string">"_intermediates"</span>; <span class="comment">//$NON-NLS-1$</span></div><div class="line">            File file = <span class="keyword">new</span> File(path.replace(<span class="string">'/'</span>, File.separatorChar));</div><div class="line">            <span class="keyword">if</span> (file.exists()) &#123;</div><div class="line">                intermediates.add(file);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> intermediates;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Lint 会尝试从 out 目录中寻找 <code>ModuleName_intermediates/classes.jar</code>, 找不到则会报 No bytecode found.<br>比如 <code>/letv/workspace/DEMETER_FINAL/out/target/common/obj/APPS/StvCamera_intermediates</code><br>而找不到有两个原因:</p>
+<ol>
+<li>从 Android M 开始 AOSP 使用 Jack 编译 (Android N 开始使用 JaCoCo?), Jack 编译时生成 classes.jack / classes.dex 而非 classes.jar</li>
+<li>getIntermediateDirs() 方法中 moduleName = mDir.getName() 而不是 vendor/letv/app/**/Android.mk 中指定的 LOCAL_PACKAGE_NAME</li>
+</ol>
+<h3 id="禁用-Jack-dex2jar"><a href="#禁用-Jack-dex2jar" class="headerlink" title="禁用 Jack / dex2jar"></a>禁用 Jack / dex2jar</h3><p>对于问题 1 要么禁用掉 Jack make 时生成 classed.jar, 要么把 classes.dex 转换成 classes.jar<br>禁用掉整个项目的 Jack 则会 make 不过, 尝试了几个 module 级别的禁用都无效<br>测试 dex2jar 可行</p>
+<h3 id="修改-lint-api-jar"><a href="#修改-lint-api-jar" class="headerlink" title="修改 lint-api.jar"></a>修改 lint-api.jar</h3><p>对于问题 2 修改 lint-api.jar 比编译整个 lint 工具更简单, 方法与 2. CrossWalk.jar 修改 类似<br>修改过程见 <a href="https://github.com/likaci/android-lint-mod-jar/commits/master" target="_blank" rel="external">https://github.com/likaci/android-lint-mod-jar/commits/master</a><br>另外源码环境中的 lint 使用的是 <code>DEMETER_FINAL/prebuilts/devtools/tools/lint</code> 版本太旧, 直接使用最新的 lint-api 修改, 但最新的 lint 需要 jre8 才能执行</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>以 DEMETER_FINAL/vendor/letv/apps/Camera/ 为例<br>下载 <a href="https://github.com/likaci/android-lint-mod" target="_blank" rel="external">https://github.com/likaci/android-lint-mod</a><br>修改 <code>bin/lint</code> 92行 <code>JAVACMD=&quot;/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java&quot;</code> 成合适的 jre8 路径<br>make 整个 AOSP 工程<br>下载 dex2jar - <a href="https://github.com/pxb1988/dex2jar/releases" target="_blank" rel="external">https://github.com/pxb1988/dex2jar/releases</a> 解压到合适的路径<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># dex2jar</span></div><div class="line"><span class="built_in">cd</span> DEMETER_FINAL/out/target/common/obj/APPS/StvCamera_intermediates</div><div class="line">dex2jar-2.0/d2j-dex2jar.sh classes.dex -o classes.jar</div><div class="line">  </div><div class="line"><span class="comment"># lint</span></div><div class="line"><span class="built_in">cd</span> DEMETER_FINAL/vendor/letv/apps/Camera/</div><div class="line">pathToModedLint/bin/lint . --xml lint-report.xml</div></pre></td></tr></table></figure></p>
+<p>之后运行 SonarScanner 指定 -Dsonar.android.lint.report=./lint-report.xml 即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">SonarQubeScanner/bin/sonar-scanner \</div><div class="line">    -Dsonar.host.url=http://localhost:9000 \</div><div class="line">    -Dsonar.projectName=`basename <span class="variable">$PWD</span>` \</div><div class="line">    -Dsonar.projectVersion=1.0 \</div><div class="line">    -Dsonar.projectKey=`basename <span class="variable">$PWD</span>` \</div><div class="line">    -Dsonar.projectBaseDir=`<span class="variable">$PWD</span>` \</div><div class="line">    -Dsonar.sources=<span class="string">"./src,./res,./AndroidManifest.xml"</span> \</div><div class="line">    -Dsonar.profile=<span class="string">"Android Lint"</span> \</div><div class="line">    -Dsonar.import_unknown_files=<span class="literal">true</span> \</div><div class="line">    -Dsonar.android.lint.report=./lint-report.xml</div><div class="line"><span class="comment">#最后四行是关键</span></div></pre></td></tr></table></figure></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>使用 Lint 改进您的代码 - <a href="https://developer.android.com/studio/write/lint.html?hl=zh-cn" target="_blank" rel="external">https://developer.android.com/studio/write/lint.html?hl=zh-cn</a><br>Compiling with Jack - <a href="https://source.android.com/source/jackey" target="_blank" rel="external">https://source.android.com/source/jackey</a><br><a href="http://macoscope.com/blog/using-sonarqube-with-jenkins-continuous-integration-and-github-to-improve-code-review/" target="_blank" rel="external">Using SonarQube with Jenkins Continuous Integration and GitHub to Improve Code Review</a></p>
+
+      
+    </div>
+    
+      <div class="article-toc">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原因"><span class="toc-number">2.</span> <span class="toc-text">原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#禁用-Jack-dex2jar"><span class="toc-number">3.</span> <span class="toc-text">禁用 Jack / dex2jar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-lint-api-jar"><span class="toc-number">4.</span> <span class="toc-text">修改 lint-api.jar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-number">5.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AOSP/">AOSP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lint/">Lint</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SonarQube/">SonarQube</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/android-method-trace-create-and-parse" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          Android Method Trace 生成与解析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/dell-tb15-diy-cooler" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Dell TB15 拓展坞 Diy 风扇散热(多图)&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  var disqus_url = 'http://blog.xiazhiri.com/Android-Lint-Aosp-with-SonarQube';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

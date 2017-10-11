@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android 播放加密视频的一个思路 - 夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基本思路Android 播放加密视频的基本思路就是：本地启动一个HTTP服务作为代理，解密之后给播放器播放。这样的好处就是可以自定义加密方案，更重要的是 加密/解密模块 可以和视频播放模块解耦。    处理HTTP头这里使用的 NanoHTTPD , 一个纯Java实现的微型WEB服务器，代码开源。代码实现起来很简单，只要继承然后重写两个方法就可以。稍微复杂的是怎样处理从视频播放器过来的请求。">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 播放加密视频的一个思路">
+<meta property="og:url" content="http://blog.xiazhiri.com/Android-Play-Encrypted-Video">
+<meta property="og:site_name" content="夏之日">
+<meta property="og:description" content="基本思路Android 播放加密视频的基本思路就是：本地启动一个HTTP服务作为代理，解密之后给播放器播放。这样的好处就是可以自定义加密方案，更重要的是 加密/解密模块 可以和视频播放模块解耦。    处理HTTP头这里使用的 NanoHTTPD , 一个纯Java实现的微型WEB服务器，代码开源。代码实现起来很简单，只要继承然后重写两个方法就可以。稍微复杂的是怎样处理从视频播放器过来的请求。">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/c0f281e2jw1f25u97tgzej215m04idgr.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/c0f281e2jw1f25ub757lbj211g09qq4v.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/c0f281e2jw1f25uch2s9fj215c05at9x.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/c0f281e2jw1f25udpfdj7j212409ytb1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/c0f281e2jw1f25xd7oh45j21401z4jz5.jpg">
+<meta property="og:updated_time" content="2017-05-13T04:33:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 播放加密视频的一个思路">
+<meta name="twitter:description" content="基本思路Android 播放加密视频的基本思路就是：本地启动一个HTTP服务作为代理，解密之后给播放器播放。这样的好处就是可以自定义加密方案，更重要的是 加密/解密模块 可以和视频播放模块解耦。    处理HTTP头这里使用的 NanoHTTPD , 一个纯Java实现的微型WEB服务器，代码开源。代码实现起来很简单，只要继承然后重写两个方法就可以。稍微复杂的是怎样处理从视频播放器过来的请求。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/c0f281e2jw1f25u97tgzej215m04idgr.jpg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-Android-Play-Encrypted-Video" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android 播放加密视频的一个思路
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/Android-Play-Encrypted-Video" class="article-date">
+  <time datetime="2016-03-20T09:32:57.000Z" itemprop="datePublished">2016-03-20</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>Android 播放加密视频的基本思路就是：<strong>本地启动一个HTTP服务作为代理，解密之后给播放器播放</strong>。<br>这样的好处就是可以<strong>自定义加密方案</strong>，更重要的是 加密/解密模块 可以和视频播放模块<strong>解耦</strong>。   </p>
+<h3 id="处理HTTP头"><a href="#处理HTTP头" class="headerlink" title="处理HTTP头"></a>处理HTTP头</h3><p>这里使用的 <a href="http://nanohttpd.org/" target="_blank" rel="external">NanoHTTPD</a> , 一个纯Java实现的微型WEB服务器，代码开源。<br>代码实现起来很简单，只要继承然后重写两个方法就可以。<br>稍微复杂的是怎样处理从视频播放器过来的请求。   </p>
+<p>通过 <a href="https://www.charlesproxy.com/" target="_blank" rel="external">Charles</a> 代理就能发现简单的规律。<br>VideoView播放在线视频的时候，发出的GET请求。第一次是一个普通的请求，务器返回200；之后的则全是分段请求，服务器返回206。   </p>
+<p>第一次请求 和 结果<br><img src="http://ww1.sinaimg.cn/large/c0f281e2jw1f25u97tgzej215m04idgr.jpg" alt="">   </p>
+<p><img src="http://ww2.sinaimg.cn/large/c0f281e2jw1f25ub757lbj211g09qq4v.jpg" alt=""></p>
+<hr>
+<p>第二次请求 和 结果<br><img src="http://ww4.sinaimg.cn/large/c0f281e2jw1f25uch2s9fj215c05at9x.jpg" alt="">   </p>
+<p><img src="http://ww3.sinaimg.cn/large/c0f281e2jw1f25udpfdj7j212409ytb1.jpg" alt="">   </p>
+<p>两次Request的区别是 后面的有Range字段<br>两次Response的区别是:   </p>
+<ol>
+<li>第一次 返回HTTP200 第二次 返回HTTP206</li>
+<li>第一次 Content-Length是文件的整体大小; 第二次Content-Lenght是剩余的大小</li>
+<li>第二次 返回Content-Range</li>
+</ol>
+<p>有了区别之后就简单了，剩下要做的就是: <strong>根据Req的不同，返回不同的 HTTP头 和数据</strong>。</p>
+<a id="more"></a>
+<h3 id="继承InputStream"><a href="#继承InputStream" class="headerlink" title="继承InputStream"></a>继承InputStream</h3><p>Demo中用到的”加密”很简单: 直接在文件头部加入一些16进制的文字，一般的视频播放就没法识别了。<br>当然还可以有其他拓展的加密方法，比如数据乱序存储(在文件头部存储读取索引)、数据按块大小进行加密等   </p>
+<p>Demo中直接继承InputStream, 然后重写几个必要的方法，通过InputStream.Skip()方法跳过无用的文件头即可。   </p>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><p>源码见：<a href="https://github.com/likaci/Android-Play-Encrypted-Video" target="_blank" rel="external">Github Repo</a>   </p>
+<p><img src="http://ww1.sinaimg.cn/large/c0f281e2jw1f25xd7oh45j21401z4jz5.jpg" alt=""></p>
+
+      
+    </div>
+    
+      <div class="article-toc">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本思路"><span class="toc-number">1.</span> <span class="toc-text">基本思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理HTTP头"><span class="toc-number">2.</span> <span class="toc-text">处理HTTP头</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承InputStream"><span class="toc-number">3.</span> <span class="toc-text">继承InputStream</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Demo"><span class="toc-number">4.</span> <span class="toc-text">Demo</span></a></li></ol>
+      </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/do-not-use-cnpm-install-f8app" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          不要使用 cnpm 安装 F8App, react-native.js:120 ...require(&#39;React&#39;), SyntaxError: Unexpected token ...
+        
+      </div>
+    </a>
+  
+  
+    <a href="/intellij-webstorm-create-non-web-node-project" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Intellij IDEA / WebStorm Create Non-Web Node Project&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  var disqus_url = 'http://blog.xiazhiri.com/Android-Play-Encrypted-Video';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

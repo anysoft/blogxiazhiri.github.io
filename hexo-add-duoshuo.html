@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>为hexo添加多说评论 - 夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="hexo是基于Node.js的静态博客程序，可以方便的生成静态网页托管在github pages服务上，值得一提的是作者是台湾同胞。hexo是在对比安装了所有可以安装的静态博客引擎之后的选择，octopress pelican liquidluke……各种引擎并无优劣之说，个个都是作者辛苦劳动的结晶，对于平台的选择完全在于个人的喜好。    ###添加多说的原因由于hexo是静态博客引擎，所以评论">
+<meta name="keywords" content="hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为hexo添加多说评论">
+<meta property="og:url" content="http://blog.xiazhiri.com/hexo-add-duoshuo.html">
+<meta property="og:site_name" content="夏之日">
+<meta property="og:description" content="hexo是基于Node.js的静态博客程序，可以方便的生成静态网页托管在github pages服务上，值得一提的是作者是台湾同胞。hexo是在对比安装了所有可以安装的静态博客引擎之后的选择，octopress pelican liquidluke……各种引擎并无优劣之说，个个都是作者辛苦劳动的结晶，对于平台的选择完全在于个人的喜好。    ###添加多说的原因由于hexo是静态博客引擎，所以评论">
+<meta property="og:updated_time" content="2017-05-14T12:35:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="为hexo添加多说评论">
+<meta name="twitter:description" content="hexo是基于Node.js的静态博客程序，可以方便的生成静态网页托管在github pages服务上，值得一提的是作者是台湾同胞。hexo是在对比安装了所有可以安装的静态博客引擎之后的选择，octopress pelican liquidluke……各种引擎并无优劣之说，个个都是作者辛苦劳动的结晶，对于平台的选择完全在于个人的喜好。    ###添加多说的原因由于hexo是静态博客引擎，所以评论">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-hexo-add-duoshuo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      为hexo添加多说评论
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/hexo-add-duoshuo.html" class="article-date">
+  <time datetime="2013-02-22T15:24:27.000Z" itemprop="datePublished">2013-02-22</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://zespia.tw/hexo/zh-TW/" target="_blank" rel="external">hexo</a>是基于Node.js的静态博客程序，可以方便的生成静态网页托管在github pages服务上，值得一提的是作者是台湾同胞。<br><a href="http://zespia.tw/hexo/zh-TW/" target="_blank" rel="external">hexo</a>是在对比安装了<em>所有</em>可以安装的静态博客引擎之后的选择，octopress pelican liquidluke……<br>各种引擎并<em>无</em>优劣之说，个个都是作者辛苦劳动的结晶，对于平台的选择完全在于个人的喜好。   </p>
+<p>###添加<em><a href="http://duoshuo.com/" target="_blank" rel="external">多说</a></em>的原因<br>由于<a href="http://zespia.tw/hexo/zh-TW/" target="_blank" rel="external">hexo</a>是静态博客引擎，所以评论只能通过js加载外部网页实现。<br><a href="http://zespia.tw/hexo/zh-TW/" target="_blank" rel="external">hexo</a>原生支持Disqus，但Disqus只支持G+ twitter等登陆，不符合兲朝的大国情，所以只能自己动手加。<br>另外<a href="http://duoshuo.com/" target="_blank" rel="external">多说</a>好像口碑不太好……</p>
+<p>###安装<br>代码的安装很简单，只需要修改   </p>
+<pre><code>\hexo\themes\light\layout\_partial\comment.ejs
+</code></pre><p>如果<strong>只打算</strong>使用<a href="http://duoshuo.com/" target="_blank" rel="external">多说</a>，可以直接把Disqus部分删掉，加上获取的代码即可。<br>而打算同时使用Disqus和<a href="http://duoshuo.com/" target="_blank" rel="external">多说</a>的同学可以参考以下代码，所有以<code>&lt;!--liakc xxxx begin end--&gt;</code>注释为添加的部分。<br>修改得不好，应该可以更模块化一下，就不提交到git上献丑了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"> &lt;% <span class="keyword">if</span> (config.disqus_shortname &amp;&amp; page.comments)&#123; %&gt;</div><div class="line"> &lt;!--likaci tab.js init begin--&gt;</div><div class="line"> &lt;script type="text/javascript" src="/js/tab.js"&gt;&lt;/script&gt;</div><div class="line"> &lt;script type="text/javascript"&gt;</div><div class="line"> 	window.onload=function()&#123;</div><div class="line"> 		 var tabtype=&#123;trigger:'mouseover',tabCurrentClass:'newclass',auto:false,timer:4000,delay:300 &#125;;</div><div class="line"> 		 tabInit(tabtype,['Disqus_bt','disqus_thread'],['duoshuo_bt','ds-thread'])</div><div class="line"> 	&#125;</div><div class="line"> &lt;/script&gt;</div><div class="line"> &lt;!--likaic tab.js init end--&gt;</div><div class="line"> &lt;!--likaci css style begin--&gt;</div><div class="line"> &lt;style type="text/css"&gt;</div><div class="line"> #Disqus_bt,#duoshuo_bt &#123; padding: 5px 10px 5px 7px; line-height: 17px; display: block; float: left; margin: 0 7px 0 0; background-color: #f5f5f5; border: 1px solid #dedede; border-top: 1px solid #eee; border-left: 1px solid #eee; &#125;</div><div class="line"> #Disqus_bt&#123;color: #336699&#125;</div><div class="line"> #duoshuo_bt&#123;color: #d12f19&#125;</div><div class="line"> #duoshuo_bt.newclass&#123;background-color:#DFF4FF&#125;</div><div class="line"> #Disqus_bt.newclass&#123;background-color:#E6EFC2&#125;</div><div class="line"> &lt;/style&gt;</div><div class="line"> &lt;!--likaci css style end--&gt;</div><div class="line"> &lt;section id="comment"&gt;</div><div class="line">   &lt;h1 class="title"&gt;&lt;%= __('comment') %&gt;&lt;/h1&gt;</div><div class="line">&lt;!--likaci add button begin--&gt;</div><div class="line">   &lt;div id="duoshuo_bt"&gt;多说&lt;/div&gt;</div><div class="line">   &lt;div id="Disqus_bt" &gt;Disqus&lt;/div&gt;</div><div class="line">&lt;!--liakc add button end--&gt;</div><div class="line">   &lt;div id="disqus_thread"&gt;</div><div class="line">     &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;</div><div class="line">   &lt;/div&gt;</div><div class="line"> &lt;!--likaci add duoshuo begin--&gt;</div><div class="line"> 	&lt;div class="ds-thread"&gt;&lt;/div&gt;</div><div class="line"> 	&lt;script type="text/javascript"&gt;</div><div class="line"> 	var duoshuoQuery = &#123;short_name:"yourshotname"&#125;;</div><div class="line"> 	(function() &#123;</div><div class="line"> 		var ds = document.createElement('script');</div><div class="line"> 		ds.type = 'text/javascript';ds.async = true;</div><div class="line"> 		ds.src = 'http://static.duoshuo.com/embed.js';</div><div class="line"> 		ds.charset = 'UTF-8';</div><div class="line"> 		(document.getElementsByTagName('head')[0] </div><div class="line"> 		|| document.getElementsByTagName('body')[0]).appendChild(ds);</div><div class="line"> 	&#125;)();</div><div class="line"> 	&lt;/script&gt;</div><div class="line"> &lt;!--likaci add duoshuo end--&gt;</div><div class="line"> &lt;/section&gt;</div><div class="line"> &lt;% &#125; %&gt;</div></pre></td></tr></table></figure>
+<p><strong><em>注意</em></strong>,tab.js请参考<a href="http://www.jb51.net/article/22992.htm" target="_blank" rel="external">脚本之家</a>，稍有基础的人就能看懂。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/hexo-duoshuo-jQuery.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          Hexo多说评论jQuery版本
+        
+      </div>
+    </a>
+  
+  
+    <a href="/arcmap-touchscreen-plugin.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ArcMap触摸屏绘图辅助程序&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  var disqus_url = 'http://blog.xiazhiri.com/hexo-add-duoshuo.html';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

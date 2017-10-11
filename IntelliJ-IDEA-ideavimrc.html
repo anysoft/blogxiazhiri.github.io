@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>IntelliJ IDEA vim 插件配置文件 .ideavimrc 配置不生效的问题 - 夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="按照官方文档 .ideavimrc 的配置文件应该是在 ~\.ideavimrc, 在Win平台下对应路径应该是 c:\Users\yourUserName\。但是新建文件写入内容 se ic (忽略大小写) 发现配置不起作用.之后把文件放在 D:\ 与 .IntelliJIdea13\ 同目录下, 发现 :e ~\.ideavimrc 可以打开配置文件, 证明路径没错, 但配置依旧无效。多次排除">
+<meta name="keywords" content="Vim,IntelliJ IDEA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IntelliJ IDEA vim 插件配置文件 .ideavimrc 配置不生效的问题">
+<meta property="og:url" content="http://blog.xiazhiri.com/IntelliJ-IDEA-ideavimrc.html">
+<meta property="og:site_name" content="夏之日">
+<meta property="og:description" content="按照官方文档 .ideavimrc 的配置文件应该是在 ~\.ideavimrc, 在Win平台下对应路径应该是 c:\Users\yourUserName\。但是新建文件写入内容 se ic (忽略大小写) 发现配置不起作用.之后把文件放在 D:\ 与 .IntelliJIdea13\ 同目录下, 发现 :e ~\.ideavimrc 可以打开配置文件, 证明路径没错, 但配置依旧无效。多次排除">
+<meta property="og:updated_time" content="2014-05-15T09:37:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IntelliJ IDEA vim 插件配置文件 .ideavimrc 配置不生效的问题">
+<meta name="twitter:description" content="按照官方文档 .ideavimrc 的配置文件应该是在 ~\.ideavimrc, 在Win平台下对应路径应该是 c:\Users\yourUserName\。但是新建文件写入内容 se ic (忽略大小写) 发现配置不起作用.之后把文件放在 D:\ 与 .IntelliJIdea13\ 同目录下, 发现 :e ~\.ideavimrc 可以打开配置文件, 证明路径没错, 但配置依旧无效。多次排除">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-IntelliJ-IDEA-ideavimrc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      IntelliJ IDEA vim 插件配置文件 .ideavimrc 配置不生效的问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/IntelliJ-IDEA-ideavimrc.html" class="article-date">
+  <time datetime="2014-05-10T15:23:23.000Z" itemprop="datePublished">2014-05-10</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>按照官方文档 <code>.ideavimrc</code> 的配置文件应该是在 <code>~\.ideavimrc</code>, 在Win平台下对应路径应该是 <code>c:\Users\yourUserName\</code>。<br>但是新建文件写入内容 <code>se ic</code> (忽略大小写) 发现配置不起作用.<br>之后把文件放在 D:\ 与 .IntelliJIdea13\ 同目录下, 发现 <code>:e ~\.ideavimrc</code> 可以打开配置文件, 证明路径没错, 但配置依旧无效。多次排除之后，发现是文件编码问题……<br><strong>结论是:</strong><br>.ideavimrc 需要和 .IntelliJIdea13\ 同路径, 且文件编码为utf-8.</p>
+<hr>
+<p><code>.ideavimrc</code> config file must store in the parent path of <code>.IntelliJIdea13\</code> , the file encoding mus be utf-8.</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IntelliJ-IDEA/">IntelliJ IDEA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vim/">Vim</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Change-IP-Crash.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          修改ip explorer崩溃(猎豹wifi导致)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Regex.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">最近用到的几个正则&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  var disqus_url = 'http://blog.xiazhiri.com/IntelliJ-IDEA-ideavimrc.html';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

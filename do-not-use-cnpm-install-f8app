@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>不要使用 cnpm 安装 F8App, react-native.js:120 ...require(&#39;React&#39;), SyntaxError: Unexpected token ... - 夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="不要使用 cnpm install 安装，不然运行时会报错。开始被这个帖子误导浪费半天时间…… 12345678910111213141516$ react-native run-android/f8app/node_modules/.npminstall/react-native/0.23.1/react-native/Libraries/react-native/react-native.js">
+<meta name="keywords" content="react,npm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不要使用 cnpm 安装 F8App, react-native.js:120 ...require(&#39;React&#39;), SyntaxError: Unexpected token ...">
+<meta property="og:url" content="http://blog.xiazhiri.com/do-not-use-cnpm-install-f8app">
+<meta property="og:site_name" content="夏之日">
+<meta property="og:description" content="不要使用 cnpm install 安装，不然运行时会报错。开始被这个帖子误导浪费半天时间…… 12345678910111213141516$ react-native run-android/f8app/node_modules/.npminstall/react-native/0.23.1/react-native/Libraries/react-native/react-native.js">
+<meta property="og:updated_time" content="2016-04-24T01:53:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="不要使用 cnpm 安装 F8App, react-native.js:120 ...require(&#39;React&#39;), SyntaxError: Unexpected token ...">
+<meta name="twitter:description" content="不要使用 cnpm install 安装，不然运行时会报错。开始被这个帖子误导浪费半天时间…… 12345678910111213141516$ react-native run-android/f8app/node_modules/.npminstall/react-native/0.23.1/react-native/Libraries/react-native/react-native.js">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-do-not-use-cnpm-install-f8app" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      不要使用 cnpm 安装 F8App, react-native.js:120 ...require(&#39;React&#39;), SyntaxError: Unexpected token ...
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/do-not-use-cnpm-install-f8app" class="article-date">
+  <time datetime="2016-04-23T01:36:22.000Z" itemprop="datePublished">2016-04-23</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>不要使用 <code>cnpm install</code> 安装，不然运行时会报错。<br>开始被<a href="https://www.bountysource.com/issues/25671889-make-relay-work-with-react-native-out-of-the-box" target="_blank" rel="external">这个帖子</a>误导浪费半天时间……</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ react-native run-android</div><div class="line">/f8app/node_modules/.npminstall/react-native/0.23.1/react-native/Libraries/react-native/react-native.js:120</div><div class="line">  ...require(<span class="string">'React'</span>),</div><div class="line">  ^^^</div><div class="line"></div><div class="line">SyntaxError: Unexpected token ...</div><div class="line">    at exports.runInThisContext (vm.js:53:16)</div><div class="line">    at Module._compile (module.js:414:25)</div><div class="line">    at Module._extensions..js (module.js:442:10)</div><div class="line">    at Object.require.extensions.(anonymous <span class="keyword">function</span>) [as .js] (/f8app/node_modules/.npminstall/babel-register/6.7.2/babel-register/lib/node.js:134:7)</div><div class="line">    at Module.load (module.js:356:32)</div><div class="line">    at Function.Module._load (module.js:311:12)</div><div class="line">    at Module.require (module.js:366:17)</div><div class="line">    at require (module.js:385:17)</div><div class="line">    at /f8app/node_modules/.npminstall/babel-core/6.7.7/babel-core/lib/transformation/file/options/option-manager.js:368:22</div><div class="line">    at Array.map (native)</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/crosswalk-chromium-mod-jar" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          CrossWalk Chromium Jar 修改指南
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Android-Play-Encrypted-Video" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android 播放加密视频的一个思路&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  var disqus_url = 'http://blog.xiazhiri.com/do-not-use-cnpm-install-f8app';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

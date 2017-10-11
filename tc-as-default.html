@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>win7下设置TotalCommander为默认文件管理器 - 夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前几天刚看完viatc这个程序的介绍，又看到善用佳软在中科大的演讲，最后决定上了total commander(以下简称TC）这个贼船。 ##设置Total commander为默认文件管理器默认情况下TC没有提供设置为默认管理器的方法，翻遍了网上的教程，都只是在xp下的设置，无非就是设置文件夹的关联方式。在注册表HKCR\Folder\shell\open\command下。 ##设置为默认管理">
+<meta name="keywords" content="ahk,totalcmd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="win7下设置TotalCommander为默认文件管理器">
+<meta property="og:url" content="http://blog.xiazhiri.com/tc-as-default.html">
+<meta property="og:site_name" content="夏之日">
+<meta property="og:description" content="前几天刚看完viatc这个程序的介绍，又看到善用佳软在中科大的演讲，最后决定上了total commander(以下简称TC）这个贼船。 ##设置Total commander为默认文件管理器默认情况下TC没有提供设置为默认管理器的方法，翻遍了网上的教程，都只是在xp下的设置，无非就是设置文件夹的关联方式。在注册表HKCR\Folder\shell\open\command下。 ##设置为默认管理">
+<meta property="og:updated_time" content="2013-02-18T16:22:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="win7下设置TotalCommander为默认文件管理器">
+<meta name="twitter:description" content="前几天刚看完viatc这个程序的介绍，又看到善用佳软在中科大的演讲，最后决定上了total commander(以下简称TC）这个贼船。 ##设置Total commander为默认文件管理器默认情况下TC没有提供设置为默认管理器的方法，翻遍了网上的教程，都只是在xp下的设置，无非就是设置文件夹的关联方式。在注册表HKCR\Folder\shell\open\command下。 ##设置为默认管理">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-tc-as-default" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      win7下设置TotalCommander为默认文件管理器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/tc-as-default.html" class="article-date">
+  <time datetime="2013-01-14T16:00:00.000Z" itemprop="datePublished">2013-01-15</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前几天刚看完viatc这个程序的介绍，又看到善用佳软在中科大的演讲，最后决定上了total commander(以下简称TC）这个贼船。</p>
+<p>##设置Total commander为默认文件管理器<br>默认情况下TC没有提供设置为默认管理器的方法，翻遍了网上的教程，都只是在xp下的设置，无非就是设置文件夹的关联方式。在注册表HKCR\Folder\shell\open\command下。</p>
+<p>##设置为默认管理器后控制面板打不开<br>但问题又来了，TC在win7下不支持控制面板的打开，很多子项目都无法打开。<br>在上面提到的注册表键值下，%1参数传递给目标程序。普通文件传递的就是文件的路径，而作为控制面板之类的虚拟文件传递的是::{xxx}类似的CLSID。<br>所以通过ahk对命令行参数的处理写了个启动器，算是解决了这个问题。<br>下面是ctotalcmd.ahk</p>
+<pre><code>Loop, %0%  ;对每个参数执行一次：
+{
+    param := %A_Index%
+If param not contains ::{,.tib
+        Run totalcmd.exe  /O /T /L=&quot;%param%&quot;
+    Else
+        Run Explorer.exe %param%
+    p=1
+}
+    if !p
+        Run totalcmd.exe  /O /T 
+</code></pre><p>与之对应的是另一个ahk小程序，安装/卸载totalcmd.ahk</p>
+<pre><code>RegRead, IsExp, HKEY_LOCAL_MACHINE, SOFTWARE\Classes\Folder\shell\open\command, DelegateExecute
+If(IsExp=&quot;{11dbb47c-a525-400b-9e80-a54615a090c0}&quot;){
+    RegDelete HKEY_LOCAL_MACHINE, SOFTWARE\Classes\Folder\shell\open\command, DelegateExecute
+    RegWrite, REG_EXPAND_SZ, HKEY_LOCAL_MACHINE, SOFTWARE\Classes\Folder\shell\open\command, , `&quot;%A_WorkingDir%\cTOTALCMD.EXE`&quot; `&quot;`%1`&quot;
+    TrayTip,,cTotalCommader为默认文件管理器,2000
+    Sleep ,1500
+    }
+Else{
+    RegWrite, REG_EXPAND_SZ, HKEY_LOCAL_MACHINE, SOFTWARE\Classes\Folder\shell\open\command, DelegateExecute, {11dbb47c-a525-400b-9e80-a54615a090c0}
+    RegWrite, REG_EXPAND_SZ, HKEY_LOCAL_MACHINE, SOFTWARE\Classes\Folder\shell\open\command, , `%SystemRoot`%\Explorer.exe
+    TrayTip,,Explorer为默认文件管理器,2000
+    Sleep ,1500
+}
+</code></pre><p><strong>注意</strong>必须放在tc目录下使用，目前对于管理无线网络、字体管理无法打开，需要临时卸载。<br>仅限于win7，xp请参考@sunwind兄的<a href="http://blog.csdn.net/liuyukuan/article/details/8493882" target="_blank" rel="external">文章</a></p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ahk/">ahk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/totalcmd/">totalcmd</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/folder-icon.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          批量修改文件夹图标
+        
+      </div>
+    </a>
+  
+  
+    <a href="/vim-run-ahk.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vim编辑运行ahk&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  var disqus_url = 'http://blog.xiazhiri.com/tc-as-default.html';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

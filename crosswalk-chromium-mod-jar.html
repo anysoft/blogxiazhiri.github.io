@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CrossWalk Chromium Jar 修改指南 - 夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CrossWalk 是由 Intel 主导, 基于 Chromium 的 WebView 实现. 旨在为不同平台提供高效并且一致的 Web 体验.关于项目简介、优劣对比、控件的使用, 建议参考官方文档.本文主要从Java层 以修改最新 Stable 22.52.561.4 介绍如何下载源码和修改Jar    1. 源码下载官方提供的下载方式与 Chromium 一样，需要使用 gclient 下载">
+<meta name="keywords" content="CrossWalk,Chromium,WebView">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CrossWalk Chromium Jar 修改指南">
+<meta property="og:url" content="http://blog.xiazhiri.com/crosswalk-chromium-mod-jar.html">
+<meta property="og:site_name" content="夏之日">
+<meta property="og:description" content="CrossWalk 是由 Intel 主导, 基于 Chromium 的 WebView 实现. 旨在为不同平台提供高效并且一致的 Web 体验.关于项目简介、优劣对比、控件的使用, 建议参考官方文档.本文主要从Java层 以修改最新 Stable 22.52.561.4 介绍如何下载源码和修改Jar    1. 源码下载官方提供的下载方式与 Chromium 一样，需要使用 gclient 下载">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0060lm7Tgy1fbsbgow1fcj30p30gkn02.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0060lm7Tgw1fbsbgox0lyj30ph0ixjue.jpg">
+<meta property="og:updated_time" content="2017-05-13T04:33:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CrossWalk Chromium Jar 修改指南">
+<meta name="twitter:description" content="CrossWalk 是由 Intel 主导, 基于 Chromium 的 WebView 实现. 旨在为不同平台提供高效并且一致的 Web 体验.关于项目简介、优劣对比、控件的使用, 建议参考官方文档.本文主要从Java层 以修改最新 Stable 22.52.561.4 介绍如何下载源码和修改Jar    1. 源码下载官方提供的下载方式与 Chromium 一样，需要使用 gclient 下载">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/0060lm7Tgy1fbsbgow1fcj30p30gkn02.jpg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-crosswalk-chromium-mod-jar" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CrossWalk Chromium Jar 修改指南
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/crosswalk-chromium-mod-jar.html" class="article-date">
+  <time datetime="2017-01-14T01:42:26.000Z" itemprop="datePublished">2017-01-14</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>CrossWalk 是由 Intel 主导, 基于 Chromium 的 WebView 实现. 旨在为不同平台提供高效并且一致的 Web 体验.<br>关于<a href="https://crosswalk-project.org/documentation/about/faq_zh.html" target="_blank" rel="external">项目简介</a>、优劣对比、<a href="https://crosswalk-project.org/documentation/getting_started_zh.html" target="_blank" rel="external">控件的使用</a>, 建议参考官方文档.<br>本文主要从Java层 以修改最新 <code>Stable 22.52.561.4</code> 介绍如何<strong>下载源码</strong>和<strong>修改Jar</strong>   </p>
+<h2 id="1-源码下载"><a href="#1-源码下载" class="headerlink" title="1. 源码下载"></a>1. 源码下载</h2><p>官方提供的<a href="https://crosswalk-project.org/contribute/building_crosswalk/android_build.html" target="_blank" rel="external">下载方式</a>与 Chromium 一样，需要使用 <a href="https://www.chromium.org/developers/how-tos/depottools" target="_blank" rel="external">gclient</a> 下载. 但是代码仓库较大, 国内网络环境下基本无望.</p>
+<p>另外一个方式可以直接从 GitHub 上下载:<br><a href="https://github.com/crosswalk-project/crosswalk" target="_blank" rel="external">https://github.com/crosswalk-project/crosswalk</a><br><a href="https://github.com/crosswalk-project/chromium-crosswalk" target="_blank" rel="external">https://github.com/crosswalk-project/chromium-crosswalk</a><br>下载完大概8GB</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> crosswalk</div><div class="line">$ git branch -av</div><div class="line">    remotes/origin/crosswalk-21        c8e322d Bump version to 21.51.546.7</div><div class="line">    remotes/origin/crosswalk-22        67b33ab Bump version to 22.52.561.4</div><div class="line">    remotes/origin/crosswalk-23        8ba6a38 Bump version to 23.53.589.4</div><div class="line"><span class="comment"># Crosswalk-22 正好是需要的版本</span></div><div class="line">$ git checkout crosswalk-22</div><div class="line"></div><div class="line"><span class="comment">#在 DEPS.xwalk 中可以找到对应 Chromium_Crosswalk 仓库对应 Commit</span></div><div class="line"><span class="comment"># chromium_crosswalk_rev = 'cbf42ea903acd7510548806a99efd200da37d492'</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> chromium-crosswalk</div><div class="line">$ git branch -av</div><div class="line">remotes/origin/crosswalk-22/52.0.2743.116		cbf42ea Merge pull request ...</div><div class="line"><span class="comment"># 找到对应的 Commit </span></div><div class="line">$ git checkout crosswalk-22/52.0.2743.116</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="2-Java-Jar-修改"><a href="#2-Java-Jar-修改" class="headerlink" title="2. Java/Jar 修改"></a>2. Java/Jar 修改</h2><p>官方建议的<a href="https://crosswalk-project.org/contribute/building_crosswalk/android_build.html" target="_blank" rel="external">构建方式</a>需要 Linux/macOS, 如果只是修改Java层的代码则不需要这么麻烦.</p>
+<ol>
+<li>使用 Intellij IDEA 新建 Java 工程, 将 xwalk_core_library_java.jar 添加进依赖.</li>
+<li>Src 下添加<strong>同包名同类名的类</strong></li>
+<li>Build – Build Artifacts – Build</li>
+</ol>
+<p>具体配置如下:<br><img src="http://ww4.sinaimg.cn/large/0060lm7Tgy1fbsbgow1fcj30p30gkn02.jpg" alt=""><br><img src="http://ww4.sinaimg.cn/large/0060lm7Tgw1fbsbgox0lyj30ph0ixjue.jpg" alt=""></p>
+
+      
+    </div>
+    
+      <div class="article-toc">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-源码下载"><span class="toc-number">1.</span> <span class="toc-text">1. 源码下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Java-Jar-修改"><span class="toc-number">2.</span> <span class="toc-text">2. Java/Jar 修改</span></a></li></ol>
+      </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Chromium/">Chromium</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CrossWalk/">CrossWalk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebView/">WebView</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/dell-tb15-diy-cooler.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          Dell TB15 拓展坞 Diy 风扇散热(多图)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/do-not-use-cnpm-install-f8app.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">不要使用 cnpm 安装 F8App, react-native.js:120 ...require(&#39;React&#39;), SyntaxError: Unexpected token ...&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  var disqus_url = 'http://blog.xiazhiri.com/crosswalk-chromium-mod-jar.html';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

@@ -66,6 +66,55 @@ ga('send', 'pageview');
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-Regex" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Regex.html">最近用到的几个正则</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/Regex.html" class="article-date">
+  <time datetime="2014-01-10T15:23:23.000Z" itemprop="datePublished">2014-01-10</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近又折腾了正则表达式，这种用一次学一次的东西实在头疼……</p>
+<p>1.用来匹配新浪微博，效果一般，适合用来粗提取。<br>    <code>&lt;div class=&quot;WB_text&quot;.*?&gt;</code><br>    <code>[ ]*(.*?)&lt;/div&gt;(?#匹配正文)</code><br>    <code>.*?&lt;ul class=&quot;.*?edia.*?clearfix&quot;(.*?)&lt;/ul&gt;(?#媒体)</code><br>    <code>.*?&lt;div class=&quot;map_data&quot;&gt;.*?&lt;/span&gt;(.*?) - &lt;a href.*?geo=(.*?)(?#纬度)&amp;amp.*?&lt;/div&gt;(?#匹配位置)</code><br>    <code>.*?weibotime.*?title=&quot;(.*?)&quot;(?#匹配时间)</code></p>
+<p>2.用来匹配Trimble Dini水准仪的数据，效果还可以。看见同事每次都用Excel处理很捉急，程序就是用来消灭重复劳动的。<br>    <code>([^#\s]{1,5})\s{0,1}([:\d\s]{8}).{52}Z.{9}(.{7})</code></p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Regex/">Regex</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
       <article id="post-tc-as-default-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -375,60 +424,8 @@ $(document).ready(function(){
 
 
     
-      <article id="post-arcmap-touchscreen-plugin" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/arcmap-touchscreen-plugin.html">ArcMap触摸屏绘图辅助程序</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/arcmap-touchscreen-plugin.html" class="article-date">
-  <time datetime="2013-02-19T13:23:57.000Z" itemprop="datePublished">2013-02-19</time>
-</a>
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这个脚本应该是写过最长的脚本了(囧，具体有多长有兴趣的可以去看下……   </p>
-<p>脚本的功能就是作为一个外挂程序，辅助ArcMap使用触摸屏进行绘图，程序的界面提供了最常用的绘图功能。不知道最新版的ArcMap有没有集成类似的功能。<br>具体的功能可以参照视频。<br>
-        
-          <p class="article-more-link">
-            <a href="/arcmap-touchscreen-plugin.html#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ahk/">ahk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gis/">gis</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">下一页 &raquo;</a>
+        <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">下一页 &raquo;</a>
       </nav>
     </section>
     <footer id="footer">

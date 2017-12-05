@@ -66,6 +66,53 @@ ga('send', 'pageview');
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-do-not-use-cnpm-install-f8app" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/do-not-use-cnpm-install-f8app.html">不要使用 cnpm 安装 F8App, react-native.js:120 ...require(&#39;React&#39;), SyntaxError: Unexpected token ...</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/do-not-use-cnpm-install-f8app.html" class="article-date">
+  <time datetime="2016-04-23T01:36:22.000Z" itemprop="datePublished">2016-04-23</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>不要使用 <code>cnpm install</code> 安装，不然运行时会报错。<br>开始被<a href="https://www.bountysource.com/issues/25671889-make-relay-work-with-react-native-out-of-the-box" target="_blank" rel="external">这个帖子</a>误导浪费半天时间……</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ react-native run-android</div><div class="line">/f8app/node_modules/.npminstall/react-native/0.23.1/react-native/Libraries/react-native/react-native.js:120</div><div class="line">  ...require(<span class="string">'React'</span>),</div><div class="line">  ^^^</div><div class="line"></div><div class="line">SyntaxError: Unexpected token ...</div><div class="line">    at exports.runInThisContext (vm.js:53:16)</div><div class="line">    at Module._compile (module.js:414:25)</div><div class="line">    at Module._extensions..js (module.js:442:10)</div><div class="line">    at Object.require.extensions.(anonymous <span class="keyword">function</span>) [as .js] (/f8app/node_modules/.npminstall/babel-register/6.7.2/babel-register/lib/node.js:134:7)</div><div class="line">    at Module.load (module.js:356:32)</div><div class="line">    at Function.Module._load (module.js:311:12)</div><div class="line">    at Module.require (module.js:366:17)</div><div class="line">    at require (module.js:385:17)</div><div class="line">    at /f8app/node_modules/.npminstall/babel-core/6.7.7/babel-core/lib/transformation/file/options/option-manager.js:368:22</div><div class="line">    at Array.map (native)</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
       <article id="post-Android-Play-Encrypted-Video" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -282,60 +329,8 @@ ga('send', 'pageview');
 
 
     
-      <article id="post-RxJava-calc-connection-cost-batch" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/RxJava-calc-connection-cost-batch.html">RxJava 批量计算网络连接速度</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/RxJava-calc-connection-cost-batch.html" class="article-date">
-  <time datetime="2015-11-03T02:51:21.000Z" itemprop="datePublished">2015-11-03</time>
-</a>
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.计算连接耗时<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">calcConnCost</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">    <span class="keyword">long</span> start = <span class="keyword">new</span> Date().getTime();</div><div class="line">    <span class="keyword">long</span> end = start;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        HttpURLConnection conn = (HttpURLConnection) <span class="keyword">new</span> URL(url).openConnection();</div><div class="line">        conn.setRequestProperty(<span class="string">"Range"</span>, <span class="string">"bytes=0-0"</span>);</div><div class="line">        conn.setIfModifiedSince(<span class="number">1</span>);</div><div class="line">        start = <span class="keyword">new</span> Date().getTime();</div><div class="line">        <span class="keyword">if</span> (conn.getResponseCode() == <span class="number">206</span> || conn.getResponseCode() == <span class="number">200</span>) &#123;</div><div class="line">            end = <span class="keyword">new</span> Date().getTime();</div><div class="line">        &#125;</div><div class="line">        conn.disconnect();</div><div class="line">        conn = <span class="keyword">null</span>;</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> end - start;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>2.异步计算<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">        Observable.just(<span class="string">"http://baidu.com"</span>)</div><div class="line">                .map(<span class="keyword">new</span> Func1&lt;String, Long&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> Long <span class="title">call</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">                        <span class="keyword">return</span> calcConnCost(url);</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">                .subscribeOn(Schedulers.io())</div><div class="line">                .observeOn(AndroidSchedulers.mainThread())</div><div class="line">                .subscribe(<span class="keyword">new</span> Action1&lt;Long&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Long cost)</span> </span>&#123;</div><div class="line">                        Log.d(<span class="string">"time"</span>, cost + <span class="string">""</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line"><span class="comment">//输出 time:90</span></div></pre></td></tr></table></figure></p>
-        
-          <p class="article-more-link">
-            <a href="/RxJava-calc-connection-cost-batch.html#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
+        <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
       </nav>
     </section>
     <footer id="footer">

@@ -66,6 +66,58 @@ ga('send', 'pageview');
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-RxJava-calc-connection-cost-batch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/RxJava-calc-connection-cost-batch.html">RxJava 批量计算网络连接速度</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/RxJava-calc-connection-cost-batch.html" class="article-date">
+  <time datetime="2015-11-03T02:51:21.000Z" itemprop="datePublished">2015-11-03</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.计算连接耗时<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">calcConnCost</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">    <span class="keyword">long</span> start = <span class="keyword">new</span> Date().getTime();</div><div class="line">    <span class="keyword">long</span> end = start;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        HttpURLConnection conn = (HttpURLConnection) <span class="keyword">new</span> URL(url).openConnection();</div><div class="line">        conn.setRequestProperty(<span class="string">"Range"</span>, <span class="string">"bytes=0-0"</span>);</div><div class="line">        conn.setIfModifiedSince(<span class="number">1</span>);</div><div class="line">        start = <span class="keyword">new</span> Date().getTime();</div><div class="line">        <span class="keyword">if</span> (conn.getResponseCode() == <span class="number">206</span> || conn.getResponseCode() == <span class="number">200</span>) &#123;</div><div class="line">            end = <span class="keyword">new</span> Date().getTime();</div><div class="line">        &#125;</div><div class="line">        conn.disconnect();</div><div class="line">        conn = <span class="keyword">null</span>;</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> end - start;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>2.异步计算<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">        Observable.just(<span class="string">"http://baidu.com"</span>)</div><div class="line">                .map(<span class="keyword">new</span> Func1&lt;String, Long&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> Long <span class="title">call</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">                        <span class="keyword">return</span> calcConnCost(url);</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">                .subscribeOn(Schedulers.io())</div><div class="line">                .observeOn(AndroidSchedulers.mainThread())</div><div class="line">                .subscribe(<span class="keyword">new</span> Action1&lt;Long&gt;() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Long cost)</span> </span>&#123;</div><div class="line">                        Log.d(<span class="string">"time"</span>, cost + <span class="string">""</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line"><span class="comment">//输出 time:90</span></div></pre></td></tr></table></figure></p>
+        
+          <p class="article-more-link">
+            <a href="/RxJava-calc-connection-cost-batch.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
       <article id="post-OSX10-11-EICapitan-IntellijIDEA-AndroidStudio-RightMouseMenuProblem" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -310,66 +362,8 @@ ga('send', 'pageview');
 
 
     
-      <article id="post-arcgis-generate-tpk" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/arcgis-generate-tpk.html">ArcGIS 制作 tpk</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/arcgis-generate-tpk.html" class="article-date">
-  <time datetime="2014-11-08T06:17:52.000Z" itemprop="datePublished">2014-11-08</time>
-</a>
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>官方博客在12年曾经介绍过 <a href="http://blog.csdn.net/arcgis_mobile/article/details/8048549" target="_blank" rel="external">3种方法快速制作tpk文件</a> ，当时的 ArcMap 版本为 10.1，本文在 ArcMap10.2.1 下仅做补充。</p>
-<h3 id="1-制作指定坐标系的tpk"><a href="#1-制作指定坐标系的tpk" class="headerlink" title="1.制作指定坐标系的tpk"></a>1.制作指定坐标系的tpk</h3><ul>
-<li>如果直接 File – Share As – Tile Package, 只需要在 TileFormat 中指定 tiling &gt;Scheme File<br><img src="http://ww2.sinaimg.cn/large/c0f281e2tw1em3ktsjg6oj20kn05zt9a.jpg" alt=""></li>
-<li><p>如果是使用GP工具，则在设置页面<strong>不勾选</strong> Package for ArcGIS…然后在Service 选择对应xml<br><img src="http://ww2.sinaimg.cn/large/c0f281e2tw1em3l62hjxbj20kx08k76d.jpg" alt=""></p>
-</li>
-<li><p><strong>制作 Tiling Scheme file</strong><br>Search – tiling – Generate Tile Cache Tiling Scheme<br><img src="http://ww4.sinaimg.cn/large/c0f281e2tw1em3lapfa2pj20cb05j3z5.jpg" alt=""></p>
-</li>
-</ul>
-        
-          <p class="article-more-link">
-            <a href="/arcgis-generate-tpk.html#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ArcGIS/">ArcGIS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tpk/">tpk</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
+        <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
       </nav>
     </section>
     <footer id="footer">

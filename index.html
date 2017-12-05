@@ -66,6 +66,69 @@ ga('send', 'pageview');
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-china-telecom-ali-free-flow" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/china-telecom-ali-free-flow.html">电信阿里鱼卡 UC 免流原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/china-telecom-ali-free-flow.html" class="article-date">
+  <time datetime="2017-12-05T07:39:10.000Z" itemprop="datePublished">2017-12-05</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上个月和电信客服扯皮两周多终于把手机套餐改成了阿里鱼卡套餐。<br>从 59RMB (500MB+100分钟通话) 的<del>高端</del>套餐改成了 19RMB(1GB+100分钟+日租+阿里文娱应用免流) <del>低端</del>套餐。<br>实在要吐槽一下电信改套餐的规定。改套餐明明一个电话或者App戳戳就能搞定事情，偏偏让你回归属地营业厅跑一趟。虽然最后手持身份证拍照异地受理了但体验实在是不好。</p>
+<p>鱼卡UC浏览器免流大体实现是这样的</p>
+<h3 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h3><p><img src="/media/15124626122024.jpg" alt="Wireshark抓包"><br>注意这段 <code>Proxy-Authorization: 1|15120022766*******|com.ucweb.iphone.lowversion|ca5fe4b11712e10ba745c2817*******</code><br>关于 Proxy-Authorization 见 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Proxy-Authorization" target="_blank" rel="external">https://developer.mozilla.org</a><br>即UC浏览器的请求都经过代理服务器。<br>对比几次请求可以发现 1|UID|UA|Key 这几段猜测规律</p>
+<ul>
+<li>1 不变</li>
+<li>UID 标示用户ID</li>
+<li>UA 浏览器UA</li>
+<li>Key 由网站Host计算，应该是md5</li>
+</ul>
+<h3 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a>反编译</h3><p>反编译 Android 客户端，基本验证各字段的意义<br><img src="/media/15124639215258.jpg" alt="UC浏览器拼接Proxy-Authorization"></p>
+<p>而 bcX 和 bcW 的获取过程断点获得调用栈如下<br><img src="/media/15124643039841.jpg" alt=""><br>在浏览器激活免流的时候会获取相关字段(不清楚是否会定时更新)<br>请求 <a href="https://freeflow.uc.cn/freeflow/generatePhoneToken" target="_blank" rel="external">https://freeflow.uc.cn/freeflow/generatePhoneToken</a> 获取一段密文，解密之后解析赋值给 bcX bcW<br>当开始网络请求时由对应 UID|Key|Host 计算 md5</p>
+<p><img src="/media/15124650691656.jpg" alt="获取Host"></p>
+<p><img src="/media/15124650285893.jpg" alt="计算MD5"></p>
+<p><img src="/media/15124651112067.jpg" alt="拼接Proxy-Authorization"></p>
+<p>密文解密之后的结构体<br><img src="/media/15124652644534.jpg" alt=""></p>
+<p>上面需要的 UID UA KEY Server Port都在里面</p>
+<h3 id="所以"><a href="#所以" class="headerlink" title="所以"></a>所以</h3><p>SSL Pinning 还是必须的。</p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
       <article id="post-android-method-trace-create-and-parse" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -99,7 +162,7 @@ ga('send', 'pageview');
 <p>主要代码如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//bridge</span></div><div class="line"><span class="comment">//**注意**, 生成 trace 需要连接 client, init(false) 会断开 client</span></div><div class="line">AndroidDebugBridge.init(<span class="keyword">true</span>);</div><div class="line">AndroidDebugBridge bridge = AndroidDebugBridge.createBridge();</div><div class="line"></div><div class="line"><span class="comment">//device</span></div><div class="line">IDevice[] devices = bridge.getDevices();</div><div class="line">IDevice device = devices[<span class="number">0</span>];</div><div class="line"></div><div class="line"><span class="comment">//client</span></div><div class="line">Client client = device.getClient(packageName);</div><div class="line"></div><div class="line"><span class="comment">//start stop</span></div><div class="line">client.startSamplingProfiler(<span class="number">10</span>, TimeUnit.MILLISECONDS);</div><div class="line">client.stopSamplingProfiler();</div></pre></td></tr></table></figure></p>
 <h4 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h4><p><strong>但是</strong> Android Studio 3.0 中并没有使用 ddmlib<br>大体调用栈如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">./idea/profilers-ui/src/com/android/tools/profilers/cpu/CpuProfilerStageView.java:      myStage.startCapturing();</div><div class="line"></div><div class="line">startCapturing</div><div class="line">./tools/adt/idea/profilers/src/com/android/tools/profilers/cpu/CpuProfilerStage.java</div><div class="line">com.android.tools.profilers.cpu.CpuProfilerStage#startCapturing</div><div class="line"></div><div class="line">./tools/base/profiler/native/perfd/cpu/cpu_service.cc</div><div class="line">grpc::Status CpuServiceImpl::StartProfilingApp</div><div class="line"></div><div class="line">./tools/base/profiler/native/perfd/cpu/simpleperf_manager.cc</div><div class="line">bool SimplePerfManager::StartProfiling</div></pre></td></tr></table></figure></p>
 <h3 id="解析-读取-trace"><a href="#解析-读取-trace" class="headerlink" title="解析/读取 trace"></a>解析/读取 trace</h3><h4 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h4><p>ddms 或者 Android Studio 2.0 / Intellij IDEA 可以直接打开 trace 文件, 但是都没有 Android Studio 3.0 的 profiler 直观好用.</p>
-<p><img src="/media/android-studio-3.0-profiler.png" alt="android-studio-3.0-profile"></p>
+<p><img src="/media/android-studio-3.0-profiler.png" alt="android-studio-3.0-profile">)</p>
 <p><img src="/media/android-studio-traceview.png" alt="android-studio-traceview"></p>
 <p><img src="/media/monitor.png" alt="monitor"></p>
 <h4 id="dmtracedump"><a href="#dmtracedump" class="headerlink" title="dmtracedump"></a>dmtracedump</h4><p>todo</p>
@@ -299,55 +362,8 @@ ga('send', 'pageview');
 
 
     
-      <article id="post-do-not-use-cnpm-install-f8app" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/do-not-use-cnpm-install-f8app.html">不要使用 cnpm 安装 F8App, react-native.js:120 ...require(&#39;React&#39;), SyntaxError: Unexpected token ...</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/do-not-use-cnpm-install-f8app.html" class="article-date">
-  <time datetime="2016-04-23T01:36:22.000Z" itemprop="datePublished">2016-04-23</time>
-</a>
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>不要使用 <code>cnpm install</code> 安装，不然运行时会报错。<br>开始被<a href="https://www.bountysource.com/issues/25671889-make-relay-work-with-react-native-out-of-the-box" target="_blank" rel="external">这个帖子</a>误导浪费半天时间……</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ react-native run-android</div><div class="line">/f8app/node_modules/.npminstall/react-native/0.23.1/react-native/Libraries/react-native/react-native.js:120</div><div class="line">  ...require(<span class="string">'React'</span>),</div><div class="line">  ^^^</div><div class="line"></div><div class="line">SyntaxError: Unexpected token ...</div><div class="line">    at exports.runInThisContext (vm.js:53:16)</div><div class="line">    at Module._compile (module.js:414:25)</div><div class="line">    at Module._extensions..js (module.js:442:10)</div><div class="line">    at Object.require.extensions.(anonymous <span class="keyword">function</span>) [as .js] (/f8app/node_modules/.npminstall/babel-register/6.7.2/babel-register/lib/node.js:134:7)</div><div class="line">    at Module.load (module.js:356:32)</div><div class="line">    at Function.Module._load (module.js:311:12)</div><div class="line">    at Module.require (module.js:366:17)</div><div class="line">    at require (module.js:385:17)</div><div class="line">    at /f8app/node_modules/.npminstall/babel-core/6.7.7/babel-core/lib/transformation/file/options/option-manager.js:368:22</div><div class="line">    at Array.map (native)</div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
       <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
       </nav>
     </section>
     <footer id="footer">

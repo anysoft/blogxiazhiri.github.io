@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>电信阿里鱼卡 UC 免流原理 - 夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上个月和电信客服扯皮两周多终于把手机套餐改成了阿里鱼卡套餐。从 59RMB (500MB+100分钟通话) 的高端套餐改成了 19RMB(1GB+100分钟+日租+阿里文娱应用免流) 低端套餐。实在要吐槽一下电信改套餐的规定。改套餐明明一个电话或者App戳戳就能搞定事情，偏偏让你回归属地营业厅跑一趟。虽然最后手持身份证拍照异地受理了但体验实在是不好。 鱼卡UC浏览器免流大体实现是这样的 抓包注意这">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电信阿里鱼卡 UC 免流原理">
+<meta property="og:url" content="http://blog.xiazhiri.com/china-telecom-ali-free-flow.html">
+<meta property="og:site_name" content="夏之日">
+<meta property="og:description" content="上个月和电信客服扯皮两周多终于把手机套餐改成了阿里鱼卡套餐。从 59RMB (500MB+100分钟通话) 的高端套餐改成了 19RMB(1GB+100分钟+日租+阿里文娱应用免流) 低端套餐。实在要吐槽一下电信改套餐的规定。改套餐明明一个电话或者App戳戳就能搞定事情，偏偏让你回归属地营业厅跑一趟。虽然最后手持身份证拍照异地受理了但体验实在是不好。 鱼卡UC浏览器免流大体实现是这样的 抓包注意这">
+<meta property="og:image" content="http://blog.xiazhiri.com/media/15124626122024.jpg">
+<meta property="og:image" content="http://blog.xiazhiri.com/media/15124639215258.jpg">
+<meta property="og:image" content="http://blog.xiazhiri.com/media/15124643039841.jpg">
+<meta property="og:image" content="http://blog.xiazhiri.com/media/15124650691656.jpg">
+<meta property="og:image" content="http://blog.xiazhiri.com/media/15124650285893.jpg">
+<meta property="og:image" content="http://blog.xiazhiri.com/media/15124651112067.jpg">
+<meta property="og:image" content="http://blog.xiazhiri.com/media/15124652644534.jpg">
+<meta property="og:updated_time" content="2017-12-05T09:32:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="电信阿里鱼卡 UC 免流原理">
+<meta name="twitter:description" content="上个月和电信客服扯皮两周多终于把手机套餐改成了阿里鱼卡套餐。从 59RMB (500MB+100分钟通话) 的高端套餐改成了 19RMB(1GB+100分钟+日租+阿里文娱应用免流) 低端套餐。实在要吐槽一下电信改套餐的规定。改套餐明明一个电话或者App戳戳就能搞定事情，偏偏让你回归属地营业厅跑一趟。虽然最后手持身份证拍照异地受理了但体验实在是不好。 鱼卡UC浏览器免流大体实现是这样的 抓包注意这">
+<meta name="twitter:image" content="http://blog.xiazhiri.com/media/15124626122024.jpg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-china-telecom-ali-free-flow" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      电信阿里鱼卡 UC 免流原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/china-telecom-ali-free-flow.html" class="article-date">
+  <time datetime="2017-12-05T07:39:10.000Z" itemprop="datePublished">2017-12-05</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上个月和电信客服扯皮两周多终于把手机套餐改成了阿里鱼卡套餐。<br>从 59RMB (500MB+100分钟通话) 的<del>高端</del>套餐改成了 19RMB(1GB+100分钟+日租+阿里文娱应用免流) <del>低端</del>套餐。<br>实在要吐槽一下电信改套餐的规定。改套餐明明一个电话或者App戳戳就能搞定事情，偏偏让你回归属地营业厅跑一趟。虽然最后手持身份证拍照异地受理了但体验实在是不好。</p>
+<p>鱼卡UC浏览器免流大体实现是这样的</p>
+<h3 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h3><p><img src="/media/15124626122024.jpg" alt="Wireshark抓包"><br>注意这段 <code>Proxy-Authorization: 1|15120022766*******|com.ucweb.iphone.lowversion|ca5fe4b11712e10ba745c2817*******</code><br>关于 Proxy-Authorization 见 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Proxy-Authorization" target="_blank" rel="external">https://developer.mozilla.org</a><br>即UC浏览器的请求都经过代理服务器。<br>对比几次请求可以发现 1|UID|UA|Key 这几段猜测规律</p>
+<ul>
+<li>1 不变</li>
+<li>UID 标示用户ID</li>
+<li>UA 浏览器UA</li>
+<li>Key 由网站Host计算，应该是md5</li>
+</ul>
+<h3 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a>反编译</h3><p>反编译 Android 客户端，基本验证各字段的意义<br><img src="/media/15124639215258.jpg" alt="UC浏览器拼接Proxy-Authorization"></p>
+<p>而 bcX 和 bcW 的获取过程断点获得调用栈如下<br><img src="/media/15124643039841.jpg" alt=""><br>在浏览器激活免流的时候会获取相关字段(不清楚是否会定时更新)<br>请求 <a href="https://freeflow.uc.cn/freeflow/generatePhoneToken" target="_blank" rel="external">https://freeflow.uc.cn/freeflow/generatePhoneToken</a> 获取一段密文，解密之后解析赋值给 bcX bcW<br>当开始网络请求时由对应 UID|Key|Host 计算 md5</p>
+<p><img src="/media/15124650691656.jpg" alt="获取Host"></p>
+<p><img src="/media/15124650285893.jpg" alt="计算MD5"></p>
+<p><img src="/media/15124651112067.jpg" alt="拼接Proxy-Authorization"></p>
+<p>密文解密之后的结构体<br><img src="/media/15124652644534.jpg" alt=""></p>
+<p>上面需要的 UID UA KEY Server Port都在里面</p>
+<h3 id="所以"><a href="#所以" class="headerlink" title="所以"></a>所以</h3><p>SSL Pinning 还是必须的。</p>
+
+      
+    </div>
+    
+      <div class="article-toc">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#抓包"><span class="toc-number">1.</span> <span class="toc-text">抓包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反编译"><span class="toc-number">2.</span> <span class="toc-text">反编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#所以"><span class="toc-number">3.</span> <span class="toc-text">所以</span></a></li></ol>
+      </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/android-method-trace-create-and-parse.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android Method Trace 生成与解析&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  var disqus_url = 'http://blog.xiazhiri.com/china-telecom-ali-free-flow.html';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

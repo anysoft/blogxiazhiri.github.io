@@ -3,20 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Elasticsearch Delete By Query plugin error - 夏之日</title>
+  <title>使用 WireShark 和 strace 定位 Android ARP 风暴 - 夏之日</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="12345DELETE _all/_query&amp;#123;  &amp;quot;query&amp;quot;: &amp;#123;  &amp;#125;&amp;#125; No handler found for uri [/logstash-2016.01.13/logs] and method [DELETE] Solution: restart elasticsearch after install the delete">
-<meta name="keywords" content="elk">
+  <meta name="description" content="这几天有用户反馈 Android TV 大量发送 ARP 包的问题. 用户应该也是同行, 用 Wireshark 抓包发现电视 1 分钟发 1000 个 arp 包, 但是没法定位到具体的应用。最后使用 strace -f -p PID | grep sendto 和 wireshark 定位到进程">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Elasticsearch Delete By Query plugin error">
-<meta property="og:url" content="http://blog.xiazhiri.com/elasticsearch-delete-by-query-error.html">
+<meta property="og:title" content="使用 WireShark 和 strace 定位 Android ARP 风暴">
+<meta property="og:url" content="http://blog.xiazhiri.com/detect-android-arp-storm-with-wireshark-and-strace.html">
 <meta property="og:site_name" content="夏之日">
-<meta property="og:description" content="12345DELETE _all/_query&amp;#123;  &amp;quot;query&amp;quot;: &amp;#123;  &amp;#125;&amp;#125; No handler found for uri [/logstash-2016.01.13/logs] and method [DELETE] Solution: restart elasticsearch after install the delete">
+<meta property="og:description" content="这几天有用户反馈 Android TV 大量发送 ARP 包的问题. 用户应该也是同行, 用 Wireshark 抓包发现电视 1 分钟发 1000 个 arp 包, 但是没法定位到具体的应用。最后使用 strace -f -p PID | grep sendto 和 wireshark 定位到进程">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2016-01-18T02:08:24.000Z">
+<meta property="og:image" content="http://blog.xiazhiri.com/media/android-arp-wireshark.png">
+<meta property="og:updated_time" content="2018-02-28T03:30:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Elasticsearch Delete By Query plugin error">
-<meta name="twitter:description" content="12345DELETE _all/_query&amp;#123;  &amp;quot;query&amp;quot;: &amp;#123;  &amp;#125;&amp;#125; No handler found for uri [/logstash-2016.01.13/logs] and method [DELETE] Solution: restart elasticsearch after install the delete">
+<meta name="twitter:title" content="使用 WireShark 和 strace 定位 Android ARP 风暴">
+<meta name="twitter:description" content="这几天有用户反馈 Android TV 大量发送 ARP 包的问题. 用户应该也是同行, 用 Wireshark 抓包发现电视 1 分钟发 1000 个 arp 包, 但是没法定位到具体的应用。最后使用 strace -f -p PID | grep sendto 和 wireshark 定位到进程">
+<meta name="twitter:image" content="http://blog.xiazhiri.com/media/android-arp-wireshark.png">
   
   
     <link rel="icon" href="/favicon.png">
@@ -71,7 +73,7 @@ ga('send', 'pageview');
     </div>
   </div>
 </header>
-    <section id="main" class="outer"><article id="post-elasticsearch-delete-by-query-error" class="article article-type-post" itemscope itemprop="blogPost">
+    <section id="main" class="outer"><article id="post-detect-android-arp-storm-with-wireshark-and-strace" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -79,24 +81,22 @@ ga('send', 'pageview');
         
   
     <h1 class="article-title" itemprop="name">
-      Elasticsearch Delete By Query plugin error
+      使用 WireShark 和 strace 定位 Android ARP 风暴
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-      <a href="/elasticsearch-delete-by-query-error.html" class="article-date">
-  <time datetime="2016-01-18T01:53:52.000Z" itemprop="datePublished">2016-01-18</time>
+      <a href="/detect-android-arp-storm-with-wireshark-and-strace.html" class="article-date">
+  <time datetime="2017-09-30T05:45:52.000Z" itemprop="datePublished">2017-09-30</time>
 </a>
       
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">DELETE _all/_query</div><div class="line">&#123;</div><div class="line">  &quot;query&quot;: &#123;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>No handler found for uri [/logstash-2016.01.13/logs] and method [DELETE]</strong></p>
-<p>Solution: restart elasticsearch after install the delete-by-query plugin…</p>
+        <p>这几天有用户反馈 Android TV 大量发送 ARP 包的问题. 用户应该也是同行, 用 Wireshark 抓包发现电视 1 分钟发 1000 个 arp 包, 但是没法定位到具体的应用。<br>最后使用 <code>strace -f -p PID | grep sendto</code> 和 wireshark 定位到进程<br><img src="/media/android-arp-wireshark.png" alt="Android Arp Storm Strace"></p>
 
       
     </div>
@@ -104,7 +104,7 @@ ga('send', 'pageview');
     
       <footer class="article-footer">
         
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elk/">elk</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
       </footer>
     
@@ -113,17 +113,17 @@ ga('send', 'pageview');
     
 <nav id="article-nav">
   
-    <a href="/intellij-webstorm-create-non-web-node-project.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/android-method-trace-create-and-parse.html" id="article-nav-newer" class="article-nav-link-wrap">
       <div class="article-nav-title"><span>&lt;</span>&nbsp;
         
-          Intellij IDEA / WebStorm Create Non-Web Node Project
+          Android Method Trace 生成与解析
         
       </div>
     </a>
   
   
-    <a href="/Intellij-IDEA-15-right-menu-can-not-show-cause-Jitouch.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Jitouch 和 Intellij IDEA 15 冲突导致 IDEA 右键菜单不能显示。&nbsp;<span>&gt;</span></div>
+    <a href="/Android-Lint-Aosp-with-SonarQube.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android Lint Aosp App With SonarQube&nbsp;<span>&gt;</span></div>
     </a>
   
 </nav>
@@ -168,7 +168,7 @@ ga('send', 'pageview');
 <script>
   var disqus_shortname = 'xiazhiri';
   
-  var disqus_url = 'http://blog.xiazhiri.com/elasticsearch-delete-by-query-error.html';
+  var disqus_url = 'http://blog.xiazhiri.com/detect-android-arp-storm-with-wireshark-and-strace.html';
   
   (function(){
     var dsq = document.createElement('script');

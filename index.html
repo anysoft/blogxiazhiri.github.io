@@ -9,6 +9,7 @@
 <meta property="og:title" content="夏之日">
 <meta property="og:url" content="http://blog.xiazhiri.com/index.html">
 <meta property="og:site_name" content="夏之日">
+<meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="夏之日">
   
@@ -91,7 +92,7 @@ ga('send', 'pageview');
       
         <p>上个月和电信客服扯皮两周多终于把手机套餐改成了阿里鱼卡套餐。<br>从 59RMB (500MB+100分钟通话) 的<del>高端</del>套餐改成了 19RMB(1GB+100分钟+日租+阿里文娱应用免流) <del>低端</del>套餐。<br>实在要吐槽一下电信改套餐的规定。改套餐明明一个电话或者App戳戳就能搞定事情，偏偏让你回归属地营业厅跑一趟。虽然最后手持身份证拍照异地受理了但体验实在是不好。</p>
 <p>鱼卡UC浏览器免流大体实现是这样的</p>
-<h3 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h3><p><img src="/media/15124626122024.jpg" alt="Wireshark抓包"><br>注意这段 <code>Proxy-Authorization: 1|15120022766*******|com.ucweb.iphone.lowversion|ca5fe4b11712e10ba745c2817*******</code><br>关于 Proxy-Authorization 见 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Proxy-Authorization" target="_blank" rel="external">https://developer.mozilla.org</a><br>即UC浏览器的请求都经过代理服务器。<br>对比几次请求可以发现 1|UID|UA|Key 这几段猜测规律</p>
+<h3 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h3><p><img src="/media/15124626122024.jpg" alt="Wireshark抓包"><br>注意这段 <code>Proxy-Authorization: 1|15120022766*******|com.ucweb.iphone.lowversion|ca5fe4b11712e10ba745c2817*******</code><br>关于 Proxy-Authorization 见 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Proxy-Authorization" target="_blank" rel="noopener">https://developer.mozilla.org</a><br>即UC浏览器的请求都经过代理服务器。<br>对比几次请求可以发现 1|UID|UA|Key 这几段猜测规律</p>
 <ul>
 <li>1 不变</li>
 <li>UID 标示用户ID</li>
@@ -99,7 +100,7 @@ ga('send', 'pageview');
 <li>Key 由网站Host计算，应该是md5</li>
 </ul>
 <h3 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a>反编译</h3><p>反编译 Android 客户端，基本验证各字段的意义<br><img src="/media/15124639215258.jpg" alt="UC浏览器拼接Proxy-Authorization"></p>
-<p>而 bcX 和 bcW 的获取过程断点获得调用栈如下<br><img src="/media/15124643039841.jpg" alt=""><br>在浏览器激活免流的时候会获取相关字段(不清楚是否会定时更新)<br>请求 <a href="https://freeflow.uc.cn/freeflow/generatePhoneToken" target="_blank" rel="external">https://freeflow.uc.cn/freeflow/generatePhoneToken</a> 获取一段密文，解密之后解析赋值给 bcX bcW<br>当开始网络请求时由对应 UID|Key|Host 计算 md5</p>
+<p>而 bcX 和 bcW 的获取过程断点获得调用栈如下<br><img src="/media/15124643039841.jpg" alt=""><br>在浏览器激活免流的时候会获取相关字段(不清楚是否会定时更新)<br>请求 <a href="https://freeflow.uc.cn/freeflow/generatePhoneToken" target="_blank" rel="noopener">https://freeflow.uc.cn/freeflow/generatePhoneToken</a> 获取一段密文，解密之后解析赋值给 bcX bcW<br>当开始网络请求时由对应 UID|Key|Host 计算 md5</p>
 <p><img src="/media/15124650691656.jpg" alt="获取Host"></p>
 <p><img src="/media/15124650285893.jpg" alt="计算MD5"></p>
 <p><img src="/media/15124651112067.jpg" alt="拼接Proxy-Authorization"></p>
@@ -153,11 +154,11 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <p>Android Studio 3.0 中的 Profiler 工具相比 2.0 版本有了很大的进步，这几天翻了下相关的源码记录如下.</p>
-<h3 id="生成-trace-文件"><a href="#生成-trace-文件" class="headerlink" title="生成 trace 文件"></a>生成 trace 文件</h3><p><a href="https://developer.android.com/studio/profile/traceview.html#creatingtracefiles" target="_blank" rel="external">官方的文档里</a>对于生成 trace 文件主要有两种</p>
+<h3 id="生成-trace-文件"><a href="#生成-trace-文件" class="headerlink" title="生成 trace 文件"></a>生成 trace 文件</h3><p><a href="https://developer.android.com/studio/profile/traceview.html#creatingtracefiles" target="_blank" rel="noopener">官方的文档里</a>对于生成 trace 文件主要有两种</p>
 <h4 id="code"><a href="#code" class="headerlink" title="code"></a>code</h4><p><strong>第一种</strong>是在代码中添加<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// start tracing to "/sdcard/calc.trace"</span></div><div class="line">Debug.startMethodTracing(<span class="string">"calc"</span>);</div><div class="line"><span class="comment">// ...</span></div><div class="line"><span class="comment">// stop tracing</span></div><div class="line">Debug.stopMethodTracing();</div></pre></td></tr></table></figure></p>
 <p>生成的trace文件</p>
-<h4 id="ddmlib"><a href="#ddmlib" class="headerlink" title="ddmlib"></a>ddmlib</h4><p><strong>第二种</strong>是使用 ddms / Android Monitor 手动生成, ddms 的核心是一个叫 ddmlib 的库, 在 Android SDK 里 tools/lib/ddmlib-*.jar 可以找到.<br>网上关于 ddmlib 的文章不多, 可以参考一下. <a href="http://blog.csdn.net/eclipsexys/article/details/51316423" target="_blank" rel="external">隐藏Boss——ddmlib使用入门</a> 和 <a href="https://testerhome.com/topics/2422" target="_blank" rel="external">通过 ddmlib 使用 adb，构建框架基础库</a></p>
-<h4 id="命令行工具"><a href="#命令行工具" class="headerlink" title="命令行工具"></a>命令行工具</h4><p>翻着源码掉了 N 次坑写了一个命令行调用的 jar <a href="https://github.com/likaci/AndroidMethodTraceRunner" target="_blank" rel="external">AndroidMethodTraceRunner</a><br>命令行中调用 <code>$ java -jar mtr.jar -p com.your.package -o output.trace -t 10</code> 可以 trace 10 秒钟, 运行需要 java8.<br>主要的两个坑:<br>AndroidDebugBridge.init(true); false 的话不能获取到 client<br>必须关闭 ddms 和 Studio 的 monitor / profiler, 否则会抢占 client 造成连接失败.</p>
+<h4 id="ddmlib"><a href="#ddmlib" class="headerlink" title="ddmlib"></a>ddmlib</h4><p><strong>第二种</strong>是使用 ddms / Android Monitor 手动生成, ddms 的核心是一个叫 ddmlib 的库, 在 Android SDK 里 tools/lib/ddmlib-*.jar 可以找到.<br>网上关于 ddmlib 的文章不多, 可以参考一下. <a href="http://blog.csdn.net/eclipsexys/article/details/51316423" target="_blank" rel="noopener">隐藏Boss——ddmlib使用入门</a> 和 <a href="https://testerhome.com/topics/2422" target="_blank" rel="noopener">通过 ddmlib 使用 adb，构建框架基础库</a></p>
+<h4 id="命令行工具"><a href="#命令行工具" class="headerlink" title="命令行工具"></a>命令行工具</h4><p>翻着源码掉了 N 次坑写了一个命令行调用的 jar <a href="https://github.com/likaci/AndroidMethodTraceRunner" target="_blank" rel="noopener">AndroidMethodTraceRunner</a><br>命令行中调用 <code>$ java -jar mtr.jar -p com.your.package -o output.trace -t 10</code> 可以 trace 10 秒钟, 运行需要 java8.<br>主要的两个坑:<br>AndroidDebugBridge.init(true); false 的话不能获取到 client<br>必须关闭 ddms 和 Studio 的 monitor / profiler, 否则会抢占 client 造成连接失败.</p>
 <p>对于 ddmlib 有几个大体的概念<br>bridge - adb<br>device - 设备<br>client - 应用</p>
 <p>主要代码如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//bridge</span></div><div class="line"><span class="comment">//**注意**, 生成 trace 需要连接 client, init(false) 会断开 client</span></div><div class="line">AndroidDebugBridge.init(<span class="keyword">true</span>);</div><div class="line">AndroidDebugBridge bridge = AndroidDebugBridge.createBridge();</div><div class="line"></div><div class="line"><span class="comment">//device</span></div><div class="line">IDevice[] devices = bridge.getDevices();</div><div class="line">IDevice device = devices[<span class="number">0</span>];</div><div class="line"></div><div class="line"><span class="comment">//client</span></div><div class="line">Client client = device.getClient(packageName);</div><div class="line"></div><div class="line"><span class="comment">//start stop</span></div><div class="line">client.startSamplingProfiler(<span class="number">10</span>, TimeUnit.MILLISECONDS);</div><div class="line">client.stopSamplingProfiler();</div></pre></td></tr></table></figure></p>
 <h4 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h4><p><strong>但是</strong> Android Studio 3.0 中并没有使用 ddmlib<br>大体调用栈如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">./idea/profilers-ui/src/com/android/tools/profilers/cpu/CpuProfilerStageView.java:      myStage.startCapturing();</div><div class="line"></div><div class="line">startCapturing</div><div class="line">./tools/adt/idea/profilers/src/com/android/tools/profilers/cpu/CpuProfilerStage.java</div><div class="line">com.android.tools.profilers.cpu.CpuProfilerStage#startCapturing</div><div class="line"></div><div class="line">./tools/base/profiler/native/perfd/cpu/cpu_service.cc</div><div class="line">grpc::Status CpuServiceImpl::StartProfilingApp</div><div class="line"></div><div class="line">./tools/base/profiler/native/perfd/cpu/simpleperf_manager.cc</div><div class="line">bool SimplePerfManager::StartProfiling</div></pre></td></tr></table></figure></p>
@@ -175,6 +176,53 @@ ga('send', 'pageview');
       <footer class="article-footer">
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ddmlib/">ddmlib</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
+      <article id="post-detect-android-arp-storm-with-wireshark-and-strace" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/detect-android-arp-storm-with-wireshark-and-strace.html">使用 WireShark 和 strace 定位 Android ARP 风暴</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/detect-android-arp-storm-with-wireshark-and-strace.html" class="article-date">
+  <time datetime="2017-09-30T05:45:52.000Z" itemprop="datePublished">2017-09-30</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这几天有用户反馈 Android TV 大量发送 ARP 包的问题. 用户应该也是同行, 用 Wireshark 抓包发现电视 1 分钟发 1000 个 arp 包, 但是没法定位到具体的应用。<br>最后使用 <code>strace -f -p PID | grep sendto</code> 和 wireshark 定位到进程<br><img src="/media/android-arp-wireshark.png" alt="Android Arp Storm Strace"></p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
       </footer>
     
@@ -214,7 +262,7 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>第三方 App 在 Android Studio 中可以直接使用 Lint 展示结果.<br>源码编译时在 make 之后工程根目录执行 lint packages/apps/Calendar/ 也可以 Lint.<br>但在实际使用中 <code>lint vendor/letv/apps/Camera/</code> 时提示 <code>No bytecode found: Has the project been built? (Camera)</code>, 同时还有资源使用的误报。</p>
-<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>分析 lint 源码可知<br><a href="https://android.googlesource.com/platform/sdk/+/0bf1b2c/lint/libs/lint_api/src/com/android/tools/lint/detector/api/Project.java#654" target="_blank" rel="external">lint/detector/api/Project.java#654</a><br>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>分析 lint 源码可知<br><a href="https://android.googlesource.com/platform/sdk/+/0bf1b2c/lint/libs/lint_api/src/com/android/tools/lint/detector/api/Project.java#654" target="_blank" rel="noopener">lint/detector/api/Project.java#654</a><br>
         
           <p class="article-more-link">
             <a href="/Android-Lint-Aosp-with-SonarQube.html#more">Read More</a>
@@ -268,7 +316,7 @@ ga('send', 'pageview');
         <p>Dell TB15 拓展坞用了一周多, 先简单说下自己发现的优缺点:</p>
 <p>缺点:</p>
 <ol>
-<li><a href="https://github.com/KhaosT/tb3-enabler" target="_blank" rel="external">必须破解才能使用</a></li>
+<li><a href="https://github.com/KhaosT/tb3-enabler" target="_blank" rel="noopener">必须破解才能使用</a></li>
 <li>散热有问题, 似乎是官方召回的产品, 持续使用时外壳40℃+ 稳定性不明</li>
 <li>有时 USB、Lan口 会没反应, 需要重启Dock</li>
 </ol>
@@ -307,61 +355,6 @@ ga('send', 'pageview');
 
 
     
-      <article id="post-crosswalk-chromium-mod-jar" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/crosswalk-chromium-mod-jar.html">CrossWalk Chromium Jar 修改指南</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/crosswalk-chromium-mod-jar.html" class="article-date">
-  <time datetime="2017-01-14T01:42:26.000Z" itemprop="datePublished">2017-01-14</time>
-</a>
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>CrossWalk 是由 Intel 主导, 基于 Chromium 的 WebView 实现. 旨在为不同平台提供高效并且一致的 Web 体验.<br>关于<a href="https://crosswalk-project.org/documentation/about/faq_zh.html" target="_blank" rel="external">项目简介</a>、优劣对比、<a href="https://crosswalk-project.org/documentation/getting_started_zh.html" target="_blank" rel="external">控件的使用</a>, 建议参考官方文档.<br>本文主要从Java层 以修改最新 <code>Stable 22.52.561.4</code> 介绍如何<strong>下载源码</strong>和<strong>修改Jar</strong>   </p>
-<h2 id="1-源码下载"><a href="#1-源码下载" class="headerlink" title="1. 源码下载"></a>1. 源码下载</h2><p>官方提供的<a href="https://crosswalk-project.org/contribute/building_crosswalk/android_build.html" target="_blank" rel="external">下载方式</a>与 Chromium 一样，需要使用 <a href="https://www.chromium.org/developers/how-tos/depottools" target="_blank" rel="external">gclient</a> 下载. 但是代码仓库较大, 国内网络环境下基本无望.</p>
-<p>另外一个方式可以直接从 GitHub 上下载:<br><a href="https://github.com/crosswalk-project/crosswalk" target="_blank" rel="external">https://github.com/crosswalk-project/crosswalk</a><br><a href="https://github.com/crosswalk-project/chromium-crosswalk" target="_blank" rel="external">https://github.com/crosswalk-project/chromium-crosswalk</a><br>下载完大概8GB</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> crosswalk</div><div class="line">$ git branch -av</div><div class="line">    remotes/origin/crosswalk-21        c8e322d Bump version to 21.51.546.7</div><div class="line">    remotes/origin/crosswalk-22        67b33ab Bump version to 22.52.561.4</div><div class="line">    remotes/origin/crosswalk-23        8ba6a38 Bump version to 23.53.589.4</div><div class="line"><span class="comment"># Crosswalk-22 正好是需要的版本</span></div><div class="line">$ git checkout crosswalk-22</div><div class="line"></div><div class="line"><span class="comment">#在 DEPS.xwalk 中可以找到对应 Chromium_Crosswalk 仓库对应 Commit</span></div><div class="line"><span class="comment"># chromium_crosswalk_rev = 'cbf42ea903acd7510548806a99efd200da37d492'</span></div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> chromium-crosswalk</div><div class="line">$ git branch -av</div><div class="line">remotes/origin/crosswalk-22/52.0.2743.116		cbf42ea Merge pull request ...</div><div class="line"><span class="comment"># 找到对应的 Commit </span></div><div class="line">$ git checkout crosswalk-22/52.0.2743.116</div></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/crosswalk-chromium-mod-jar.html#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Chromium/">Chromium</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CrossWalk/">CrossWalk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebView/">WebView</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
       <nav id="page-nav">
         <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
       </nav>
@@ -370,7 +363,7 @@ ga('send', 'pageview');
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 likaci&nbsp;
+      &copy; 2018 likaci&nbsp;
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
   </div>

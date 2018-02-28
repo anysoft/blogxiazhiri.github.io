@@ -9,6 +9,7 @@
 <meta property="og:title" content="夏之日">
 <meta property="og:url" content="http://blog.xiazhiri.com/page/2/index.html">
 <meta property="og:site_name" content="夏之日">
+<meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="夏之日">
   
@@ -66,6 +67,61 @@ ga('send', 'pageview');
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-crosswalk-chromium-mod-jar" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/crosswalk-chromium-mod-jar.html">CrossWalk Chromium Jar 修改指南</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/crosswalk-chromium-mod-jar.html" class="article-date">
+  <time datetime="2017-01-14T01:42:26.000Z" itemprop="datePublished">2017-01-14</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>CrossWalk 是由 Intel 主导, 基于 Chromium 的 WebView 实现. 旨在为不同平台提供高效并且一致的 Web 体验.<br>关于<a href="https://crosswalk-project.org/documentation/about/faq_zh.html" target="_blank" rel="noopener">项目简介</a>、优劣对比、<a href="https://crosswalk-project.org/documentation/getting_started_zh.html" target="_blank" rel="noopener">控件的使用</a>, 建议参考官方文档.<br>本文主要从Java层 以修改最新 <code>Stable 22.52.561.4</code> 介绍如何<strong>下载源码</strong>和<strong>修改Jar</strong>   </p>
+<h2 id="1-源码下载"><a href="#1-源码下载" class="headerlink" title="1. 源码下载"></a>1. 源码下载</h2><p>官方提供的<a href="https://crosswalk-project.org/contribute/building_crosswalk/android_build.html" target="_blank" rel="noopener">下载方式</a>与 Chromium 一样，需要使用 <a href="https://www.chromium.org/developers/how-tos/depottools" target="_blank" rel="noopener">gclient</a> 下载. 但是代码仓库较大, 国内网络环境下基本无望.</p>
+<p>另外一个方式可以直接从 GitHub 上下载:<br><a href="https://github.com/crosswalk-project/crosswalk" target="_blank" rel="noopener">https://github.com/crosswalk-project/crosswalk</a><br><a href="https://github.com/crosswalk-project/chromium-crosswalk" target="_blank" rel="noopener">https://github.com/crosswalk-project/chromium-crosswalk</a><br>下载完大概8GB</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> crosswalk</div><div class="line">$ git branch -av</div><div class="line">    remotes/origin/crosswalk-21        c8e322d Bump version to 21.51.546.7</div><div class="line">    remotes/origin/crosswalk-22        67b33ab Bump version to 22.52.561.4</div><div class="line">    remotes/origin/crosswalk-23        8ba6a38 Bump version to 23.53.589.4</div><div class="line"><span class="comment"># Crosswalk-22 正好是需要的版本</span></div><div class="line">$ git checkout crosswalk-22</div><div class="line"></div><div class="line"><span class="comment">#在 DEPS.xwalk 中可以找到对应 Chromium_Crosswalk 仓库对应 Commit</span></div><div class="line"><span class="comment"># chromium_crosswalk_rev = 'cbf42ea903acd7510548806a99efd200da37d492'</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> chromium-crosswalk</div><div class="line">$ git branch -av</div><div class="line">remotes/origin/crosswalk-22/52.0.2743.116		cbf42ea Merge pull request ...</div><div class="line"><span class="comment"># 找到对应的 Commit </span></div><div class="line">$ git checkout crosswalk-22/52.0.2743.116</div></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/crosswalk-chromium-mod-jar.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Chromium/">Chromium</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CrossWalk/">CrossWalk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebView/">WebView</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
       <article id="post-do-not-use-cnpm-install-f8app" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -89,7 +145,7 @@ ga('send', 'pageview');
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>不要使用 <code>cnpm install</code> 安装，不然运行时会报错。<br>开始被<a href="https://www.bountysource.com/issues/25671889-make-relay-work-with-react-native-out-of-the-box" target="_blank" rel="external">这个帖子</a>误导浪费半天时间……</p>
+        <p>不要使用 <code>cnpm install</code> 安装，不然运行时会报错。<br>开始被<a href="https://www.bountysource.com/issues/25671889-make-relay-work-with-react-native-out-of-the-box" target="_blank" rel="noopener">这个帖子</a>误导浪费半天时间……</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ react-native run-android</div><div class="line">/f8app/node_modules/.npminstall/react-native/0.23.1/react-native/Libraries/react-native/react-native.js:120</div><div class="line">  ...require(<span class="string">'React'</span>),</div><div class="line">  ^^^</div><div class="line"></div><div class="line">SyntaxError: Unexpected token ...</div><div class="line">    at exports.runInThisContext (vm.js:53:16)</div><div class="line">    at Module._compile (module.js:414:25)</div><div class="line">    at Module._extensions..js (module.js:442:10)</div><div class="line">    at Object.require.extensions.(anonymous <span class="keyword">function</span>) [as .js] (/f8app/node_modules/.npminstall/babel-register/6.7.2/babel-register/lib/node.js:134:7)</div><div class="line">    at Module.load (module.js:356:32)</div><div class="line">    at Function.Module._load (module.js:311:12)</div><div class="line">    at Module.require (module.js:366:17)</div><div class="line">    at require (module.js:385:17)</div><div class="line">    at /f8app/node_modules/.npminstall/babel-core/6.7.7/babel-core/lib/transformation/file/options/option-manager.js:368:22</div><div class="line">    at Array.map (native)</div></pre></td></tr></table></figure>
       
     </div>
@@ -137,8 +193,8 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>Android 播放加密视频的基本思路就是：<strong>本地启动一个HTTP服务作为代理，解密之后给播放器播放</strong>。<br>这样的好处就是可以<strong>自定义加密方案</strong>，更重要的是 加密/解密模块 可以和视频播放模块<strong>解耦</strong>。   </p>
-<h3 id="处理HTTP头"><a href="#处理HTTP头" class="headerlink" title="处理HTTP头"></a>处理HTTP头</h3><p>这里使用的 <a href="http://nanohttpd.org/" target="_blank" rel="external">NanoHTTPD</a> , 一个纯Java实现的微型WEB服务器，代码开源。<br>代码实现起来很简单，只要继承然后重写两个方法就可以。<br>稍微复杂的是怎样处理从视频播放器过来的请求。   </p>
-<p>通过 <a href="https://www.charlesproxy.com/" target="_blank" rel="external">Charles</a> 代理就能发现简单的规律。<br>VideoView播放在线视频的时候，发出的GET请求。第一次是一个普通的请求，务器返回200；之后的则全是分段请求，服务器返回206。   </p>
+<h3 id="处理HTTP头"><a href="#处理HTTP头" class="headerlink" title="处理HTTP头"></a>处理HTTP头</h3><p>这里使用的 <a href="http://nanohttpd.org/" target="_blank" rel="noopener">NanoHTTPD</a> , 一个纯Java实现的微型WEB服务器，代码开源。<br>代码实现起来很简单，只要继承然后重写两个方法就可以。<br>稍微复杂的是怎样处理从视频播放器过来的请求。   </p>
+<p>通过 <a href="https://www.charlesproxy.com/" target="_blank" rel="noopener">Charles</a> 代理就能发现简单的规律。<br>VideoView播放在线视频的时候，发出的GET请求。第一次是一个普通的请求，务器返回200；之后的则全是分段请求，服务器返回206。   </p>
 <p>第一次请求 和 结果<br><img src="http://ww1.sinaimg.cn/large/c0f281e2jw1f25u97tgzej215m04idgr.jpg" alt="">   </p>
 <p><img src="http://ww2.sinaimg.cn/large/c0f281e2jw1f25ub757lbj211g09qq4v.jpg" alt=""></p>
 <hr>
@@ -280,55 +336,6 @@ ga('send', 'pageview');
 
 
     
-      <article id="post-Intellij-IDEA-15-right-menu-can-not-show-cause-Jitouch" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/Intellij-IDEA-15-right-menu-can-not-show-cause-Jitouch.html">Jitouch 和 Intellij IDEA 15 冲突导致 IDEA 右键菜单不能显示。</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/Intellij-IDEA-15-right-menu-can-not-show-cause-Jitouch.html" class="article-date">
-  <time datetime="2015-11-04T09:00:00.000Z" itemprop="datePublished">2015-11-04</time>
-</a>
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Jitouch 和 Intellij IDEA 15 冲突导致 IDEA 右键菜单不能显示。<br>目前只能禁用掉 Jitouch<br>或者 <a href="http://blog.jetbrains.com/idea/2015/05/intellij-idea-14-1-4-eap-141-1192-is-available/" target="_blank" rel="external">切换 IDE JDK 版本</a> 或者 Ctrl+左键</p>
-<hr>
-<p>IntelliJ IDEA 15 context menu can’t show cause conflicts with Jitouch.<br>You can disable Jitouch<br>or <a href="http://blog.jetbrains.com/idea/2015/05/intellij-idea-14-1-4-eap-141-1192-is-available/" target="_blank" rel="external">Switch JDK version of IDE</a> or just ctrl + click…</p>
-
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Intellij-IDEA/">Intellij IDEA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS-X/">OS X</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
       <nav id="page-nav">
         <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
       </nav>
@@ -337,7 +344,7 @@ ga('send', 'pageview');
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 likaci&nbsp;
+      &copy; 2018 likaci&nbsp;
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
   </div>

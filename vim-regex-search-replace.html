@@ -12,6 +12,7 @@
 <meta property="og:url" content="http://blog.xiazhiri.com/vim-regex-search-replace.html">
 <meta property="og:site_name" content="夏之日">
 <meta property="og:description" content="最近需要处理一些 html 文件,目的说起来很简单：去掉其中的几个特定的 div。对于 Windows 用户，多文件搜索推荐 FileLocator Pro，正则处理推荐 RegexBuddy两个软件相对于 Vim 更加人性化。脱离 Win 之后没有了趁手的工具，只能捡起 Vim 这个宰牛刀…… vim中的正则与常用的正则有些出入： \.  匹配任意字符(不包含换行) \_.  匹配任意字符(包含">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2017-05-14T12:31:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vim中的正则与多文件搜索、批量替换">
@@ -93,7 +94,7 @@ ga('send', 'pageview');
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近需要处理一些 html 文件,目的说起来很简单：去掉其中的几个特定的 div。<br>对于 Windows 用户，多文件搜索推荐 <a href="http://www.appinn.com/filelocator-pro-gift/" target="_blank" rel="external">FileLocator Pro</a>，正则处理推荐 <a href="http://www.cnblogs.com/Fooo/archive/2008/08/28/1278755.html" target="_blank" rel="external">RegexBuddy</a><br>两个软件相对于 Vim 更加人性化。<br>脱离 Win 之后没有了趁手的工具，只能捡起 Vim 这个宰牛刀……</p>
+        <p>最近需要处理一些 html 文件,目的说起来很简单：去掉其中的几个特定的 div。<br>对于 Windows 用户，多文件搜索推荐 <a href="http://www.appinn.com/filelocator-pro-gift/" target="_blank" rel="noopener">FileLocator Pro</a>，正则处理推荐 <a href="http://www.cnblogs.com/Fooo/archive/2008/08/28/1278755.html" target="_blank" rel="noopener">RegexBuddy</a><br>两个软件相对于 Vim 更加人性化。<br>脱离 Win 之后没有了趁手的工具，只能捡起 Vim 这个宰牛刀……</p>
 <h3 id="vim中的正则与常用的正则有些出入："><a href="#vim中的正则与常用的正则有些出入：" class="headerlink" title="vim中的正则与常用的正则有些出入："></a>vim中的正则与常用的正则有些出入：</h3><ul>
 <li><code>\.</code>  匹配任意字符(<strong>不包含</strong>换行)</li>
 <li><code>\_.</code>  匹配任意字符(包含换行)</li>
@@ -132,14 +133,14 @@ ga('send', 'pageview');
 </li>
 </ul>
 <p>暂时就是这些。</p>
-<h4 id="参见："><a href="#参见：" class="headerlink" title="参见："></a>参见：</h4><p><a href="http://blog.chinaunix.net/uid-23381466-id-93905.html" target="_blank" rel="external">vim 查找多个文件, 替换</a> @wangchenxicool</p>
+<h4 id="参见："><a href="#参见：" class="headerlink" title="参见："></a>参见：</h4><p><a href="http://blog.chinaunix.net/uid-23381466-id-93905.html" target="_blank" rel="noopener">vim 查找多个文件, 替换</a> @wangchenxicool</p>
 
       
     </div>
     
       <div class="article-toc">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#vim中的正则与常用的正则有些出入："><span class="toc-number">1.</span> <span class="toc-text">vim中的正则与常用的正则有些出入：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以替换多行注释为例-lt-多行注释-gt"><span class="toc-number">2.</span> <span class="toc-text">以替换多行注释为例 <!-- 多行注释 --></span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#更多："><span class="toc-number">2.1.</span> <span class="toc-text">更多：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参见："><span class="toc-number">2.2.</span> <span class="toc-text">参见：</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#vim中的正则与常用的正则有些出入："><span class="toc-number">1.</span> <span class="toc-text">vim中的正则与常用的正则有些出入：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以替换多行注释为例-lt-多行注释-gt"><span class="toc-number">2.</span> <span class="toc-text">以替换多行注释为例 &lt;!-- 多行注释 --&gt;</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#更多："><span class="toc-number">2.1.</span> <span class="toc-text">更多：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参见："><span class="toc-number">2.2.</span> <span class="toc-text">参见：</span></a></li></ol></li></ol>
       </div>
     
     
@@ -200,7 +201,7 @@ ga('send', 'pageview');
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 likaci&nbsp;
+      &copy; 2018 likaci&nbsp;
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
   </div>

@@ -12,6 +12,7 @@
 <meta property="og:url" content="http://blog.xiazhiri.com/Import-ArcGIS-Android-SDK-to-Intellij-IDEA.html">
 <meta property="og:site_name" content="夏之日">
 <meta property="og:description" content="之前一直使用的 ADT + Intellij, 用起来也算安逸，导入导出依赖配置和 Eclipse 没什么区别。但是在多人协作开发时依赖的配置很麻烦。多次尝试切换到 Gradle 都出错告终。    大部分依赖提供jcenter 别名, 只要 在 build.gradle 的 dependencies 中添加compile &amp;#39;com.jakewharton:butterknife:6.0.">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/c0f281e2tw1emyzyl4o2lj207305wwen.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/c0f281e2tw1emz0357bauj20fl0apwfi.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/c0f281e2tw1emz06w0r3gj20k30aota3.jpg">
@@ -100,20 +101,20 @@ ga('send', 'pageview');
         <p>之前一直使用的 ADT + Intellij, 用起来也算安逸，导入导出依赖配置和 Eclipse 没什么区别。但是在多人协作开发时依赖的配置很麻烦。多次尝试切换到 Gradle 都出错告终。   </p>
 <p>大部分依赖提供jcenter 别名, 只要 在 <code>build.gradle</code> 的 <code>dependencies</code> 中添加<br><code>compile &#39;com.jakewharton:butterknife:6.0.0&#39;</code></p>
 <p>但是一些没有推送到 jcenter 的项目按照之前的 <code>Import Module</code> 导入时总会导致原先的项目混乱。</p>
-<p>参考 StackOverflow 上的一篇问答 <a href="http://stackoverflow.com/questions/24456192/android-studio-import-module-changes-structure-of-existing-library" target="_blank" rel="external">“Import Module” changes structure of existing library</a></p>
+<p>参考 StackOverflow 上的一篇问答 <a href="http://stackoverflow.com/questions/24456192/android-studio-import-module-changes-structure-of-existing-library" target="_blank" rel="noopener">“Import Module” changes structure of existing library</a></p>
 <ol>
 <li>Copied library’s directory under the root directory of my project. </li>
 <li>Referenced that library in settings.gradle by adding include ‘:libraryA’.</li>
 <li>Added dependency to my project’s build.gradle: compile project(‘:libraryA’).   </li>
 </ol>
 <hr>
-<p>ADT 模式下 Intellij 导入 ArcGIS Android SDK 的方式可以参考官方博客<a href="http://blogs.esri.com/esri/arcgis/2013/10/31/arcgis-android-development-with-intellij-idea/" target="_blank" rel="external">ArcGIS Android development with IntelliJ IDEA</a>。</p>
-<p>Gradle 方式官方在 GitHub 上有介绍 <a href="https://github.com/Esri/arcgis-android-api-lib-module" target="_blank" rel="external">ArcGIS Android API Lib Module</a>，但是说明版本太旧，按照说明无法导入。</p>
+<p>ADT 模式下 Intellij 导入 ArcGIS Android SDK 的方式可以参考官方博客<a href="http://blogs.esri.com/esri/arcgis/2013/10/31/arcgis-android-development-with-intellij-idea/" target="_blank" rel="noopener">ArcGIS Android development with IntelliJ IDEA</a>。</p>
+<p>Gradle 方式官方在 GitHub 上有介绍 <a href="https://github.com/Esri/arcgis-android-api-lib-module" target="_blank" rel="noopener">ArcGIS Android API Lib Module</a>，但是说明版本太旧，按照说明无法导入。</p>
 <h3 id="下面是测试可行的导入方式"><a href="#下面是测试可行的导入方式" class="headerlink" title="下面是测试可行的导入方式"></a>下面是测试可行的导入方式</h3><a id="more"></a>
 <ol>
 <li><p>整个 Project 中有 <strong>三</strong>个 <code>build.gradle</code>, <strong>一</strong>个 <code>settings.gradle</code> 每步需要的修改的依赖不能乱。配置之前记得把项目提交到 git 仓库,  万一出错checkout回来就好了。</p>
 </li>
-<li><p>获取依赖项目<br>可以直接<a href="https://github.com/Esri/arcgis-android-api-lib-module/archive/master.zip" target="_blank" rel="external">下载</a><br>推荐使用 git <code>git clone  git@github.com:Esri/arcgis-android-api-lib-module.git --depth=1</code></p>
+<li><p>获取依赖项目<br>可以直接<a href="https://github.com/Esri/arcgis-android-api-lib-module/archive/master.zip" target="_blank" rel="noopener">下载</a><br>推荐使用 git <code>git clone  git@github.com:Esri/arcgis-android-api-lib-module.git --depth=1</code></p>
 </li>
 <li><p>复制 <code>arcgis-android-v10.2.4</code> 到项目目录<br><img src="http://ww3.sinaimg.cn/large/c0f281e2tw1emyzyl4o2lj207305wwen.jpg" alt=""></p>
 </li>
@@ -191,7 +192,7 @@ ga('send', 'pageview');
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 likaci&nbsp;
+      &copy; 2018 likaci&nbsp;
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
   </div>

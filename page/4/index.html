@@ -9,6 +9,7 @@
 <meta property="og:title" content="夏之日">
 <meta property="og:url" content="http://blog.xiazhiri.com/page/4/index.html">
 <meta property="og:site_name" content="夏之日">
+<meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="夏之日">
   
@@ -66,6 +67,78 @@ ga('send', 'pageview');
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-vim-regex-search-replace" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/vim-regex-search-replace.html">Vim中的正则与多文件搜索、批量替换</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/vim-regex-search-replace.html" class="article-date">
+  <time datetime="2014-11-14T12:52:50.000Z" itemprop="datePublished">2014-11-14</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近需要处理一些 html 文件,目的说起来很简单：去掉其中的几个特定的 div。<br>对于 Windows 用户，多文件搜索推荐 <a href="http://www.appinn.com/filelocator-pro-gift/" target="_blank" rel="noopener">FileLocator Pro</a>，正则处理推荐 <a href="http://www.cnblogs.com/Fooo/archive/2008/08/28/1278755.html" target="_blank" rel="noopener">RegexBuddy</a><br>两个软件相对于 Vim 更加人性化。<br>脱离 Win 之后没有了趁手的工具，只能捡起 Vim 这个宰牛刀……</p>
+<h3 id="vim中的正则与常用的正则有些出入："><a href="#vim中的正则与常用的正则有些出入：" class="headerlink" title="vim中的正则与常用的正则有些出入："></a>vim中的正则与常用的正则有些出入：</h3><ul>
+<li><code>\.</code>  匹配任意字符(<strong>不包含</strong>换行)</li>
+<li><code>\_.</code>  匹配任意字符(包含换行)</li>
+<li><code>\{-}</code>  表示懒惰模式<br>具体 <code>:h regexp</code></li>
+</ul>
+<h3 id="以替换多行注释为例-lt-多行注释-gt"><a href="#以替换多行注释为例-lt-多行注释-gt" class="headerlink" title="以替换多行注释为例 &lt;!-- 多行注释 --&gt;"></a>以替换多行注释为例 <code>&lt;!-- 多行注释 --&gt;</code></h3><ol>
+<li><p>定位到指定目录<br><code>:cd /target/folder</code></p>
+</li>
+<li><p>打开单个文件<br><code>e: target.html</code></p>
+</li>
+<li><p>测试匹配<br><code>/&lt;!--\_.\{-}--&gt;</code> 多行注释<br><code>/&lt;!--.\{-}--&gt;</code>  单行注释</p>
+</li>
+<li><p>多文件搜索<br><code>:vimgrep /test/ **/*.html</code>  当前目录和子目录<br><code>:vimgrep /test/ *.html</code> 当前目录<br><code>:vimgrep /test/ subfolder/*</code> 子目录<br>vimgrep 之后可以 <code>:copen</code> 打开 quickfix 查看匹配的列表</p>
+</li>
+<li><p>批量替换</p>
+</li>
+</ol>
+<ul>
+<li>添加文件 <code>:args **/*.html</code></li>
+<li>批量替换 <code>:argdo %s/cha1/cha2/ | update</code></li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/vim-regex-search-replace.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Regex/">Regex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vim/">Vim</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
       <article id="post-arcgis-generate-tpk" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -89,7 +162,7 @@ ga('send', 'pageview');
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>官方博客在12年曾经介绍过 <a href="http://blog.csdn.net/arcgis_mobile/article/details/8048549" target="_blank" rel="external">3种方法快速制作tpk文件</a> ，当时的 ArcMap 版本为 10.1，本文在 ArcMap10.2.1 下仅做补充。</p>
+        <p>官方博客在12年曾经介绍过 <a href="http://blog.csdn.net/arcgis_mobile/article/details/8048549" target="_blank" rel="noopener">3种方法快速制作tpk文件</a> ，当时的 ArcMap 版本为 10.1，本文在 ArcMap10.2.1 下仅做补充。</p>
 <h3 id="1-制作指定坐标系的tpk"><a href="#1-制作指定坐标系的tpk" class="headerlink" title="1.制作指定坐标系的tpk"></a>1.制作指定坐标系的tpk</h3><ul>
 <li>如果直接 File – Share As – Tile Package, 只需要在 TileFormat 中指定 tiling &gt;Scheme File<br><img src="http://ww2.sinaimg.cn/large/c0f281e2tw1em3ktsjg6oj20kn05zt9a.jpg" alt=""></li>
 <li><p>如果是使用GP工具，则在设置页面<strong>不勾选</strong> Package for ArcGIS…然后在Service 选择对应xml<br><img src="http://ww2.sinaimg.cn/large/c0f281e2tw1em3l62hjxbj20kx08k76d.jpg" alt=""></p>
@@ -148,7 +221,7 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="个人观点，看看就好。"><a href="#个人观点，看看就好。" class="headerlink" title="个人观点，看看就好。"></a>个人观点，看看就好。</h3><hr>
-<h2 id="1-goagent免费翻墙利器"><a href="#1-goagent免费翻墙利器" class="headerlink" title="1.goagent免费翻墙利器"></a>1.goagent免费翻墙利器</h2><p>不会翻墙的程序员不是好程序员，有了它就可以访问<strong>不存在的</strong>网站。<br>相比StackOverflow 百度知道就是个x，还有维基百科和百度百科、谷歌和百度……<br><a href="http://wildcat.name/goagent.html" target="_blank" rel="external">介绍地址</a></p>
+<h2 id="1-goagent免费翻墙利器"><a href="#1-goagent免费翻墙利器" class="headerlink" title="1.goagent免费翻墙利器"></a>1.goagent免费翻墙利器</h2><p>不会翻墙的程序员不是好程序员，有了它就可以访问<strong>不存在的</strong>网站。<br>相比StackOverflow 百度知道就是个x，还有维基百科和百度百科、谷歌和百度……<br><a href="http://wildcat.name/goagent.html" target="_blank" rel="noopener">介绍地址</a></p>
 <blockquote>
 <p><img src="http://ww4.sinaimg.cn/large/c0f281e2tw1eiuz78ygarj20qd0cvgo2.jpg" alt=""></p>
 </blockquote>
@@ -277,55 +350,6 @@ ga('send', 'pageview');
 
 
     
-      <article id="post-IntelliJ-IDEA-ideavimrc" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/IntelliJ-IDEA-ideavimrc.html">IntelliJ IDEA vim 插件配置文件 .ideavimrc 配置不生效的问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/IntelliJ-IDEA-ideavimrc.html" class="article-date">
-  <time datetime="2014-05-10T15:23:23.000Z" itemprop="datePublished">2014-05-10</time>
-</a>
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>按照官方文档 <code>.ideavimrc</code> 的配置文件应该是在 <code>~\.ideavimrc</code>, 在Win平台下对应路径应该是 <code>c:\Users\yourUserName\</code>。<br>但是新建文件写入内容 <code>se ic</code> (忽略大小写) 发现配置不起作用.<br>之后把文件放在 D:\ 与 .IntelliJIdea13\ 同目录下, 发现 <code>:e ~\.ideavimrc</code> 可以打开配置文件, 证明路径没错, 但配置依旧无效。多次排除之后，发现是文件编码问题……<br><strong>结论是:</strong><br>.ideavimrc 需要和 .IntelliJIdea13\ 同路径, 且文件编码为utf-8.</p>
-<hr>
-<p><code>.ideavimrc</code> config file must store in the parent path of <code>.IntelliJIdea13\</code> , the file encoding mus be utf-8.</p>
-
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IntelliJ-IDEA/">IntelliJ IDEA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vim/">Vim</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
       <nav id="page-nav">
         <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">下一页 &raquo;</a>
       </nav>
@@ -334,7 +358,7 @@ ga('send', 'pageview');
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 likaci&nbsp;
+      &copy; 2018 likaci&nbsp;
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
   </div>

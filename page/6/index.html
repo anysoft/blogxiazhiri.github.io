@@ -67,6 +67,103 @@ ga('send', 'pageview');
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-hexo-duoshuo-jQuery" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/hexo-duoshuo-jQuery.html">Hexo多说评论jQuery版本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/hexo-duoshuo-jQuery.html" class="article-date">
+  <time datetime="2013-02-23T17:34:17.000Z" itemprop="datePublished">2013-02-24</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://blog.xiazhiri.com/hexo-add-duoshuo.html">上文</a>介绍了为hexo添加多说评论，用的是原生js方式，需要外挂一个js文件，十分啰嗦。<br>参考了jQuery的帮助文档，发现用jQuery更方便、简洁。<br>comment.ejs全文如下，其中<code>&lt;!--likaci xxx --&gt;</code>之间部分为添加内容，具体效果参见下方评论框。   </p>
+<pre><code>&lt;% if (config.disqus_shortname &amp;&amp; page.comments){ %&gt;
+&lt;!--likaci js init begin--&gt;
+&lt;script type=&quot;text/javascript&quot;&gt; 
+$(document).ready(function(){
+   $(&quot;#Disqus_bt&quot;).mouseover(function(){
+     $(&quot;#Disqus_bt&quot;).css(&quot;background-color&quot;,&quot;#E6EFC2&quot;)
+     $(&quot;#duoshuo_bt&quot;).css(&quot;background-color&quot;,&quot;#f5f5f5&quot;)
+     $(&quot;.ds-thread&quot;).animate({ height: &apos;hide&apos;, opacity: &apos;hide&apos; }, &apos;slow&apos;);
+     $(&quot;#disqus_thread&quot;).animate({ height: &apos;show&apos;, opacity: &apos;show&apos; }, &apos;slow&apos;);
+   });
+   $(&quot;#duoshuo_bt&quot;).mouseover(function(){
+     $(&quot;#Disqus_bt&quot;).css(&quot;background-color&quot;,&quot;#f5f5f5&quot;)
+     $(&quot;#duoshuo_bt&quot;).css(&quot;background-color&quot;,&quot;#DFF4FF&quot;)
+     $(&quot;.ds-thread&quot;).animate({ height: &apos;show&apos;, opacity: &apos;show&apos; }, &apos;slow&apos;);
+     $(&quot;#disqus_thread&quot;).animate({ height: &apos;hide&apos;, opacity: &apos;hide&apos; }, &apos;slow&apos;);
+   });
+});
+&lt;/script&gt; 
+&lt;!--likaic js init end--&gt;
+&lt;!--likaci css style begin--&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+#Disqus_bt,#duoshuo_bt { padding: 5px 10px 5px 7px; line-height: 17px; display: block; float: left; margin: 0 0 0 9px; background-color: #f5f5f5; border: 1px solid #dedede; border-top: 1px solid #eee; border-left: 1px solid #eee; }
+#Disqus_bt{color: #336699}
+#duoshuo_bt{color: #d12f19}
+&lt;/style&gt;
+&lt;!--likaci css style end--&gt;
+&lt;section id=&quot;comment&quot;&gt;
+  &lt;h1 class=&quot;title&quot; style=&quot;float:left&quot;&gt;&lt;%= __(&apos;comment&apos;) %&gt;&lt;/h1&gt;
+  &lt;div id=&quot;duoshuo_bt&quot; &gt;多说&lt;/div&gt;
+  &lt;div id=&quot;Disqus_bt&quot; &gt;Disqus&lt;/div&gt;
+  &lt;div style=&quot;clear:both&quot;&gt;&lt;/div&gt;
+  &lt;div id=&quot;disqus_thread&quot; style=&quot;display:none&quot;&gt;
+    &lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;http://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+  &lt;/div&gt;
+&lt;!--likaci add duoshuo begin--&gt;
+    &lt;div class=&quot;ds-thread&quot;&gt;&lt;/div&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+    var duoshuoQuery = {short_name:&quot;yourshortname&quot;};
+    (function() {
+        var ds = document.createElement(&apos;script&apos;);
+        ds.type = &apos;text/javascript&apos;;ds.async = true;
+        ds.src = &apos;http://static.duoshuo.com/embed.js&apos;;
+        ds.charset = &apos;UTF-8&apos;;
+        (document.getElementsByTagName(&apos;head&apos;)[0] 
+        || document.getElementsByTagName(&apos;body&apos;)[0]).appendChild(ds);
+    })();
+    &lt;/script&gt;
+&lt;!--likaci add duoshuo end--&gt;
+&lt;/section&gt;
+&lt;% } %&gt;
+</code></pre>
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jquery/">jquery</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
       <article id="post-hexo-add-duoshuo" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -281,73 +378,6 @@ Else{
       <footer class="article-footer">
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ahk/">ahk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/totalcmd/">totalcmd</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
-      <article id="post-vim-run-ahk" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/vim-run-ahk.html">vim编辑运行ahk</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/vim-run-ahk.html" class="article-date">
-  <time datetime="2013-01-12T16:00:00.000Z" itemprop="datePublished">2013-01-13</time>
-</a>
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>vim中编辑ahk自然没问题，问题是怎样<strong>让错误信息输出到/回vim窗口。</strong><br>善用佳软曾经在水木社区讨论过这个问题，可惜最后还是没有给出明确的解决方案。<a href="http://www.newsmth.net/nForum/#!article/VIM/65596" target="_blank" rel="noopener">见此处</a></p>
-<p>网上查了查其他语言的编译运行方式，发现问题焦点在正确设置makeprg上，关于makeprg请直接 :h makeprg<br>具体vimrc配置如下，出错自动打开quickfix</p>
-<pre><code>&quot;自动补全的字典 配合acp插件自动补全
-autocmd BufRead,BufNewFile *.ahk set dictionary+=$VIMvimfilesbundleautocomplpopdictahk.api
-&quot;设置makeprg程序 路径中空格要转义
-autocmd BufRead,Bufnewfile *.ahk set makeprg=&quot;D:AutoHotKeyLAutoHotkey.exe&quot; /ErrorStdOut %
-&quot;f5 f7
-autocmd BufRead,Bufnewfile *.ahk map  :silent !&quot;D:AutoHotKeyLCompilerAhk2Exe.exe&quot; /in %
-autocmd BufRead,Bufnewfile *.ahk map  :call MyMake()
-&quot;实现f5 make后自动打开quickfix的函数
-function! MyMake()
-       silent make
-       redraw!
-       for i in getqflist()
-               if i[&apos;valid&apos;]
-                       cwin
-                       winc p
-                       return
-               endif
-       endfor
-endfunction
-</code></pre>
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ahk/">ahk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
 
       </footer>
     

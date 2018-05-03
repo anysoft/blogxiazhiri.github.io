@@ -13,14 +13,14 @@
 <meta property="og:site_name" content="夏之日">
 <meta property="og:description" content="之前一直使用的 ADT + Intellij, 用起来也算安逸，导入导出依赖配置和 Eclipse 没什么区别。但是在多人协作开发时依赖的配置很麻烦。多次尝试切换到 Gradle 都出错告终。    大部分依赖提供jcenter 别名, 只要 在 build.gradle 的 dependencies 中添加compile &amp;#39;com.jakewharton:butterknife:6.0.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/c0f281e2tw1emyzyl4o2lj207305wwen.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/c0f281e2tw1emz0357bauj20fl0apwfi.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/c0f281e2tw1emz06w0r3gj20k30aota3.jpg">
-<meta property="og:updated_time" content="2017-05-14T12:31:17.000Z">
+<meta property="og:image" content="http://blog.xiazhiri.com/media/c0f281e2tw1emyzyl4o2lj207305wwen.jpg">
+<meta property="og:image" content="http://blog.xiazhiri.com/media/c0f281e2tw1emz0357bauj20fl0apwfi.jpg">
+<meta property="og:image" content="http://blog.xiazhiri.com/media/c0f281e2tw1emz06w0r3gj20k30aota3.jpg">
+<meta property="og:updated_time" content="2018-05-03T02:54:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android Studio 导入项目依赖(Gradle) 以 ArcGIS Android SDK 为例">
 <meta name="twitter:description" content="之前一直使用的 ADT + Intellij, 用起来也算安逸，导入导出依赖配置和 Eclipse 没什么区别。但是在多人协作开发时依赖的配置很麻烦。多次尝试切换到 Gradle 都出错告终。    大部分依赖提供jcenter 别名, 只要 在 build.gradle 的 dependencies 中添加compile &amp;#39;com.jakewharton:butterknife:6.0.">
-<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/c0f281e2tw1emyzyl4o2lj207305wwen.jpg">
+<meta name="twitter:image" content="http://blog.xiazhiri.com/media/c0f281e2tw1emyzyl4o2lj207305wwen.jpg">
   
   
     <link rel="icon" href="/favicon.png">
@@ -116,11 +116,11 @@ ga('send', 'pageview');
 </li>
 <li><p>获取依赖项目<br>可以直接<a href="https://github.com/Esri/arcgis-android-api-lib-module/archive/master.zip" target="_blank" rel="noopener">下载</a><br>推荐使用 git <code>git clone  git@github.com:Esri/arcgis-android-api-lib-module.git --depth=1</code></p>
 </li>
-<li><p>复制 <code>arcgis-android-v10.2.4</code> 到项目目录<br><img src="http://ww3.sinaimg.cn/large/c0f281e2tw1emyzyl4o2lj207305wwen.jpg" alt=""></p>
+<li><p>复制 <code>arcgis-android-v10.2.4</code> 到项目目录<br><img src="/media/c0f281e2tw1emyzyl4o2lj207305wwen.jpg" alt=""></p>
 </li>
-<li><p><code>settings.gradle</code>  中添加 <code>include &#39;:arcgis-android-v10.2.4&#39;</code><br><img src="http://ww1.sinaimg.cn/large/c0f281e2tw1emz0357bauj20fl0apwfi.jpg" alt=""></p>
+<li><p><code>settings.gradle</code>  中添加 <code>include &#39;:arcgis-android-v10.2.4&#39;</code><br><img src="/media/c0f281e2tw1emz0357bauj20fl0apwfi.jpg" alt=""></p>
 </li>
-<li><p><strong>要添加依赖的module的</strong> build.gradle 中的<code>dependencies</code> 添加 <code>compile project(&quot;:arcgis-android-v10.2.4&quot;)</code><br><img src="http://ww1.sinaimg.cn/large/c0f281e2tw1emz06w0r3gj20k30aota3.jpg" alt=""></p>
+<li><p><strong>要添加依赖的module的</strong> build.gradle 中的<code>dependencies</code> 添加 <code>compile project(&quot;:arcgis-android-v10.2.4&quot;)</code><br><img src="/media/c0f281e2tw1emz06w0r3gj20k30aota3.jpg" alt=""></p>
 </li>
 <li><p><strong>其他注意</strong> ArcGIS Android 10.2.4 (Gradle) 中 <code>classpath &#39;com.android.tools.build:gradle:0.14.1&#39;</code> 版本为 0.14.1 对于 0.14.0 之后的版本 runProguard 替换为 minifyEnabled 如果你的版本低于14则 arcgis-android-v10.2.4 中的 build.gradle 中的 minifyEnabled()会提示找不到，只要替换就好。 </p>
 </li>

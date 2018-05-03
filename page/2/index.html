@@ -104,7 +104,7 @@ ga('send', 'pageview');
 <li>千兆 Lan</li>
 <li>便宜. *宝上洋垃圾 + 180w 电源适配器 500+大洋</li>
 </ol>
-<p>下面开始 DIY<br><img src="http://ww1.sinaimg.cn/large/006tNbRwly1fbslnrmgr7j31kw16ohdt.jpg" alt=""><br>▲带电测试几分钟, 红框内的芯片触摸温度50℃+</p>
+<p>下面开始 DIY<br><img src="/media/006tNbRwly1fbslnrmgr7j31kw16ohdt.jpg" alt=""><br>▲带电测试几分钟, 红框内的芯片触摸温度50℃+</p>
         
           <p class="article-more-link">
             <a href="/dell-tb15-diy-cooler.html#more">Read More</a>
@@ -212,6 +212,7 @@ ga('send', 'pageview');
       
         <p>不要使用 <code>cnpm install</code> 安装，不然运行时会报错。<br>开始被<a href="https://www.bountysource.com/issues/25671889-make-relay-work-with-react-native-out-of-the-box" target="_blank" rel="noopener">这个帖子</a>误导浪费半天时间……</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ react-native run-android</div><div class="line">/f8app/node_modules/.npminstall/react-native/0.23.1/react-native/Libraries/react-native/react-native.js:120</div><div class="line">  ...require(<span class="string">'React'</span>),</div><div class="line">  ^^^</div><div class="line"></div><div class="line">SyntaxError: Unexpected token ...</div><div class="line">    at exports.runInThisContext (vm.js:53:16)</div><div class="line">    at Module._compile (module.js:414:25)</div><div class="line">    at Module._extensions..js (module.js:442:10)</div><div class="line">    at Object.require.extensions.(anonymous <span class="keyword">function</span>) [as .js] (/f8app/node_modules/.npminstall/babel-register/6.7.2/babel-register/lib/node.js:134:7)</div><div class="line">    at Module.load (module.js:356:32)</div><div class="line">    at Function.Module._load (module.js:311:12)</div><div class="line">    at Module.require (module.js:366:17)</div><div class="line">    at require (module.js:385:17)</div><div class="line">    at /f8app/node_modules/.npminstall/babel-core/6.7.7/babel-core/lib/transformation/file/options/option-manager.js:368:22</div><div class="line">    at Array.map (native)</div></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -260,11 +261,11 @@ ga('send', 'pageview');
         <h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>Android 播放加密视频的基本思路就是：<strong>本地启动一个HTTP服务作为代理，解密之后给播放器播放</strong>。<br>这样的好处就是可以<strong>自定义加密方案</strong>，更重要的是 加密/解密模块 可以和视频播放模块<strong>解耦</strong>。   </p>
 <h3 id="处理HTTP头"><a href="#处理HTTP头" class="headerlink" title="处理HTTP头"></a>处理HTTP头</h3><p>这里使用的 <a href="http://nanohttpd.org/" target="_blank" rel="noopener">NanoHTTPD</a> , 一个纯Java实现的微型WEB服务器，代码开源。<br>代码实现起来很简单，只要继承然后重写两个方法就可以。<br>稍微复杂的是怎样处理从视频播放器过来的请求。   </p>
 <p>通过 <a href="https://www.charlesproxy.com/" target="_blank" rel="noopener">Charles</a> 代理就能发现简单的规律。<br>VideoView播放在线视频的时候，发出的GET请求。第一次是一个普通的请求，务器返回200；之后的则全是分段请求，服务器返回206。   </p>
-<p>第一次请求 和 结果<br><img src="http://ww1.sinaimg.cn/large/c0f281e2jw1f25u97tgzej215m04idgr.jpg" alt="">   </p>
-<p><img src="http://ww2.sinaimg.cn/large/c0f281e2jw1f25ub757lbj211g09qq4v.jpg" alt=""></p>
+<p>第一次请求 和 结果<br><img src="/media/c0f281e2jw1f25u97tgzej215m04idgr.jpg" alt="">   </p>
+<p><img src="/media/c0f281e2jw1f25ub757lbj211g09qq4v.jpg" alt=""></p>
 <hr>
-<p>第二次请求 和 结果<br><img src="http://ww4.sinaimg.cn/large/c0f281e2jw1f25uch2s9fj215c05at9x.jpg" alt="">   </p>
-<p><img src="http://ww3.sinaimg.cn/large/c0f281e2jw1f25udpfdj7j212409ytb1.jpg" alt="">   </p>
+<p>第二次请求 和 结果<br><img src="/media/c0f281e2jw1f25uch2s9fj215c05at9x.jpg" alt="">   </p>
+<p><img src="/media/c0f281e2jw1f25udpfdj7j212409ytb1.jpg" alt="">   </p>
 <p>两次Request的区别是 后面的有Range字段<br>两次Response的区别是:   </p>
 <ol>
 <li>第一次 返回HTTP200 第二次 返回HTTP206</li>
@@ -326,7 +327,7 @@ ga('send', 'pageview');
 <li><p>Create project</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ mkdir nodetest &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></div><div class="line">$ npm init</div></pre></td></tr></table></figure>
 </li>
-<li><p>Open project in intellij / WebStorm , Enable Code Assistance<br><img src="http://ww4.sinaimg.cn/large/c0f281e2jw1f0f0j3cmk2j217k0w0dmo.jpg" alt=""></p>
+<li><p>Open project in intellij / WebStorm , Enable Code Assistance<br><img src="/media/c0f281e2jw1f0f0j3cmk2j217k0w0dmo.jpg" alt=""></p>
 </li>
 </ol>
 

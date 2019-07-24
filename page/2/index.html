@@ -67,6 +67,58 @@ ga('send', 'pageview');
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-Android-Lint-Aosp-with-SonarQube" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Android-Lint-Aosp-with-SonarQube.html">Android Lint Aosp App With SonarQube</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/Android-Lint-Aosp-with-SonarQube.html" class="article-date">
+  <time datetime="2017-06-06T08:08:42.000Z" itemprop="datePublished">2017-06-06</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>第三方 App 在 Android Studio 中可以直接使用 Lint 展示结果.<br>源码编译时在 make 之后工程根目录执行 lint packages/apps/Calendar/ 也可以 Lint.<br>但在实际使用中 <code>lint vendor/letv/apps/Camera/</code> 时提示 <code>No bytecode found: Has the project been built? (Camera)</code>, 同时还有资源使用的误报。</p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>分析 lint 源码可知<br><a href="https://android.googlesource.com/platform/sdk/+/0bf1b2c/lint/libs/lint_api/src/com/android/tools/lint/detector/api/Project.java#654" target="_blank" rel="noopener">lint/detector/api/Project.java#654</a><br>
+        
+          <p class="article-more-link">
+            <a href="/Android-Lint-Aosp-with-SonarQube.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AOSP/">AOSP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lint/">Lint</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SonarQube/">SonarQube</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
       <article id="post-dell-tb15-diy-cooler" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -300,59 +352,6 @@ ga('send', 'pageview');
 
 
     
-      <article id="post-intellij-webstorm-create-non-web-node-project" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/intellij-webstorm-create-non-web-node-project.html">Intellij IDEA / WebStorm Create Non-Web Node Project</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/intellij-webstorm-create-non-web-node-project.html" class="article-date">
-  <time datetime="2016-01-28T02:06:30.000Z" itemprop="datePublished">2016-01-28</time>
-</a>
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><p>Create project</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ mkdir nodetest &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></div><div class="line">$ npm init</div></pre></td></tr></table></figure>
-</li>
-<li><p>Open project in intellij / WebStorm , Enable Code Assistance<br><img src="/media/c0f281e2jw1f0f0j3cmk2j217k0w0dmo.jpg" alt=""></p>
-</li>
-</ol>
-
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Intellij/">Intellij</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
       <nav id="page-nav">
         <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
       </nav>
@@ -361,7 +360,7 @@ ga('send', 'pageview');
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2018 likaci&nbsp;
+      &copy; 2019 likaci&nbsp;
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
   </div>

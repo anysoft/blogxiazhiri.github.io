@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>夏之日</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="title: 水星 Mercury MIPC251C-4 网络摄像头 ONVIF 与 PTZ 云台控制date: 2019-07-23 17:51:00tags: [HomeAssistant] [toc] 概况最近在 什么值得买 上发现一款水星的网络摄像头, 除了支持云台/夜视功能之外, 还标明支持 onvif 协议. 所以想着买来接入到 HomeAssistat 作为监控使用.可到手之后发现事">
+<meta property="og:type" content="article">
+<meta property="og:title" content="夏之日">
+<meta property="og:url" content="http://blog.xiazhiri.com/Mercury-MIPC251C-4-Reverse.html">
+<meta property="og:site_name" content="夏之日">
+<meta property="og:description" content="title: 水星 Mercury MIPC251C-4 网络摄像头 ONVIF 与 PTZ 云台控制date: 2019-07-23 17:51:00tags: [HomeAssistant] [toc] 概况最近在 什么值得买 上发现一款水星的网络摄像头, 除了支持云台/夜视功能之外, 还标明支持 onvif 协议. 所以想着买来接入到 HomeAssistat 作为监控使用.可到手之后发现事">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://blog.xiazhiri.com/media/15639447250564.jpg">
+<meta property="og:image" content="http://blog.xiazhiri.com/media/15639465101232.jpg">
+<meta property="og:updated_time" content="2019-07-24T09:21:11.313Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="夏之日">
+<meta name="twitter:description" content="title: 水星 Mercury MIPC251C-4 网络摄像头 ONVIF 与 PTZ 云台控制date: 2019-07-23 17:51:00tags: [HomeAssistant] [toc] 概况最近在 什么值得买 上发现一款水星的网络摄像头, 除了支持云台/夜视功能之外, 还标明支持 onvif 协议. 所以想着买来接入到 HomeAssistat 作为监控使用.可到手之后发现事">
+<meta name="twitter:image" content="http://blog.xiazhiri.com/media/15639447250564.jpg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-77438358-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">夏之日</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/atom.xml">Rss</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.xiazhiri.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-Mercury-MIPC251C-4-Reverse" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    <div class="article-meta">
+      <a href="/Mercury-MIPC251C-4-Reverse.html" class="article-date">
+  <time datetime="2019-07-23T09:50:31.309Z" itemprop="datePublished">2019-07-23</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: 水星 Mercury MIPC251C-4 网络摄像头 ONVIF 与 PTZ 云台控制<br>date: 2019-07-23 17:51:00<br>tags: [HomeAssistant]</p>
+<p>[toc]</p>
+<h2 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h2><p>最近在 什么值得买 上发现一款水星的网络摄像头, 除了支持云台/夜视功能之外, 还标明支持 onvif 协议. 所以想着买来接入到 HomeAssistat 作为监控使用.<br>可到手之后发现事情并没有那么简单, 记录如下.<br><a id="more"></a></p>
+<h2 id="接入-HomeAssistant"><a href="#接入-HomeAssistant" class="headerlink" title="接入 HomeAssistant"></a>接入 HomeAssistant</h2><p>按照 HA 的文档 <a href="https://www.home-assistant.io/components/onvif/" target="_blank" rel="noopener">ONVIF Camera</a> 接入无非就是配置文件里写两行配置的事, 但无论是使用默认配置还是尝试后台页面里的几个端口都是添加失败.<br>最后使用 DSM 的 Surveillance Station 找到了正确的端口, 事后发现其实使用 <a href="https://www.ispyconnect.com/" target="_blank" rel="noopener">iSpy</a> 也可以找到正确的端口, 端口是2020.</p>
+<p>HA 配置如下:<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="attr">ffmpeg:</span></div><div class="line"></div><div class="line"><span class="attr">camera:</span></div><div class="line"><span class="attr">  - platform:</span> <span class="string">onvif</span></div><div class="line"><span class="attr">    host:</span> <span class="number">192.168</span><span class="number">.2</span><span class="number">.2</span></div><div class="line"><span class="attr">    port:</span> <span class="number">2020</span></div><div class="line"><span class="attr">    username:</span> <span class="string">admin</span></div><div class="line"><span class="attr">    password:</span> <span class="string">password</span></div></pre></td></tr></table></figure></p>
+<p>需要注意的是使用 onvif camera 需要配置 <code>ffmpeg</code>, 另外可能根据环境不同需要 <code>pip install onvif-zeep-async</code></p>
+<h2 id="ONVIF-与-RTSP-参数"><a href="#ONVIF-与-RTSP-参数" class="headerlink" title="ONVIF 与 RTSP 参数"></a>ONVIF 与 RTSP 参数</h2><p>onvif<br><code>http://192.168.2.x:2020/onvif/device_service</code><br>rtsp 1920x1080<br><code>rtsp://admin:pass@192.168.2.x:554/stream1</code><br>rtsp 640x480<br><code>rtsp://admin:pass@192.168.2.x:554/stream1</code></p>
+<h2 id="PTZ-云台控制"><a href="#PTZ-云台控制" class="headerlink" title="PTZ / 云台控制"></a>PTZ / 云台控制</h2><p>接入 HA 和 DSM Surveillance Station 之后发现<strong>云台不能控制</strong>, 看来说的支持 ONVIF 只是可以录制.<br>剩下的大部分记录如何控制云台.</p>
+<h3 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h3><p>Charles 抓包的结果是失败, 应用没有走设置的代理. </p>
+<h3 id="反编译-Android-App"><a href="#反编译-Android-App" class="headerlink" title="反编译 Android App"></a>反编译 Android App</h3><p>在尝试了 Charles http 抓包无果之后试着反编译 <a href="http://service.mercurycom.com.cn/download-891.html" target="_blank" rel="noopener">水星安防App</a>.<br>然后发现大段 <code>com.tplink.ipc</code> 的代码, 看来水星真的是 TP 的弟弟.<br>应用开了混淆, 挺好…</p>
+<ul>
+<li>添加本地局域网设备 Fragment<br><code>com.tplink.ipc.ui.device.add.DeviceAddByDeviceDetailInputFragment</code></li>
+<li>登录<br><code>com.tplink.ipc.ui.device.add.DeviceAddByDeviceDetailInputFragment#x</code><br><code>com.tplink.ipc.core.IPCAppContext#devReqAddDevice(java.lang.String, int, java.lang.String, java.lang.String, int, int)</code><br>而 devReqAddDevice 执行的 native 方法, 真正的实现在 <code>libIPCAppContextJNI.so</code><br>看来网络请求是在 JNI 里做的, Charles 抓不到包. 反编译 so 库吃力不讨好, 换方向.</li>
+</ul>
+<h3 id="WireShark-iOS-抓包"><a href="#WireShark-iOS-抓包" class="headerlink" title="WireShark iOS 抓包"></a>WireShark iOS 抓包</h3><p>rvictl 可以将 iOS 设备虚拟成一个网络端口, 然后就可以 WireShark 抓包. 好处是这样可以减少一些局域网的干扰.<br>使用 rvictl 还可以抓 3G/4G 的包, 可以用来抓一些只能在 4G环境下才能复现的问题的包. 同样, 对于一些不支持设置代理的设备, 也可以通过把 iPhone 设置为热点来抓包.<br><code>rvictl -s 0000xxxx-00xxxxxxxxxxxxxx</code><br>抓包发现 App登录 控制云台的几个步骤的网络请求如下: (1,2两步是根据网页端登录分析出来的)</p>
+<ol>
+<li>获取 RSA 公钥和 nonce</li>
+<li>使用公钥加密密码, 登录, 获取 stok</li>
+<li>发送控制指令</li>
+</ol>
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>获取 stok<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"># 获取 RSA 公钥</div><div class="line">----&gt;</div><div class="line">POST /  HTTP/1.1</div><div class="line">Host: 192.168.2.2:80</div><div class="line">User-Agent: MERCURY_APP</div><div class="line">Content-Type: application/json; charset=UTF-8</div><div class="line">&#123;&quot;method&quot;:&quot;do&quot;,&quot;login&quot;:&#123;&#125;&#125;</div><div class="line">&lt;----</div><div class="line">&#123;   &quot;error_code&quot;: -40401,</div><div class="line">    &quot;data&quot;: &#123;</div><div class="line">        &quot;code&quot;: -60502, </div><div class="line">        &quot;encrypt_type&quot;: [&quot;1&quot;, &quot;2&quot;],</div><div class="line">        &quot;key&quot;: &quot;MIGfMA0GCSqGSIb3DQ省略200个字符uJ7N8wIDAQAB&quot;, </div><div class="line">        &quot;nonce&quot;: &quot;4vqqXXXX&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 登录 获取 stok</div><div class="line">----&gt;</div><div class="line">POST /</div><div class="line">&#123;   &quot;method&quot;:&quot;do&quot;,</div><div class="line">    &quot;login&quot;: &#123;   </div><div class="line">    &quot;username&quot;:&quot;admin&quot;,</div><div class="line">    &quot;encrypt_type&quot;:&quot;2&quot;,</div><div class="line">    &quot;password&quot;:&quot;ERcuPXuaiwNQcrOX8woIgUAN省略150%2fIHaA%3d&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&lt;----</div><div class="line">&#123;   &quot;error_code&quot;: 0,</div><div class="line">    &quot;stok&quot;: &quot;7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59&quot;,</div><div class="line">    &quot;user_group&quot;: &quot;root&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="控制"><a href="#控制" class="headerlink" title="控制"></a>控制</h3><p>使用获取的 stok post 指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"># 获取信息</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;get&quot;,&quot;device_info&quot;:&#123;&quot;name&quot;:[&quot;basic_info&quot;]&#125;&#125;</div><div class="line"></div><div class="line"># 获取信息2</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;get&quot;,&quot;function&quot;:&#123;&quot;name&quot;:[&quot;module_spec&quot;]&#125;&#125;</div><div class="line"></div><div class="line"># 获取预设位置</div><div class="line">POST /stok=7e82c0908c8b141c8e9bb8353b54e259/ds</div><div class="line">&#123;&quot;method&quot;:&quot;get&quot;,&quot;preset&quot;:&#123;&quot;name&quot;:[&quot;preset&quot;]&#125;&#125;</div><div class="line"></div><div class="line"># 控制云台转到预设位置</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;do&quot;,&quot;preset&quot;:&#123;&quot;goto_preset&quot;:&#123;&quot;id&quot;:&quot;1&quot;&#125;&#125;&#125;</div><div class="line"></div><div class="line"># 云台水平/垂直移动</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;do&quot;,&quot;motor&quot;:&#123;&quot;move&quot;:&#123;&quot;x_coord&quot;:&quot;10&quot;,&quot;y_coord&quot;:&quot;0&quot;&#125;&#125;&#125;</div><div class="line"></div><div class="line"># 云台步进 direction 0 / 90</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;do&quot;,&quot;motor&quot;:&#123;&quot;movestep&quot;:&#123;&quot;direction&quot;:&quot;0&quot;&#125;&#125;&#125;</div><div class="line"></div><div class="line"># 云台停止</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;do&quot;,&quot;motor&quot;:&#123;&quot;stop&quot;:&quot;null&quot;&#125;&#125;</div><div class="line"></div><div class="line"># 增加预置点</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;do&quot;,&quot;preset&quot;:&#123;&quot;set_preset&quot;:&#123;&quot;name&quot;:&quot;name&quot;,&quot;save_ptz&quot;:&quot;1&quot;&#125;&#125;&#125;</div><div class="line"></div><div class="line"># 镜头遮蔽</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;set&quot;,&quot;lens_mask&quot;:&#123;&quot;lens_mask_info&quot;:&#123;&quot;enabled&quot;:&quot;on&quot;&#125;&#125;&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>目前看来想要控制云台/摄像头的关键是获取 stok, 可以通过抓包可以获得, 但是通过观察当设备重启或着过一段时间(?)就就会失效. </p>
+<h2 id="获取-stok"><a href="#获取-stok" class="headerlink" title="获取 stok"></a>获取 stok</h2><p>这款摄像头虽然有 web 端但是不支持在 web 端控制云台, 所以开始的抓包没有考虑 web 端. 对 web 端分析发现登录验证使用的是同样的逻辑.<br>步骤如下</p>
+<ol>
+<li>获取 RSA 公钥 和 nonce (公钥和 nonce 每次都会变化)</li>
+<li>使用 tp-link 的通用加密方式将 <code>密码 password</code> 加密 为 <code>tpPassword</code></li>
+<li>tpPassword 追加 :nonce 为 <code>tpPassword:nonce</code></li>
+<li>tpPassword:nonce 使用 公钥加密为 <code>rsaPassword</code></li>
+<li>rsaPassword 作为密码发送给摄像头验证</li>
+</ol>
+<p>对于步骤 2 3 记录如下</p>
+<h3 id="tp-link-加密密码为-tpPassword"><a href="#tp-link-加密密码为-tpPassword" class="headerlink" title="tp-link 加密密码为 tpPassword"></a>tp-link 加密密码为 tpPassword</h3><p><img src="media/15639447250564.jpg" alt=""><br>搜索 <a href="https://www.google.com/search?q=RDpbLfCPsJZ7fiv" target="_blank" rel="noopener">RDpbLfCPsJZ7fiv</a> 可以找到这种加密的各种实现.</p>
+<h3 id="RSA-加密-tpPassword-为-rsaPassword"><a href="#RSA-加密-tpPassword-为-rsaPassword" class="headerlink" title="RSA 加密 tpPassword 为 rsaPassword"></a>RSA 加密 tpPassword 为 rsaPassword</h3><p><img src="media/15639465101232.jpg" alt=""><br>其中 <code>a = a.concat(&quot;:&quot;, $.authRltObj.nonce)</code> 即为追加 nonce<br>c.setPublicKey($.authRltObj.key) 设置公钥<br>后面的 sendAjaxReq 就是发送请求</p>
+<h2 id="控制脚本"><a href="#控制脚本" class="headerlink" title="控制脚本"></a>控制脚本</h2><p>根据上面的分析写的脚本<br><a href="https://github.com/likaci/mercury-ipc-control" target="_blank" rel="noopener">https://github.com/likaci/mercury-ipc-control</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">usage</div><div class="line">need to install packages rsa and requests</div><div class="line">      pip install requests</div><div class="line">      pip install rsa</div><div class="line"></div><div class="line">python mipcc.py admin password url data</div><div class="line">python mipcc.py admin password http://192.168.2.89:80 &apos;&#123;&quot;method&quot;:&quot;do&quot;,&quot;preset&quot;:&#123;&quot;goto_preset&quot;: &#123;&quot;id&quot;: &quot;1&quot;&#125;&#125;&#125;&apos;</div><div class="line"></div><div class="line">data example:</div><div class="line">      PTZ to preset position      &#123;&quot;method&quot;:&quot;do&quot;,&quot;preset&quot;:&#123;&quot;goto_preset&quot;: &#123;&quot;id&quot;: &quot;1&quot;&#125;&#125;&#125;</div><div class="line">      PTZ by coord                &#123;&quot;method&quot;:&quot;do&quot;,&quot;motor&quot;:&#123;&quot;move&quot;:&#123;&quot;x_coord&quot;:&quot;10&quot;,&quot;y_coord&quot;:&quot;0&quot;&#125;&#125;&#125;</div><div class="line">      PTZ horizontal by step      &#123;&quot;method&quot;:&quot;do&quot;,&quot;motor&quot;:&#123;&quot;movestep&quot;:&#123;&quot;direction&quot;:&quot;0&quot;&#125;&#125;&#125;</div><div class="line">      PTZ vertical by step        &#123;&quot;method&quot;:&quot;do&quot;,&quot;motor&quot;:&#123;&quot;movestep&quot;:&#123;&quot;direction&quot;:&quot;90&quot;&#125;&#125;&#125;</div><div class="line">      stop PTZ                    &#123;&quot;method&quot;:&quot;do&quot;,&quot;motor&quot;:&#123;&quot;stop&quot;:&quot;null&quot;&#125;&#125;</div><div class="line">      add PTZ preset position     &#123;&quot;method&quot;:&quot;do&quot;,&quot;preset&quot;:&#123;&quot;set_preset&quot;:&#123;&quot;name&quot;:&quot;name&quot;,&quot;save_ptz&quot;:&quot;1&quot;&#125;&#125;&#125;</div><div class="line">      lens mask                   &#123;&quot;method&quot;:&quot;set&quot;,&quot;lens_mask&quot;:&#123;&quot;lens_mask_info&quot;:&#123;&quot;enabled&quot;:&quot;on&quot;&#125;&#125;&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+      <div class="article-toc">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概况"><span class="toc-number">1.</span> <span class="toc-text">概况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#接入-HomeAssistant"><span class="toc-number">2.</span> <span class="toc-text">接入 HomeAssistant</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ONVIF-与-RTSP-参数"><span class="toc-number">3.</span> <span class="toc-text">ONVIF 与 RTSP 参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PTZ-云台控制"><span class="toc-number">4.</span> <span class="toc-text">PTZ / 云台控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#抓包"><span class="toc-number">4.1.</span> <span class="toc-text">抓包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反编译-Android-App"><span class="toc-number">4.2.</span> <span class="toc-text">反编译 Android App</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WireShark-iOS-抓包"><span class="toc-number">4.3.</span> <span class="toc-text">WireShark iOS 抓包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#登录"><span class="toc-number">4.4.</span> <span class="toc-text">登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制"><span class="toc-number">4.5.</span> <span class="toc-text">控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小结"><span class="toc-number">4.6.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取-stok"><span class="toc-number">5.</span> <span class="toc-text">获取 stok</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tp-link-加密密码为-tpPassword"><span class="toc-number">5.1.</span> <span class="toc-text">tp-link 加密密码为 tpPassword</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RSA-加密-tpPassword-为-rsaPassword"><span class="toc-number">5.2.</span> <span class="toc-text">RSA 加密 tpPassword 为 rsaPassword</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#控制脚本"><span class="toc-number">6.</span> <span class="toc-text">控制脚本</span></a></li></ol>
+      </div>
+    
+    
+      <footer class="article-footer">
+        
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/macbook-pro-2016-power-charging.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MacBook Pro 2016 充电功率&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="share_addthis">
+  <div class="sharing addthis_toolbox share">
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 likaci&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+<script>
+  var disqus_shortname = 'xiazhiri';
+  
+  var disqus_url = 'http://blog.xiazhiri.com/Mercury-MIPC251C-4-Reverse.html';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>

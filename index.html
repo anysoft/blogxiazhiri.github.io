@@ -71,26 +71,91 @@ ga('send', 'pageview');
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Mercury-MIPC251C-4-Reverse.html">水星 Mercury MIPC251C-4 网络摄像头 ONVIF 与 PTZ 云台控制</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-meta">
       <a href="/Mercury-MIPC251C-4-Reverse.html" class="article-date">
-  <time datetime="2019-07-23T09:50:31.309Z" itemprop="datePublished">2019-07-23</time>
+  <time datetime="2019-07-23T09:51:00.000Z" itemprop="datePublished">2019-07-23</time>
 </a>
       
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: 水星 Mercury MIPC251C-4 网络摄像头 ONVIF 与 PTZ 云台控制<br>date: 2019-07-23 17:51:00<br>tags: [HomeAssistant]</p>
-<p>[toc]</p>
-<h2 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h2><p>最近在 什么值得买 上发现一款水星的网络摄像头, 除了支持云台/夜视功能之外, 还标明支持 onvif 协议. 所以想着买来接入到 HomeAssistat 作为监控使用.<br>可到手之后发现事情并没有那么简单, 记录如下.<br>
-        
-          <p class="article-more-link">
-            <a href="/Mercury-MIPC251C-4-Reverse.html#more">Read More</a>
-          </p>
-        
+        <!-- toc -->
+<ul>
+<li><a href="#概况">概况</a></li>
+<li><a href="#接入-homeassistant">接入 HomeAssistant</a></li>
+<li><a href="#onvif-与-rtsp-参数">ONVIF 与 RTSP 参数</a></li>
+<li><a href="#ptz-云台控制">PTZ / 云台控制</a><ul>
+<li><a href="#抓包">抓包</a></li>
+<li><a href="#反编译-android-app">反编译 Android App</a></li>
+<li><a href="#wireshark-ios-抓包">WireShark iOS 抓包</a></li>
+<li><a href="#登录">登录</a></li>
+<li><a href="#控制">控制</a></li>
+<li><a href="#小结">小结</a></li>
+</ul>
+</li>
+<li><a href="#获取-stok">获取 stok</a><ul>
+<li><a href="#tp-link-加密密码为-tppassword">tp-link 加密密码为 tpPassword</a></li>
+<li><a href="#rsa-加密-tppassword-为-rsapassword">RSA 加密 tpPassword 为 rsaPassword</a></li>
+</ul>
+</li>
+<li><a href="#控制脚本">控制脚本</a></li>
+</ul>
+<!-- tocstop -->
+<p><img src="media/15639612608425.jpg" alt=""></p>
+<h2><span id="概况">概况</span></h2><p>最近在 什么值得买 上发现一款水星的网络摄像头, 除了支持云台/夜视功能之外, 还标明支持 onvif 协议. 所以想着买来接入到 HomeAssistat 作为监控使用.<br>可到手之后发现事情并没有那么简单, 记录如下.</p>
+<h2><span id="接入-homeassistant">接入 HomeAssistant</span></h2><p>按照 HA 的文档 <a href="https://www.home-assistant.io/components/onvif/" target="_blank" rel="noopener">ONVIF Camera</a> 接入无非就是配置文件里写两行配置的事, 但无论是使用默认配置还是尝试后台页面里的几个端口都是添加失败.<br>最后使用 DSM 的 Surveillance Station 找到了正确的端口, 事后发现其实使用 <a href="https://www.ispyconnect.com/" target="_blank" rel="noopener">iSpy</a> 也可以找到正确的端口, 端口是2020.</p>
+<p>HA 配置如下:<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="attr">ffmpeg:</span></div><div class="line"></div><div class="line"><span class="attr">camera:</span></div><div class="line"><span class="attr">  - platform:</span> <span class="string">onvif</span></div><div class="line"><span class="attr">    host:</span> <span class="number">192.168</span><span class="number">.2</span><span class="number">.2</span></div><div class="line"><span class="attr">    port:</span> <span class="number">2020</span></div><div class="line"><span class="attr">    username:</span> <span class="string">admin</span></div><div class="line"><span class="attr">    password:</span> <span class="string">password</span></div></pre></td></tr></table></figure></p>
+<p>需要注意的是使用 onvif camera 需要配置 <code>ffmpeg</code>, 另外可能根据环境不同需要 <code>pip install onvif-zeep-async</code></p>
+<h2><span id="onvif-与-rtsp-参数">ONVIF 与 RTSP 参数</span></h2><p>onvif<br><code>http://192.168.2.x:2020/onvif/device_service</code><br>rtsp 1920x1080<br><code>rtsp://admin:pass@192.168.2.x:554/stream1</code><br>rtsp 640x480<br><code>rtsp://admin:pass@192.168.2.x:554/stream1</code></p>
+<h2><span id="ptz-云台控制">PTZ / 云台控制</span></h2><p>接入 HA 和 DSM Surveillance Station 之后发现<strong>云台不能控制</strong>, 看来说的支持 ONVIF 只是可以录制.<br>剩下的大部分记录如何控制云台.</p>
+<h3><span id="抓包">抓包</span></h3><p>Charles 抓包的结果是失败, 应用没有走设置的代理. </p>
+<h3><span id="反编译-android-app">反编译 Android App</span></h3><p>在尝试了 Charles http 抓包无果之后试着反编译 <a href="http://service.mercurycom.com.cn/download-891.html" target="_blank" rel="noopener">水星安防App</a>.<br>然后发现大段 <code>com.tplink.ipc</code> 的代码, 看来水星真的是 TP 的弟弟.<br>应用开了混淆, 挺好…</p>
+<ul>
+<li>添加本地局域网设备 Fragment<br><code>com.tplink.ipc.ui.device.add.DeviceAddByDeviceDetailInputFragment</code></li>
+<li>登录<br><code>com.tplink.ipc.ui.device.add.DeviceAddByDeviceDetailInputFragment#x</code><br><code>com.tplink.ipc.core.IPCAppContext#devReqAddDevice(java.lang.String, int, java.lang.String, java.lang.String, int, int)</code><br>而 devReqAddDevice 执行的 native 方法, 真正的实现在 <code>libIPCAppContextJNI.so</code><br>看来网络请求是在 JNI 里做的, Charles 抓不到包. 反编译 so 库吃力不讨好, 换方向.</li>
+</ul>
+<h3><span id="wireshark-ios-抓包">WireShark iOS 抓包</span></h3><p>rvictl 可以将 iOS 设备虚拟成一个网络端口, 然后就可以 WireShark 抓包. 好处是这样可以减少一些局域网的干扰.<br>使用 rvictl 还可以抓 3G/4G 的包, 可以用来抓一些只能在 4G环境下才能复现的问题的包. 同样, 对于一些不支持设置代理的设备, 也可以通过把 iPhone 设置为热点来抓包.<br><code>rvictl -s 0000xxxx-00xxxxxxxxxxxxxx</code><br>抓包发现 App登录 控制云台的几个步骤的网络请求如下: (1,2两步是根据网页端登录分析出来的)</p>
+<ol>
+<li>获取 RSA 公钥和 nonce</li>
+<li>使用公钥加密密码, 登录, 获取 stok</li>
+<li>发送控制指令</li>
+</ol>
+<h3><span id="登录">登录</span></h3><p>获取 stok<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"># 获取 RSA 公钥</div><div class="line">----&gt;</div><div class="line">POST /  HTTP/1.1</div><div class="line">Host: 192.168.2.2:80</div><div class="line">User-Agent: MERCURY_APP</div><div class="line">Content-Type: application/json; charset=UTF-8</div><div class="line">&#123;&quot;method&quot;:&quot;do&quot;,&quot;login&quot;:&#123;&#125;&#125;</div><div class="line">&lt;----</div><div class="line">&#123;   &quot;error_code&quot;: -40401,</div><div class="line">    &quot;data&quot;: &#123;</div><div class="line">        &quot;code&quot;: -60502, </div><div class="line">        &quot;encrypt_type&quot;: [&quot;1&quot;, &quot;2&quot;],</div><div class="line">        &quot;key&quot;: &quot;MIGfMA0GCSqGSIb3DQ省略200个字符uJ7N8wIDAQAB&quot;, </div><div class="line">        &quot;nonce&quot;: &quot;4vqqXXXX&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 登录 获取 stok</div><div class="line">----&gt;</div><div class="line">POST /</div><div class="line">&#123;   &quot;method&quot;:&quot;do&quot;,</div><div class="line">    &quot;login&quot;: &#123;   </div><div class="line">    &quot;username&quot;:&quot;admin&quot;,</div><div class="line">    &quot;encrypt_type&quot;:&quot;2&quot;,</div><div class="line">    &quot;password&quot;:&quot;ERcuPXuaiwNQcrOX8woIgUAN省略150%2fIHaA%3d&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&lt;----</div><div class="line">&#123;   &quot;error_code&quot;: 0,</div><div class="line">    &quot;stok&quot;: &quot;7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59&quot;,</div><div class="line">    &quot;user_group&quot;: &quot;root&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3><span id="控制">控制</span></h3><p>使用获取的 stok post 指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"># 获取信息</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;get&quot;,&quot;device_info&quot;:&#123;&quot;name&quot;:[&quot;basic_info&quot;]&#125;&#125;</div><div class="line"></div><div class="line"># 获取信息2</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;get&quot;,&quot;function&quot;:&#123;&quot;name&quot;:[&quot;module_spec&quot;]&#125;&#125;</div><div class="line"></div><div class="line"># 获取预设位置</div><div class="line">POST /stok=7e82c0908c8b141c8e9bb8353b54e259/ds</div><div class="line">&#123;&quot;method&quot;:&quot;get&quot;,&quot;preset&quot;:&#123;&quot;name&quot;:[&quot;preset&quot;]&#125;&#125;</div><div class="line"></div><div class="line"># 控制云台转到预设位置</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;do&quot;,&quot;preset&quot;:&#123;&quot;goto_preset&quot;:&#123;&quot;id&quot;:&quot;1&quot;&#125;&#125;&#125;</div><div class="line"></div><div class="line"># 云台水平/垂直移动</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;do&quot;,&quot;motor&quot;:&#123;&quot;move&quot;:&#123;&quot;x_coord&quot;:&quot;10&quot;,&quot;y_coord&quot;:&quot;0&quot;&#125;&#125;&#125;</div><div class="line"></div><div class="line"># 云台步进 direction 0 / 90</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;do&quot;,&quot;motor&quot;:&#123;&quot;movestep&quot;:&#123;&quot;direction&quot;:&quot;0&quot;&#125;&#125;&#125;</div><div class="line"></div><div class="line"># 云台停止</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;do&quot;,&quot;motor&quot;:&#123;&quot;stop&quot;:&quot;null&quot;&#125;&#125;</div><div class="line"></div><div class="line"># 增加预置点</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;do&quot;,&quot;preset&quot;:&#123;&quot;set_preset&quot;:&#123;&quot;name&quot;:&quot;name&quot;,&quot;save_ptz&quot;:&quot;1&quot;&#125;&#125;&#125;</div><div class="line"></div><div class="line"># 镜头遮蔽</div><div class="line">POST /stok=7exxxxxxxxxxxxxxxxxxxxxxxxxxxx59/ds</div><div class="line">&#123;&quot;method&quot;:&quot;set&quot;,&quot;lens_mask&quot;:&#123;&quot;lens_mask_info&quot;:&#123;&quot;enabled&quot;:&quot;on&quot;&#125;&#125;&#125;</div></pre></td></tr></table></figure></p>
+<h3><span id="小结">小结</span></h3><p>目前看来想要控制云台/摄像头的关键是获取 stok, 可以通过抓包可以获得, 但是通过观察当设备重启或着过一段时间(?)就就会失效. </p>
+<h2><span id="获取-stok">获取 stok</span></h2><p>这款摄像头虽然有 web 端但是不支持在 web 端控制云台, 所以开始的抓包没有考虑 web 端. 对 web 端分析发现登录验证使用的是同样的逻辑.<br>步骤如下</p>
+<ol>
+<li>获取 RSA 公钥 和 nonce (公钥和 nonce 每次都会变化)</li>
+<li>使用 tp-link 的通用加密方式将 <code>密码 password</code> 加密 为 <code>tpPassword</code></li>
+<li>tpPassword 追加 :nonce 为 <code>tpPassword:nonce</code></li>
+<li>tpPassword:nonce 使用 公钥加密为 <code>rsaPassword</code></li>
+<li>rsaPassword 作为密码发送给摄像头验证</li>
+</ol>
+<p>对于步骤 2 3 记录如下</p>
+<h3><span id="tp-link-加密密码为-tppassword">tp-link 加密密码为 tpPassword</span></h3><p><img src="media/15639447250564.jpg" alt=""><br>搜索 <a href="https://www.google.com/search?q=RDpbLfCPsJZ7fiv" target="_blank" rel="noopener">RDpbLfCPsJZ7fiv</a> 可以找到这种加密的各种实现.</p>
+<h3><span id="rsa-加密-tppassword-为-rsapassword">RSA 加密 tpPassword 为 rsaPassword</span></h3><p><img src="media/15639465101232.jpg" alt=""><br>其中 <code>a = a.concat(&quot;:&quot;, $.authRltObj.nonce)</code> 即为追加 nonce<br>c.setPublicKey($.authRltObj.key) 设置公钥<br>后面的 sendAjaxReq 就是发送请求</p>
+<h2><span id="控制脚本">控制脚本</span></h2><p>根据上面的分析写的脚本<br><a href="https://github.com/likaci/mercury-ipc-control" target="_blank" rel="noopener">https://github.com/likaci/mercury-ipc-control</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">usage</div><div class="line">need to install packages rsa and requests</div><div class="line">      pip install requests</div><div class="line">      pip install rsa</div><div class="line"></div><div class="line">python mipcc.py admin password url data</div><div class="line">python mipcc.py admin password http://192.168.2.89:80 &apos;&#123;&quot;method&quot;:&quot;do&quot;,&quot;preset&quot;:&#123;&quot;goto_preset&quot;: &#123;&quot;id&quot;: &quot;1&quot;&#125;&#125;&#125;&apos;</div><div class="line"></div><div class="line">data example:</div><div class="line">      PTZ to preset position      &#123;&quot;method&quot;:&quot;do&quot;,&quot;preset&quot;:&#123;&quot;goto_preset&quot;: &#123;&quot;id&quot;: &quot;1&quot;&#125;&#125;&#125;</div><div class="line">      PTZ by coord                &#123;&quot;method&quot;:&quot;do&quot;,&quot;motor&quot;:&#123;&quot;move&quot;:&#123;&quot;x_coord&quot;:&quot;10&quot;,&quot;y_coord&quot;:&quot;0&quot;&#125;&#125;&#125;</div><div class="line">      PTZ horizontal by step      &#123;&quot;method&quot;:&quot;do&quot;,&quot;motor&quot;:&#123;&quot;movestep&quot;:&#123;&quot;direction&quot;:&quot;0&quot;&#125;&#125;&#125;</div><div class="line">      PTZ vertical by step        &#123;&quot;method&quot;:&quot;do&quot;,&quot;motor&quot;:&#123;&quot;movestep&quot;:&#123;&quot;direction&quot;:&quot;90&quot;&#125;&#125;&#125;</div><div class="line">      stop PTZ                    &#123;&quot;method&quot;:&quot;do&quot;,&quot;motor&quot;:&#123;&quot;stop&quot;:&quot;null&quot;&#125;&#125;</div><div class="line">      add PTZ preset position     &#123;&quot;method&quot;:&quot;do&quot;,&quot;preset&quot;:&#123;&quot;set_preset&quot;:&#123;&quot;name&quot;:&quot;name&quot;,&quot;save_ptz&quot;:&quot;1&quot;&#125;&#125;&#125;</div><div class="line">      lens mask                   &#123;&quot;method&quot;:&quot;set&quot;,&quot;lens_mask&quot;:&#123;&quot;lens_mask_info&quot;:&#123;&quot;enabled&quot;:&quot;on&quot;&#125;&#125;&#125;</div></pre></td></tr></table></figure></p>
+
       
     </div>
     
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HomeAssistant/">HomeAssistant</a></li></ul>
+
+      </footer>
     
   </div>
   
@@ -233,21 +298,21 @@ ga('send', 'pageview');
       
         <p>上个月和电信客服扯皮两周多终于把手机套餐改成了阿里鱼卡套餐。<br>从 59RMB (500MB+100分钟通话) 的<del>高端</del>套餐改成了 19RMB(1GB+100分钟+日租+阿里文娱应用免流) <del>低端</del>套餐。<br>实在要吐槽一下电信改套餐的规定。改套餐明明一个电话或者App戳戳就能搞定事情，偏偏让你回归属地营业厅跑一趟。虽然最后手持身份证拍照异地受理了但体验实在是不好。</p>
 <p>鱼卡UC浏览器免流大体实现是这样的</p>
-<h3 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h3><p><img src="/media/15124626122024.jpg" alt="Wireshark抓包"><br>注意这段 <code>Proxy-Authorization: 1|15120022766*******|com.ucweb.iphone.lowversion|ca5fe4b11712e10ba745c2817*******</code><br>关于 Proxy-Authorization 见 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Proxy-Authorization" target="_blank" rel="noopener">https://developer.mozilla.org</a><br>即UC浏览器的请求都经过代理服务器。<br>对比几次请求可以发现 1|UID|UA|Key 这几段猜测规律</p>
+<h3><span id="抓包">抓包</span></h3><p><img src="/media/15124626122024.jpg" alt="Wireshark抓包"><br>注意这段 <code>Proxy-Authorization: 1|15120022766*******|com.ucweb.iphone.lowversion|ca5fe4b11712e10ba745c2817*******</code><br>关于 Proxy-Authorization 见 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Proxy-Authorization" target="_blank" rel="noopener">https://developer.mozilla.org</a><br>即UC浏览器的请求都经过代理服务器。<br>对比几次请求可以发现 1|UID|UA|Key 这几段猜测规律</p>
 <ul>
 <li>1 不变</li>
 <li>UID 标示用户ID</li>
 <li>UA 浏览器UA</li>
 <li>Key 由网站Host计算，应该是md5</li>
 </ul>
-<h3 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a>反编译</h3><p>反编译 Android 客户端，基本验证各字段的意义<br><img src="/media/15124639215258.jpg" alt="UC浏览器拼接Proxy-Authorization"></p>
+<h3><span id="反编译">反编译</span></h3><p>反编译 Android 客户端，基本验证各字段的意义<br><img src="/media/15124639215258.jpg" alt="UC浏览器拼接Proxy-Authorization"></p>
 <p>而 bcX 和 bcW 的获取过程断点获得调用栈如下<br><img src="/media/15124643039841.jpg" alt=""><br>在浏览器激活免流的时候会获取相关字段(不清楚是否会定时更新)<br>请求 <a href="https://freeflow.uc.cn/freeflow/generatePhoneToken" target="_blank" rel="noopener">https://freeflow.uc.cn/freeflow/generatePhoneToken</a> 获取一段密文，解密之后解析赋值给 bcX bcW<br>当开始网络请求时由对应 UID|Key|Host 计算 md5</p>
 <p><img src="/media/15124650691656.jpg" alt="获取Host"></p>
 <p><img src="/media/15124650285893.jpg" alt="计算MD5"></p>
 <p><img src="/media/15124651112067.jpg" alt="拼接Proxy-Authorization"></p>
 <p>密文解密之后的结构体<br><img src="/media/15124652644534.jpg" alt=""></p>
 <p>上面需要的 UID UA KEY Server Port都在里面</p>
-<h3 id="所以"><a href="#所以" class="headerlink" title="所以"></a>所以</h3><p>SSL Pinning 还是必须的。</p>
+<h3><span id="所以">所以</span></h3><p>SSL Pinning 还是必须的。</p>
 
       
     </div>
@@ -295,20 +360,20 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <p>Android Studio 3.0 中的 Profiler 工具相比 2.0 版本有了很大的进步，这几天翻了下相关的源码记录如下.</p>
-<h3 id="生成-trace-文件"><a href="#生成-trace-文件" class="headerlink" title="生成 trace 文件"></a>生成 trace 文件</h3><p><a href="https://developer.android.com/studio/profile/traceview.html#creatingtracefiles" target="_blank" rel="noopener">官方的文档里</a>对于生成 trace 文件主要有两种</p>
-<h4 id="code"><a href="#code" class="headerlink" title="code"></a>code</h4><p><strong>第一种</strong>是在代码中添加<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// start tracing to "/sdcard/calc.trace"</span></div><div class="line">Debug.startMethodTracing(<span class="string">"calc"</span>);</div><div class="line"><span class="comment">// ...</span></div><div class="line"><span class="comment">// stop tracing</span></div><div class="line">Debug.stopMethodTracing();</div></pre></td></tr></table></figure></p>
+<h3><span id="生成-trace-文件">生成 trace 文件</span></h3><p><a href="https://developer.android.com/studio/profile/traceview.html#creatingtracefiles" target="_blank" rel="noopener">官方的文档里</a>对于生成 trace 文件主要有两种</p>
+<h4><span id="code">code</span></h4><p><strong>第一种</strong>是在代码中添加<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// start tracing to "/sdcard/calc.trace"</span></div><div class="line">Debug.startMethodTracing(<span class="string">"calc"</span>);</div><div class="line"><span class="comment">// ...</span></div><div class="line"><span class="comment">// stop tracing</span></div><div class="line">Debug.stopMethodTracing();</div></pre></td></tr></table></figure></p>
 <p>生成的trace文件</p>
-<h4 id="ddmlib"><a href="#ddmlib" class="headerlink" title="ddmlib"></a>ddmlib</h4><p><strong>第二种</strong>是使用 ddms / Android Monitor 手动生成, ddms 的核心是一个叫 ddmlib 的库, 在 Android SDK 里 tools/lib/ddmlib-*.jar 可以找到.<br>网上关于 ddmlib 的文章不多, 可以参考一下. <a href="http://blog.csdn.net/eclipsexys/article/details/51316423" target="_blank" rel="noopener">隐藏Boss——ddmlib使用入门</a> 和 <a href="https://testerhome.com/topics/2422" target="_blank" rel="noopener">通过 ddmlib 使用 adb，构建框架基础库</a></p>
-<h4 id="命令行工具"><a href="#命令行工具" class="headerlink" title="命令行工具"></a>命令行工具</h4><p>翻着源码掉了 N 次坑写了一个命令行调用的 jar <a href="https://github.com/likaci/AndroidMethodTraceRunner" target="_blank" rel="noopener">AndroidMethodTraceRunner</a><br>命令行中调用 <code>$ java -jar mtr.jar -p com.your.package -o output.trace -t 10</code> 可以 trace 10 秒钟, 运行需要 java8.<br>主要的两个坑:<br>AndroidDebugBridge.init(true); false 的话不能获取到 client<br>必须关闭 ddms 和 Studio 的 monitor / profiler, 否则会抢占 client 造成连接失败.</p>
+<h4><span id="ddmlib">ddmlib</span></h4><p><strong>第二种</strong>是使用 ddms / Android Monitor 手动生成, ddms 的核心是一个叫 ddmlib 的库, 在 Android SDK 里 tools/lib/ddmlib-*.jar 可以找到.<br>网上关于 ddmlib 的文章不多, 可以参考一下. <a href="http://blog.csdn.net/eclipsexys/article/details/51316423" target="_blank" rel="noopener">隐藏Boss——ddmlib使用入门</a> 和 <a href="https://testerhome.com/topics/2422" target="_blank" rel="noopener">通过 ddmlib 使用 adb，构建框架基础库</a></p>
+<h4><span id="命令行工具">命令行工具</span></h4><p>翻着源码掉了 N 次坑写了一个命令行调用的 jar <a href="https://github.com/likaci/AndroidMethodTraceRunner" target="_blank" rel="noopener">AndroidMethodTraceRunner</a><br>命令行中调用 <code>$ java -jar mtr.jar -p com.your.package -o output.trace -t 10</code> 可以 trace 10 秒钟, 运行需要 java8.<br>主要的两个坑:<br>AndroidDebugBridge.init(true); false 的话不能获取到 client<br>必须关闭 ddms 和 Studio 的 monitor / profiler, 否则会抢占 client 造成连接失败.</p>
 <p>对于 ddmlib 有几个大体的概念<br>bridge - adb<br>device - 设备<br>client - 应用</p>
 <p>主要代码如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//bridge</span></div><div class="line"><span class="comment">//**注意**, 生成 trace 需要连接 client, init(false) 会断开 client</span></div><div class="line">AndroidDebugBridge.init(<span class="keyword">true</span>);</div><div class="line">AndroidDebugBridge bridge = AndroidDebugBridge.createBridge();</div><div class="line"></div><div class="line"><span class="comment">//device</span></div><div class="line">IDevice[] devices = bridge.getDevices();</div><div class="line">IDevice device = devices[<span class="number">0</span>];</div><div class="line"></div><div class="line"><span class="comment">//client</span></div><div class="line">Client client = device.getClient(packageName);</div><div class="line"></div><div class="line"><span class="comment">//start stop</span></div><div class="line">client.startSamplingProfiler(<span class="number">10</span>, TimeUnit.MILLISECONDS);</div><div class="line">client.stopSamplingProfiler();</div></pre></td></tr></table></figure></p>
-<h4 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h4><p><strong>但是</strong> Android Studio 3.0 中并没有使用 ddmlib<br>大体调用栈如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">./idea/profilers-ui/src/com/android/tools/profilers/cpu/CpuProfilerStageView.java:      myStage.startCapturing();</div><div class="line"></div><div class="line">startCapturing</div><div class="line">./tools/adt/idea/profilers/src/com/android/tools/profilers/cpu/CpuProfilerStage.java</div><div class="line">com.android.tools.profilers.cpu.CpuProfilerStage#startCapturing</div><div class="line"></div><div class="line">./tools/base/profiler/native/perfd/cpu/cpu_service.cc</div><div class="line">grpc::Status CpuServiceImpl::StartProfilingApp</div><div class="line"></div><div class="line">./tools/base/profiler/native/perfd/cpu/simpleperf_manager.cc</div><div class="line">bool SimplePerfManager::StartProfiling</div></pre></td></tr></table></figure></p>
-<h3 id="解析-读取-trace"><a href="#解析-读取-trace" class="headerlink" title="解析/读取 trace"></a>解析/读取 trace</h3><h4 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h4><p>ddms 或者 Android Studio 2.0 / Intellij IDEA 可以直接打开 trace 文件, 但是都没有 Android Studio 3.0 的 profiler 直观好用.</p>
+<h4><span id="android-studio">Android Studio</span></h4><p><strong>但是</strong> Android Studio 3.0 中并没有使用 ddmlib<br>大体调用栈如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">./idea/profilers-ui/src/com/android/tools/profilers/cpu/CpuProfilerStageView.java:      myStage.startCapturing();</div><div class="line"></div><div class="line">startCapturing</div><div class="line">./tools/adt/idea/profilers/src/com/android/tools/profilers/cpu/CpuProfilerStage.java</div><div class="line">com.android.tools.profilers.cpu.CpuProfilerStage#startCapturing</div><div class="line"></div><div class="line">./tools/base/profiler/native/perfd/cpu/cpu_service.cc</div><div class="line">grpc::Status CpuServiceImpl::StartProfilingApp</div><div class="line"></div><div class="line">./tools/base/profiler/native/perfd/cpu/simpleperf_manager.cc</div><div class="line">bool SimplePerfManager::StartProfiling</div></pre></td></tr></table></figure></p>
+<h3><span id="解析读取-trace">解析/读取 trace</span></h3><h4><span id="gui">GUI</span></h4><p>ddms 或者 Android Studio 2.0 / Intellij IDEA 可以直接打开 trace 文件, 但是都没有 Android Studio 3.0 的 profiler 直观好用.</p>
 <p><img src="/media/android-studio-3.0-profiler.png" alt="android-studio-3.0-profile">)</p>
 <p><img src="/media/android-studio-traceview.png" alt="android-studio-traceview"></p>
 <p><img src="/media/monitor.png" alt="monitor"></p>
-<h4 id="dmtracedump"><a href="#dmtracedump" class="headerlink" title="dmtracedump"></a>dmtracedump</h4><p>todo</p>
-<h4 id="命令行工具-1"><a href="#命令行工具-1" class="headerlink" title="命令行工具"></a>命令行工具</h4><p>todo</p>
+<h4><span id="dmtracedump">dmtracedump</span></h4><p>todo</p>
+<h4><span id="命令行工具">命令行工具</span></h4><p>todo</p>
 
       
     </div>

@@ -6,7 +6,7 @@
   <title>Android Studio 导入项目依赖(Gradle) 以 ArcGIS Android SDK 为例 - 夏之日</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="之前一直使用的 ADT + Intellij, 用起来也算安逸，导入导出依赖配置和 Eclipse 没什么区别。但是在多人协作开发时依赖的配置很麻烦。多次尝试切换到 Gradle 都出错告终。    大部分依赖提供jcenter 别名, 只要 在 build.gradle 的 dependencies 中添加compile &amp;#39;com.jakewharton:butterknife:6.0.">
-<meta name="keywords" content="ArcGIS,Android,Intellij">
+<meta name="keywords" content="Android,ArcGIS,Intellij">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android Studio 导入项目依赖(Gradle) 以 ArcGIS Android SDK 为例">
 <meta property="og:url" content="http://blog.xiazhiri.com/Import-ArcGIS-Android-SDK-to-Intellij-IDEA.html">
@@ -110,7 +110,7 @@ ga('send', 'pageview');
 <hr>
 <p>ADT 模式下 Intellij 导入 ArcGIS Android SDK 的方式可以参考官方博客<a href="http://blogs.esri.com/esri/arcgis/2013/10/31/arcgis-android-development-with-intellij-idea/" target="_blank" rel="noopener">ArcGIS Android development with IntelliJ IDEA</a>。</p>
 <p>Gradle 方式官方在 GitHub 上有介绍 <a href="https://github.com/Esri/arcgis-android-api-lib-module" target="_blank" rel="noopener">ArcGIS Android API Lib Module</a>，但是说明版本太旧，按照说明无法导入。</p>
-<h3 id="下面是测试可行的导入方式"><a href="#下面是测试可行的导入方式" class="headerlink" title="下面是测试可行的导入方式"></a>下面是测试可行的导入方式</h3><a id="more"></a>
+<h3><span id="下面是测试可行的导入方式">下面是测试可行的导入方式</span></h3><a id="more"></a>
 <ol>
 <li><p>整个 Project 中有 <strong>三</strong>个 <code>build.gradle</code>, <strong>一</strong>个 <code>settings.gradle</code> 每步需要的修改的依赖不能乱。配置之前记得把项目提交到 git 仓库,  万一出错checkout回来就好了。</p>
 </li>
@@ -122,7 +122,7 @@ ga('send', 'pageview');
 </li>
 <li><p><strong>要添加依赖的module的</strong> build.gradle 中的<code>dependencies</code> 添加 <code>compile project(&quot;:arcgis-android-v10.2.4&quot;)</code><br><img src="/media/c0f281e2tw1emz06w0r3gj20k30aota3.jpg" alt=""></p>
 </li>
-<li><p><strong>其他注意</strong> ArcGIS Android 10.2.4 (Gradle) 中 <code>classpath &#39;com.android.tools.build:gradle:0.14.1&#39;</code> 版本为 0.14.1 对于 0.14.0 之后的版本 runProguard 替换为 minifyEnabled 如果你的版本低于14则 arcgis-android-v10.2.4 中的 build.gradle 中的 minifyEnabled()会提示找不到，只要替换就好。 </p>
+<li><p><strong>其他注意</strong> ArcGIS Android 10.2.4 (Gradle) 中 <code>classpath &#39;com.android.tools.build:gradle:0.14.1&#39;</code> 版本为 0.14.1 对于 0.14.0 之后的版本 runProguard 替换为 minifyEnabled 如果你的版本低于14则 arcgis-android-v10.2.4 中的 build.gradle 中的 minifyEnabled()会提示找不到，只要替换就好。</p>
 </li>
 </ol>
 
@@ -131,7 +131,7 @@ ga('send', 'pageview');
     
       <div class="article-toc">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#下面是测试可行的导入方式"><span class="toc-number">1.</span> <span class="toc-text">下面是测试可行的导入方式</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">下面是测试可行的导入方式</span></a></li></ol>
       </div>
     
     

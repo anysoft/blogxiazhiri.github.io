@@ -6,7 +6,7 @@
   <title>ArcGIS 制作 tpk - 夏之日</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="官方博客在12年曾经介绍过 3种方法快速制作tpk文件 ，当时的 ArcMap 版本为 10.1，本文在 ArcMap10.2.1 下仅做补充。 1.制作指定坐标系的tpk 如果直接 File – Share As – Tile Package, 只需要在 TileFormat 中指定 tiling &amp;gt;Scheme File 如果是使用GP工具，则在设置页面不勾选 Package for A">
-<meta name="keywords" content="ArcGIS,Android,tpk">
+<meta name="keywords" content="Android,ArcGIS,tpk">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ArcGIS 制作 tpk">
 <meta property="og:url" content="http://blog.xiazhiri.com/arcgis-generate-tpk.html">
@@ -102,7 +102,7 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <p>官方博客在12年曾经介绍过 <a href="http://blog.csdn.net/arcgis_mobile/article/details/8048549" target="_blank" rel="noopener">3种方法快速制作tpk文件</a> ，当时的 ArcMap 版本为 10.1，本文在 ArcMap10.2.1 下仅做补充。</p>
-<h3 id="1-制作指定坐标系的tpk"><a href="#1-制作指定坐标系的tpk" class="headerlink" title="1.制作指定坐标系的tpk"></a>1.制作指定坐标系的tpk</h3><ul>
+<h3><span id="1制作指定坐标系的tpk">1.制作指定坐标系的tpk</span></h3><ul>
 <li>如果直接 File – Share As – Tile Package, 只需要在 TileFormat 中指定 tiling &gt;Scheme File<br><img src="/media/c0f281e2tw1em3ktsjg6oj20kn05zt9a.jpg" alt=""></li>
 <li><p>如果是使用GP工具，则在设置页面<strong>不勾选</strong> Package for ArcGIS…然后在Service 选择对应xml<br><img src="/media/c0f281e2tw1em3l62hjxbj20kx08k76d.jpg" alt=""></p>
 </li>
@@ -111,9 +111,9 @@ ga('send', 'pageview');
 </ul>
 <a id="more"></a>
 <hr>
-<h3 id="2-指定线程数制作tpk-多个线程同时切图"><a href="#2-指定线程数制作tpk-多个线程同时切图" class="headerlink" title="2.指定线程数制作tpk (多个线程同时切图)"></a>2.指定线程数制作tpk (多个线程同时切图)</h3><p>默认的 Share As 和 GP工具 采用两个线程切图，没有充分利用硬件。<br>GP工具中Parallel Processing 指定线程数即可<br><img src="/media/c0f281e2tw1em3lk7jykfj20dd0713za.jpg" alt=""></p>
+<h3><span id="2指定线程数制作tpk-多个线程同时切图">2.指定线程数制作tpk (多个线程同时切图)</span></h3><p>默认的 Share As 和 GP工具 采用两个线程切图，没有充分利用硬件。<br>GP工具中Parallel Processing 指定线程数即可<br><img src="/media/c0f281e2tw1em3lk7jykfj20dd0713za.jpg" alt=""></p>
 <hr>
-<h3 id="3-推荐方案"><a href="#3-推荐方案" class="headerlink" title="3.推荐方案"></a>3.推荐方案</h3><p>先制作紧凑切片再导出为tpk，和官方博客中提到的最后一种方法类似，不过不再是手动制作。</p>
+<h3><span id="3推荐方案">3.推荐方案</span></h3><p>先制作紧凑切片再导出为tpk，和官方博客中提到的最后一种方法类似，不过不再是手动制作。</p>
 <ul>
 <li><p>首先制作紧凑型切片，参数可以设置指定坐标系、比例尺范围、切图范围<br>Search – Manage Tile Cache<br><img src="/media/c0f281e2tw1em3m60cpkzj20ki0dq421.jpg" alt=""></p>
 </li>
@@ -126,7 +126,7 @@ ga('send', 'pageview');
     
       <div class="article-toc">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-制作指定坐标系的tpk"><span class="toc-number">1.</span> <span class="toc-text">1.制作指定坐标系的tpk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-指定线程数制作tpk-多个线程同时切图"><span class="toc-number">2.</span> <span class="toc-text">2.指定线程数制作tpk (多个线程同时切图)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-推荐方案"><span class="toc-number">3.</span> <span class="toc-text">3.推荐方案</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1.制作指定坐标系的tpk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2.指定线程数制作tpk (多个线程同时切图)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3.推荐方案</span></a></li></ol>
       </div>
     
     

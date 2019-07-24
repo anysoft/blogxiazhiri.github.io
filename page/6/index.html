@@ -90,7 +90,7 @@ ga('send', 'pageview');
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><pre><code>F5 运行
+        <h2><span id="特性">特性</span></h2><pre><code>F5 运行
 F6 停止
 F7 编译
 F8 打开taglist 等
@@ -100,7 +100,7 @@ F8 打开taglist 等
 Alt-F1 查询光标处help.chm
 ahk Snippet补全
 ahk taglist
-</code></pre><h2 id="To-do"><a href="#To-do" class="headerlink" title="To do"></a>To do</h2><pre><code>&lt;del&gt;当脚本运行时信息窗口提示Running&lt;/del&gt;
+</code></pre><h2><span id="to-do">To do</span></h2><pre><code>&lt;del&gt;当脚本运行时信息窗口提示Running&lt;/del&gt;
 解决中文和特殊字符脚本无法运行
 同时编辑多个脚本时F5 F6混乱
 替换文件管理器为NERDTree
@@ -108,14 +108,14 @@ ahk taglist
 代码提示做成弹出菜单的形式
 增加Debug功能
 </code></pre><hr>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="1-建议路径是-d-Vim"><a href="#1-建议路径是-d-Vim" class="headerlink" title="1.建议路径是 d:\Vim\"></a>1.建议路径是 d:\Vim\</h3><pre><code>即 d:\
+<h2><span id="安装">安装</span></h2><h3><span id="1建议路径是-dvim">1.建议路径是 d:\Vim\</span></h3><pre><code>即 d:\
     |-vim\
     |    |-vim73\
     |    |-vimfile\
     |    |-BackupDir\
     |    |-Dict\
-</code></pre><h3 id="2-配置ctags"><a href="#2-配置ctags" class="headerlink" title="2.配置ctags"></a>2.配置ctags</h3><p>如果<strong>不</strong>使用taglist可以省略以下<br>    ctags.cnf 放到$HOME中,win7默认为 c:\Users\用户名\ ,可以在vim中 :ec $HOME  获取路径<br>    ctags.exe 放到环境变量的path中 比如c:\windows   </p>
-<h3 id="3编辑vimrc"><a href="#3编辑vimrc" class="headerlink" title="3编辑vimrc"></a>3编辑vimrc</h3><pre><code>编辑vimrc,根据实际情况配置，路径中尽量不要使用空格和中文
+</code></pre><h3><span id="2配置ctags">2.配置ctags</span></h3><p>如果<strong>不</strong>使用taglist可以省略以下<br>    ctags.cnf 放到$HOME中,win7默认为 c:\Users\用户名\ ,可以在vim中 :ec $HOME  获取路径<br>    ctags.exe 放到环境变量的path中 比如c:\windows   </p>
+<h3><span id="3编辑vimrc">3编辑vimrc</span></h3><pre><code>编辑vimrc,根据实际情况配置，路径中尽量不要使用空格和中文
 62行
     let g:AhkSIDE_AhkChm = &apos;d:\AutoHotKeyL\AutoHotkey.chm&apos;
 63行
@@ -123,7 +123,7 @@ ahk taglist
 316行
     let Tlist_Ctags_Cmd = &apos;D:\Vim\vim73\ctags.exe&apos;
 </code></pre><p>  完成后即可</p>
-<h3 id="预设快捷键"><a href="#预设快捷键" class="headerlink" title="预设快捷键"></a>预设快捷键</h3><pre><code>F1 编辑状态下  代码提示
+<h3><span id="预设快捷键">预设快捷键</span></h3><pre><code>F1 编辑状态下  代码提示
     alt-F1 查询帮助chm
 F2 隐藏显示菜单栏
 F4 跳转到错误
@@ -132,7 +132,7 @@ F6 结束运行
 F7 编译
 F8 打开taglis等
 F9 生成tags
-</code></pre><h3 id="其他快捷键"><a href="#其他快捷键" class="headerlink" title="其他快捷键"></a>其他快捷键</h3><pre><code>leader设置为&quot;,&quot;
+</code></pre><h3><span id="其他快捷键">其他快捷键</span></h3><pre><code>leader设置为&quot;,&quot;
 ,c 关闭当前窗口
 ,o 关闭其他窗口
 ,b 新建窗口
@@ -149,10 +149,10 @@ gn 下个tab
 ,wf 强制保存
 ,qq 退出/关闭窗口
 ,qa 退出所有
-</code></pre><h3 id="再其他的快捷键见vimrc"><a href="#再其他的快捷键见vimrc" class="headerlink" title="再其他的快捷键见vimrc"></a>再其他的快捷键见vimrc</h3><hr>
-<h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><p>感谢<a href="http://blog.csdn.net/liuyukuan" target="_blank" rel="noopener">Sunwind</a> 和 <a href="https://github.com/linxinhong" target="_blank" rel="noopener">Array</a> 的指点<br>还有AhkSIDE作者<a href="http://ahk.5d6d.net/viewthread.php?tid=5462&amp;pid=33912&amp;page=1&amp;extra=#pid33912" target="_blank" rel="noopener">Loaxs</a><br>有幸如果作者能看见一定要联系我likaci(a)qq.com<br>最主要的功能全部有AhkSIDE实现,我只是稍作修改后各个插件的堆砌，修改后的ahkside在bundle\AhkSIDE\ 中<br>还有vim作者,各位插件作者  </p>
-<h2 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h2><p><img src="http://blog.xiazhiri.com/pic/vim2ahk.jpg" alt="">   </p>
-<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p><a href="https://github.com/likaci/vim2ahk" target="_blank" rel="noopener">vim2ahk</a></p>
+</code></pre><h3><span id="再其他的快捷键见vimrc">再其他的快捷键见vimrc</span></h3><hr>
+<h2><span id="感谢">感谢</span></h2><p>感谢<a href="http://blog.csdn.net/liuyukuan" target="_blank" rel="noopener">Sunwind</a> 和 <a href="https://github.com/linxinhong" target="_blank" rel="noopener">Array</a> 的指点<br>还有AhkSIDE作者<a href="http://ahk.5d6d.net/viewthread.php?tid=5462&amp;pid=33912&amp;page=1&amp;extra=#pid33912" target="_blank" rel="noopener">Loaxs</a><br>有幸如果作者能看见一定要联系我likaci(a)qq.com<br>最主要的功能全部有AhkSIDE实现,我只是稍作修改后各个插件的堆砌，修改后的ahkside在bundle\AhkSIDE\ 中<br>还有vim作者,各位插件作者  </p>
+<h2><span id="预览">预览</span></h2><p><img src="http://blog.xiazhiri.com/pic/vim2ahk.jpg" alt="">   </p>
+<h3><span id="下载">下载</span></h3><p><a href="https://github.com/likaci/vim2ahk" target="_blank" rel="noopener">vim2ahk</a></p>
 
       
     </div>

@@ -104,28 +104,28 @@ ga('send', 'pageview');
       
         <p>上个月和电信客服扯皮两周多终于把手机套餐改成了阿里鱼卡套餐。<br>从 59RMB (500MB+100分钟通话) 的<del>高端</del>套餐改成了 19RMB(1GB+100分钟+日租+阿里文娱应用免流) <del>低端</del>套餐。<br>实在要吐槽一下电信改套餐的规定。改套餐明明一个电话或者App戳戳就能搞定事情，偏偏让你回归属地营业厅跑一趟。虽然最后手持身份证拍照异地受理了但体验实在是不好。</p>
 <p>鱼卡UC浏览器免流大体实现是这样的</p>
-<h3 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h3><p><img src="/media/15124626122024.jpg" alt="Wireshark抓包"><br>注意这段 <code>Proxy-Authorization: 1|15120022766*******|com.ucweb.iphone.lowversion|ca5fe4b11712e10ba745c2817*******</code><br>关于 Proxy-Authorization 见 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Proxy-Authorization" target="_blank" rel="noopener">https://developer.mozilla.org</a><br>即UC浏览器的请求都经过代理服务器。<br>对比几次请求可以发现 1|UID|UA|Key 这几段猜测规律</p>
+<h3><span id="抓包">抓包</span></h3><p><img src="/media/15124626122024.jpg" alt="Wireshark抓包"><br>注意这段 <code>Proxy-Authorization: 1|15120022766*******|com.ucweb.iphone.lowversion|ca5fe4b11712e10ba745c2817*******</code><br>关于 Proxy-Authorization 见 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Proxy-Authorization" target="_blank" rel="noopener">https://developer.mozilla.org</a><br>即UC浏览器的请求都经过代理服务器。<br>对比几次请求可以发现 1|UID|UA|Key 这几段猜测规律</p>
 <ul>
 <li>1 不变</li>
 <li>UID 标示用户ID</li>
 <li>UA 浏览器UA</li>
 <li>Key 由网站Host计算，应该是md5</li>
 </ul>
-<h3 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a>反编译</h3><p>反编译 Android 客户端，基本验证各字段的意义<br><img src="/media/15124639215258.jpg" alt="UC浏览器拼接Proxy-Authorization"></p>
+<h3><span id="反编译">反编译</span></h3><p>反编译 Android 客户端，基本验证各字段的意义<br><img src="/media/15124639215258.jpg" alt="UC浏览器拼接Proxy-Authorization"></p>
 <p>而 bcX 和 bcW 的获取过程断点获得调用栈如下<br><img src="/media/15124643039841.jpg" alt=""><br>在浏览器激活免流的时候会获取相关字段(不清楚是否会定时更新)<br>请求 <a href="https://freeflow.uc.cn/freeflow/generatePhoneToken" target="_blank" rel="noopener">https://freeflow.uc.cn/freeflow/generatePhoneToken</a> 获取一段密文，解密之后解析赋值给 bcX bcW<br>当开始网络请求时由对应 UID|Key|Host 计算 md5</p>
 <p><img src="/media/15124650691656.jpg" alt="获取Host"></p>
 <p><img src="/media/15124650285893.jpg" alt="计算MD5"></p>
 <p><img src="/media/15124651112067.jpg" alt="拼接Proxy-Authorization"></p>
 <p>密文解密之后的结构体<br><img src="/media/15124652644534.jpg" alt=""></p>
 <p>上面需要的 UID UA KEY Server Port都在里面</p>
-<h3 id="所以"><a href="#所以" class="headerlink" title="所以"></a>所以</h3><p>SSL Pinning 还是必须的。</p>
+<h3><span id="所以">所以</span></h3><p>SSL Pinning 还是必须的。</p>
 
       
     </div>
     
       <div class="article-toc">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#抓包"><span class="toc-number">1.</span> <span class="toc-text">抓包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反编译"><span class="toc-number">2.</span> <span class="toc-text">反编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#所以"><span class="toc-number">3.</span> <span class="toc-text">所以</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">抓包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">反编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">所以</span></a></li></ol>
       </div>
     
     

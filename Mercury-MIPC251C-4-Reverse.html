@@ -16,7 +16,7 @@
 <meta property="og:image" content="http://blog.xiazhiri.com/media/15639612608425.jpg">
 <meta property="og:image" content="http://blog.xiazhiri.com/media/15639447250564.jpg">
 <meta property="og:image" content="http://blog.xiazhiri.com/media/15639465101232.jpg">
-<meta property="og:updated_time" content="2019-07-24T09:58:55.667Z">
+<meta property="og:updated_time" content="2019-07-29T08:04:37.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="水星 Mercury MIPC251C-4 网络摄像头 ONVIF 与 PTZ 云台控制">
 <meta name="twitter:description" content="概况 接入 HomeAssistant ONVIF 与 RTSP 参数 PTZ / 云台控制 抓包 反编译 Android App WireShark iOS 抓包 登录 控制 小结   获取 stok tp-link 加密密码为 tpPassword RSA 加密 tpPassword 为 rsaPassword   控制脚本    概况最近在 什么值得买 上发现一款水星的网络摄像头, 除了">
@@ -125,7 +125,7 @@ ga('send', 'pageview');
 <h2><span id="接入-homeassistant">接入 HomeAssistant</span></h2><p>按照 HA 的文档 <a href="https://www.home-assistant.io/components/onvif/" target="_blank" rel="noopener">ONVIF Camera</a> 接入无非就是配置文件里写两行配置的事, 但无论是使用默认配置还是尝试后台页面里的几个端口都是添加失败.<br>最后使用 DSM 的 Surveillance Station 找到了正确的端口, 事后发现其实使用 <a href="https://www.ispyconnect.com/" target="_blank" rel="noopener">iSpy</a> 也可以找到正确的端口, 端口是2020.</p>
 <p>HA 配置如下:<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="attr">ffmpeg:</span></div><div class="line"></div><div class="line"><span class="attr">camera:</span></div><div class="line"><span class="attr">  - platform:</span> <span class="string">onvif</span></div><div class="line"><span class="attr">    host:</span> <span class="number">192.168</span><span class="number">.2</span><span class="number">.2</span></div><div class="line"><span class="attr">    port:</span> <span class="number">2020</span></div><div class="line"><span class="attr">    username:</span> <span class="string">admin</span></div><div class="line"><span class="attr">    password:</span> <span class="string">password</span></div></pre></td></tr></table></figure></p>
 <p>需要注意的是使用 onvif camera 需要配置 <code>ffmpeg</code>, 另外可能根据环境不同需要 <code>pip install onvif-zeep-async</code></p>
-<h2><span id="onvif-与-rtsp-参数">ONVIF 与 RTSP 参数</span></h2><p>onvif<br><code>http://192.168.2.x:2020/onvif/device_service</code><br>rtsp 1920x1080<br><code>rtsp://admin:pass@192.168.2.x:554/stream1</code><br>rtsp 640x480<br><code>rtsp://admin:pass@192.168.2.x:554/stream1</code></p>
+<h2><span id="onvif-与-rtsp-参数">ONVIF 与 RTSP 参数</span></h2><p>onvif<br><code>http://192.168.2.x:2020/onvif/device_service</code><br>rtsp 1920x1080<br><code>rtsp://admin:pass@192.168.2.x:554/stream1</code><br>rtsp 640x480<br><code>rtsp://admin:pass@192.168.2.x:554/stream2</code></p>
 <h2><span id="ptz-云台控制">PTZ / 云台控制</span></h2><p>接入 HA 和 DSM Surveillance Station 之后发现<strong>云台不能控制</strong>, 看来说的支持 ONVIF 只是可以录制.<br>剩下的大部分记录如何控制云台.</p>
 <h3><span id="抓包">抓包</span></h3><p>Charles 抓包的结果是失败, 应用没有走设置的代理. </p>
 <h3><span id="反编译-android-app">反编译 Android App</span></h3><p>在尝试了 Charles http 抓包无果之后试着反编译 <a href="http://service.mercurycom.com.cn/download-891.html" target="_blank" rel="noopener">水星安防App</a>.<br>然后发现大段 <code>com.tplink.ipc</code> 的代码, 看来水星真的是 TP 的弟弟.<br>应用开了混淆, 挺好…</p>

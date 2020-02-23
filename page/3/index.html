@@ -67,6 +67,71 @@ ga('send', 'pageview');
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-Android-Play-Encrypted-Video" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Android-Play-Encrypted-Video.html">Android 播放加密视频的一个思路</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/Android-Play-Encrypted-Video.html" class="article-date">
+  <time datetime="2016-03-20T09:32:57.000Z" itemprop="datePublished">2016-03-20</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>Android 播放加密视频的基本思路就是：<strong>本地启动一个HTTP服务作为代理，解密之后给播放器播放</strong>。<br>这样的好处就是可以<strong>自定义加密方案</strong>，更重要的是 加密/解密模块 可以和视频播放模块<strong>解耦</strong>。   </p>
+<h3 id="处理HTTP头"><a href="#处理HTTP头" class="headerlink" title="处理HTTP头"></a>处理HTTP头</h3><p>这里使用的 <a href="http://nanohttpd.org/" target="_blank" rel="noopener">NanoHTTPD</a> , 一个纯Java实现的微型WEB服务器，代码开源。<br>代码实现起来很简单，只要继承然后重写两个方法就可以。<br>稍微复杂的是怎样处理从视频播放器过来的请求。   </p>
+<p>通过 <a href="https://www.charlesproxy.com/" target="_blank" rel="noopener">Charles</a> 代理就能发现简单的规律。<br>VideoView播放在线视频的时候，发出的GET请求。第一次是一个普通的请求，务器返回200；之后的则全是分段请求，服务器返回206。   </p>
+<p>第一次请求 和 结果<br><img src="/media/c0f281e2jw1f25u97tgzej215m04idgr.jpg" alt="">   </p>
+<p><img src="/media/c0f281e2jw1f25ub757lbj211g09qq4v.jpg" alt=""></p>
+<hr>
+<p>第二次请求 和 结果<br><img src="/media/c0f281e2jw1f25uch2s9fj215c05at9x.jpg" alt="">   </p>
+<p><img src="/media/c0f281e2jw1f25udpfdj7j212409ytb1.jpg" alt="">   </p>
+<p>两次Request的区别是 后面的有Range字段<br>两次Response的区别是:   </p>
+<ol>
+<li>第一次 返回HTTP200 第二次 返回HTTP206</li>
+<li>第一次 Content-Length是文件的整体大小; 第二次Content-Lenght是剩余的大小</li>
+<li>第二次 返回Content-Range</li>
+</ol>
+<p>有了区别之后就简单了，剩下要做的就是: <strong>根据Req的不同，返回不同的 HTTP头 和数据</strong>。</p>
+        
+          <p class="article-more-link">
+            <a href="/Android-Play-Encrypted-Video.html#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+    
       <article id="post-intellij-webstorm-create-non-web-node-project" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -270,55 +335,6 @@ ga('send', 'pageview');
 
 
     
-      <article id="post-OSX10-11-EICapitan-IntellijIDEA-AndroidStudio-RightMouseMenuProblem" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/OSX10-11-EICapitan-IntellijIDEA-AndroidStudio-RightMouseMenuProblem.html">AndroidStudio Intellij IDEA 在 OSX 10.11 上右键失效</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/OSX10-11-EICapitan-IntellijIDEA-AndroidStudio-RightMouseMenuProblem.html" class="article-date">
-  <time datetime="2015-09-17T08:08:50.000Z" itemprop="datePublished">2015-09-17</time>
-</a>
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>从 10.10 升级到 10.11 EI Capitan GM 发现 Intellij IDEA 和 Android Studio 右键点击失效，但 Ctrl+左键 有效。<br> 尝试几次之后发现安装 JavaForOSX 问题解决.<br> <a href="https://support.apple.com/kb/DL1572?locale=en_US" target="_blank" rel="noopener">https://support.apple.com/kb/DL1572?locale=en_US</a></p>
-<hr>
-<p>Android Studio and Intellij IDEA RightClick Menu won’t show in new OSX 10.11 EI Capitan due to system java version.<br>Install<br> <a href="https://support.apple.com/kb/DL1572?locale=en_US" target="_blank" rel="noopener">https://support.apple.com/kb/DL1572?locale=en_US</a></p>
-
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS-X/">OS X</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-    
       <nav id="page-nav">
         <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
       </nav>
@@ -327,7 +343,7 @@ ga('send', 'pageview');
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 likaci&nbsp;
+      &copy; 2020 likaci&nbsp;
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
   </div>
